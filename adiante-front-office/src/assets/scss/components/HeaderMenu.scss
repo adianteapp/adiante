@@ -1,0 +1,14 @@
+.navbar-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 1em;
+    border-bottom: 1px solid $neutral-20;
+    margin-bottom: 1em;
+
+    .logo{
+        max-height: 45px !important;
+    }
+
+    
+}
