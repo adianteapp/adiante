@@ -3,7 +3,7 @@
     <div class="content">
       <img alt="logo" class="logo" src="../assets/img/svg/logo.svg"/> 
        
-      <form>
+      <form @submit="handleLogin">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Usuario</label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -27,16 +27,11 @@
 
 
 <script>
-import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
 export default {
   name: "Login",
-  components: {
-    Form,
-    Field,
-    ErrorMessage,
-  },
+  components: {},
   data() {
     const schema = yup.object().shape({
       username: yup.string().required("Username is required!"),
