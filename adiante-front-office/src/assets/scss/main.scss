@@ -1,12 +1,16 @@
 // Custom variables
-@import 'theme/variables'; 
+@import 'theme/variables';  
 @import 'theme/font'; 
 @import 'theme/buttons'; 
 @import 'theme/form'; 
 
+
 @import 'components/FooterMenu'; 
 @import 'components/HeaderMenu'; 
+@import 'components/WidgetHello'; 
+@import 'components/WidgetState'; 
 
 @import 'views/HomeView.scss'; 
 @import 'views/LoginView.scss'; 
+@import 'views/PanelView.scss'; 
 

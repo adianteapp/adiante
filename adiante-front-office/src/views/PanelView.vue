@@ -12,40 +12,70 @@ export default {
 
 <template>
   <HeaderMenu />
-  <div class="container-fluid"> 
 
-    <div class="row">
-      <div class="col-12">
+  <div class="container-fluid panel-container"> 
+
+    <div class="widget widget-hello"> 
         <h1>Hola, <strong>Nombre</strong> <img class="mx-2" src="../assets/img/svg/hand.svg">  </h1>
-      </div>
     </div>
 
-    <section class="widget-state">
-      <div class="header d-flex justify-content-between">
+    <section class="widget widget-state">
+
+      <div class="header">
         <h2>¿Cómo te sientes?</h2>
-        <a class="text-sm" href="">0 registros hoy</a>
+        <span>0 registros hoy</span>
       </div>
       
-      <div class="row"> 
-        <div class="col-2 card">
-          1
+      <div class="content"> 
+
+        <div class="states">
+          <div class="state">
+            <img src="../assets/img/svg/states/state1.svg"   alt="">
+            <span>Feliz</span>
+          </div>
+
+          <div class="state">
+            <img src="../assets/img/svg/states/state1.svg"   alt="">
+            <span>Feliz</span>
+          </div>
+
+          <div class="state">
+            <img src="../assets/img/svg/states/state1.svg"   alt="">
+            <span>Feliz</span>
+          </div>
+
+          <div class="state">
+            <img src="../assets/img/svg/states/state1.svg"   alt="">
+            <span>Feliz</span>
+          </div>
+
+          <div class="state">
+            <img src="../assets/img/svg/states/state1.svg"   alt="">
+            <span>Feliz</span>
+          </div>
+
+          <div class="state">
+            <img src="../assets/img/svg/states/state1.svg"   alt="">
+            <span>Feliz</span>
+          </div>
+
+          <div class="state">
+            <img src="../assets/img/svg/states/state1.svg"   alt="">
+            <span>Feliz</span>
+          </div>
+
+         
         </div>
-        <div class="col-2 card">
-          2
-        </div>
-        <div class="col-2 card">
-          3
-        </div>
-        <div class="col-2 card">
-          4
-        </div> 
-        <div class="col-2 card">
-          5
-        </div> 
+        
       </div>
+
+      <div class="footer">
+        <a class="text-sm" href="">0 registros hoy</a>
+      </div>
+
     </section>
 
-    <section class="widget-tasks">
+    <section class="widget widget-tasks">
       <div class="header d-flex justify-content-between">
         <h2>Tus tareas para hoy</h2> 
       </div>

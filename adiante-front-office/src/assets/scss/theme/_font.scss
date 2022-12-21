@@ -5,11 +5,19 @@ body{
     font: $font-size-base !important;
 
 }
-h1, .h1{
-    font-family: 'Poppins', sans-serif;
-}
+
 
 a{
     color: $primary !important;
     text-decoration: underline !important;
+}
+
+h1, .h1{
+    font-family: 'Poppins', sans-serif;
+}
+
+h2, .h2{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    font-weight: $font-weigh-bold;
 }

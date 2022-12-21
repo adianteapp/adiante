@@ -1,0 +1,16 @@
+
+
+.widget-hello{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px; 
+    align-self: stretch;
+    padding: 1em;
+    .h1, h1{
+        font-size: 28px;
+        line-height: 33px;
+    }
+
+}

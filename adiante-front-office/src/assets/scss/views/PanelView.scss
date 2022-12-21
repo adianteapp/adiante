@@ -1,0 +1,13 @@
+// View used as home logged
+
+.container-fluid{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px 20px;
+    gap: 14px;
+}
+.panel-container{
+    padding: 0 !important;
+    margin: 0 !important;
+}
