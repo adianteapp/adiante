@@ -4,22 +4,27 @@
       <img alt="logo" class="logo" src="../assets/img/svg/logo.svg"/> 
        
       <form @submit="handleLogin">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Usuario</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+        <div class="form-login">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Usuario</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+           </div>
+          <div class="mb-4">
+            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Acceder <span class="material-symbols-outlined">
+            login
+            </span></button>
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">No cerrar sesión</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Acceder</button>
       </form>
-      <hr />
-      <button type="submit" class="btn btn-outline-primary">Olvidé mi contraseña</button>
+      <div class="lost-pwd">
+        <button type="submit" class="btn btn-outline-primary w-100 mt-4">Olvidé mi contraseña</button>
+      </div>
+
+      <div class="about">
+        <a href="">About us</a>
+      </div>
 
     </div>
   </div>
