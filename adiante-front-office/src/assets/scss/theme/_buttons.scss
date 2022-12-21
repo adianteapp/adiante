@@ -1,0 +1,12 @@
+.btn{
+    display: flex;
+    &.btn-primary{
+        background-color: $primary !important;
+        border: 1px solid $primary !important;
+        color: $neutral-00 !important;
+    }
+    &.btn-outline-primary{
+        border: 1px solid $primary !important;
+        color: $primary !important;
+    }
+}
