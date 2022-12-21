@@ -6,12 +6,23 @@
     justify-content: center;
     align-items: center;
     .content{  
-        .logo{
-            margin-bottom: 4em;
-            max-height: 100px !important; 
+        .logo{ 
+            max-height: 70px !important;  
+            margin: 2em 2em;
         }
         .spinner-border{
             color: $neutral-50;
+        }
+        .form-login{
+            padding-bottom: 2em;
+
+        }
+        .lost-pwd{
+            padding-bottom: 4em;
+            
+        }
+        .about{
+            text-align: center;
         }
     }
 }

@@ -1,4 +1,4 @@
-//Colors
+//Primary Color
 
 $primary-light-1:   #8a5ee8 !default;
 $primary-light-2:   #a07fe6 !default;
@@ -14,6 +14,7 @@ $primary-dark-3:    #481da5 !default;
 $primary-dark-4:    #30146a !default;
 $primary-dark-5:    #1d0d3f !default;
 
+//Neutral Color
 
 $neutral-00:   #fff !default;
 $neutral-10:   #eee !default;
@@ -25,3 +26,36 @@ $neutral-60:   #636263 !default;
 $neutral-70:   #404040 !default;
 $neutral-80:   #323232 !default;
 $neutral-90:   #0A0D13 !default; 
+
+//Feedback Color
+
+$sucess-light:    #E3F2E0 !default;
+$sucess-medium:   #8DC881 !default;
+$sucess-dark:     #459A33 !default;
+
+$warning-light:    #E3F2E0 !default;
+$warning-medium:   #8DC881 !default;
+$warning-dark:     #459A33 !default;
+
+$info-light:    #E3F2E0 !default;
+$info-medium:   #8DC881 !default;
+$info-dark:     #459A33 !default;
+
+$error-light:    #E3F2E0 !default;
+$error-medium:   #8DC881 !default;
+$error-dark:     #459A33 !default;
+
+
+// Font size
+
+$font-size-base: 1rem;
+$font-size-small: .9rem;
+
+$font-weight-base: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+
+// Border radius
+
+$border-radius-input: 0.3rem;
+$border-radius-button: 0.6rem;

@@ -1,12 +1,33 @@
 .btn{
     display: flex;
+    padding: .8em 1.6em;
+    justify-content: center;
+    border-radius: $border-radius-button;
+    span{
+        padding: 0em .4em;
+    }
     &.btn-primary{
         background-color: $primary !important;
         border: 1px solid $primary !important;
         color: $neutral-00 !important;
+        &:hover{
+            background-color: $primary-light-1 !important;
+        }
+        &:focus{
+            box-shadow: 0 0 0 0.2rem $primary-light-4 !important;
+        }
     }
     &.btn-outline-primary{
         border: 1px solid $primary !important;
         color: $primary !important;
+        &:hover{
+            background-color: $primary-light-5 !important;
+        }
+        &:focus{
+            box-shadow: 0 0 0 0.2rem $primary-light-4 !important;
+        }
+    }
+    &.btn-icon{
+
     }
 }
