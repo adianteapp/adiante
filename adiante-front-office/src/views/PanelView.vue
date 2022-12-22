@@ -62,7 +62,7 @@ export default {
         
       </div>
 
-      <div class="footer">
+      <div class="footer d-none">
         <a class="text-sm" href="">Ver mis registros </a> <span class="material-symbols-outlined">
           chevron_right
           </span>
@@ -77,13 +77,8 @@ export default {
           <span>1 de 4 completadas</span>
           <a href="#">Ver todas</a>
         </div>
-        <div class="completed">
-          
-          
-
-          <div class="flex-wrapper">
-            
-            
+        <div class="completed"> 
+          <div class="flex-wrapper"> 
             <div class="single-chart">
               <svg viewBox="0 0 36 36" class="circular-chart green">
                 <path class="circle-bg"
