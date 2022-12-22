@@ -6,7 +6,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: baseline;  
-        padding: 0 .5rem;
+        padding: 0 1rem;
         margin-bottom: .5rem;
         span{
             font-size: $font-size-xs;
@@ -16,13 +16,13 @@
     }
     .content{
         .states{ 
-            margin-left: .5rem;
+            margin-left: 1rem;
             display: flex;
             flex-direction: row;
             align-items: flex-start;
             padding: 0px;
             gap: 10px;  
-            height: 108px;
+            height: 120px;
             overflow-x: scroll; 
 
             flex: none;
@@ -33,14 +33,17 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                padding: 10px;
+                padding: .4em;
                 gap: 10px;
                 background: #FFFFFF; 
                 border: 1px solid #ECEDEF;
                 box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
-                max-width: 75px;
-                min-height: 108px;
+                min-width: 75px;
+                min-height: 105px;
+                span{
+                    font-size: $font-size-xs;
+                }
             }
         
         }

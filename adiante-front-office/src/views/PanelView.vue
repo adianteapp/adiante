@@ -30,11 +30,30 @@ export default {
 
         <div class="states">
           
-          <div class="state">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#modalState"> 
+          <div class="state" data-bs-toggle="modal" data-bs-target="#modalState"> 
             <img src="../assets/img/svg/states/state1.svg"   alt="">
-            <span>Feliz</span>
-            </a>
+            <span>Muy felíz</span> 
+          </div>
+
+          <div class="state" data-bs-toggle="modal" data-bs-target="#modalState"> 
+            <img src="../assets/img/svg/states/state2.svg"   alt="">
+            <span>Muy bien</span> 
+          </div>
+
+          <div class="state" data-bs-toggle="modal" data-bs-target="#modalState"> 
+            <img src="../assets/img/svg/states/state3.svg"   alt="">
+            <span>Indiferente</span> 
+          </div>
+
+
+          <div class="state" data-bs-toggle="modal" data-bs-target="#modalState"> 
+            <img src="../assets/img/svg/states/state4.svg"   alt="">
+            <span>Mal</span> 
+          </div>
+
+          <div class="state" data-bs-toggle="modal" data-bs-target="#modalState"> 
+            <img src="../assets/img/svg/states/state5.svg"   alt="">
+            <span>Muy mal</span> 
           </div>
 
         
@@ -51,11 +70,43 @@ export default {
 
     </section>
 
-    <section class="widget widget-tasks">
-      <div class="header d-flex justify-content-between">
-        <h2>Tus tareas para hoy</h2> 
+    <section class="widget widget-task">
+      <div class="content">
+        <div class="info">
+          <h2>Tus tareas para hoy</h2> 
+          <span>1 de 4 completadas</span>
+          <a href="#">Ver todas</a>
+        </div>
+        <div class="completed">
+          
+          
+
+          <div class="flex-wrapper">
+            
+            
+            <div class="single-chart">
+              <svg viewBox="0 0 36 36" class="circular-chart green">
+                <path class="circle-bg"
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+                <path class="circle"
+                  stroke-dasharray="60, 100"
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+                <text x="18" y="20.35" class="percentage">60%</text>
+              </svg>
+            </div>
+          
+             
+          </div>
+
+
+        </div>
       </div>
-      
       
     </section>
  
