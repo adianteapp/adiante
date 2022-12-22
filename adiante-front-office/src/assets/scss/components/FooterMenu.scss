@@ -10,9 +10,39 @@
         .nav-link{
             color: white;
             padding: 1em !important;
-            &.active{
-                color: gray;
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+
+            .active{
+                width: 5px;
+                height: 5px;
+                border-radius: 3em;
+                background-color: #FC5C7F;
+                margin-left: 12px;
             }
+            .icon{
+                width: 24px;
+                height: 24px;
+                background-repeat: no-repeat;
+                &.icon-home{  
+                    background-image: url( '../img/svg/menu/home.svg');
+                }
+                &.icon-calendar{  
+                    background-image: url( '../img/svg/menu/calendar.svg');
+                }
+                &.icon-retos{  
+                    background-image: url( '../img/svg/menu/retos.svg');
+                }
+                &.icon-chat{  
+                    background-image: url( '../img/svg/menu/chat.svg');
+                }
+                &.icon-contact{  
+                    background-image: url( '../img/svg/menu/contacto.svg');
+                }
+
+            }
+            
         }
 
     }

@@ -3,38 +3,29 @@
 
     <ul class="nav">
         <li>
-          <a href="#" class="nav-link active">
-            <span class="material-symbols-outlined">
-              home
-              </span>
+          <a href="#" class="nav-link ">
+            <div class="active"></div>
+            <div class="icon icon-home"> </div>
           </a>
         </li>
         <li>
           <a href="#" class="nav-link">
-            <span class="material-symbols-outlined">
-              calendar_month
-              </span>
+            <div class="icon icon-calendar"> </div>
           </a>
         </li>
         <li>
           <a href="#" class="nav-link">
-            <span class="material-symbols-outlined">
-              apps
-              </span>
+            <div class="icon icon-retos">  </div>
           </a>
         </li>
         <li>
           <a href="#" class="nav-link">
-            <span class="material-symbols-outlined">
-              chat
-              </span>
+            <div class="icon icon-chat"> </div>
           </a>
         </li>
         <li>
           <a href="#" class="nav-link">
-            <span class="material-symbols-outlined">
-              mail
-              </span>
+            <div class="icon icon-contact"> </div>
           </a>
         </li>
       </ul>

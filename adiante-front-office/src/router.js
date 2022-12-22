@@ -2,7 +2,8 @@ import { createWebHistory, createRouter } from "vue-router";
 import LoginAux from "./components/Login.vue";
 import Login from "./views/LoginView.vue";
 import Register from "./components/Register.vue";
-import Panel from "./views/PanelView.vue";
+import Panel from "./views/PanelView.vue";   
+
 // lazy-loaded
 const Profile = () => import("./components/Profile.vue")
 const BoardAdmin = () => import("./components/BoardAdmin.vue")
@@ -29,6 +30,7 @@ const routes = [
   },
   {
     path: "/panel",
+    name: "panel",
     component: Panel,
   },
   {

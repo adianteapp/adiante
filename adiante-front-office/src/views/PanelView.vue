@@ -15,9 +15,9 @@ export default {
 
   <div class="container-fluid panel-container"> 
 
-    <div class="widget widget-hello"> 
+    <section class="widget widget-hello"> 
         <h1>Hola, <strong>Nombre</strong> <img class="mx-2" src="../assets/img/svg/hand.svg">  </h1>
-    </div>
+    </section>
 
     <section class="widget widget-state">
 
@@ -54,9 +54,7 @@ export default {
           <div class="state" data-bs-toggle="modal" data-bs-target="#modalState"> 
             <img src="../assets/img/svg/states/state5.svg"   alt="">
             <span>Muy mal</span> 
-          </div>
-
-        
+          </div> 
          
         </div>
         
@@ -104,7 +102,19 @@ export default {
       </div>
       
     </section>
- 
+    
+    <section class="widget widget-retos">
+        <div class="retos">
+
+        </div>
+        <div class="relax">
+          
+        </div>
+    </section>
+
+    <section class="widget widget-actividades">
+
+    </section>
 
   </div>
   <FooterMenu />
