@@ -29,48 +29,24 @@ export default {
       <div class="content"> 
 
         <div class="states">
+          
           <div class="state">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#modalState"> 
             <img src="../assets/img/svg/states/state1.svg"   alt="">
             <span>Feliz</span>
+            </a>
           </div>
 
-          <div class="state">
-            <img src="../assets/img/svg/states/state1.svg"   alt="">
-            <span>Feliz</span>
-          </div>
-
-          <div class="state">
-            <img src="../assets/img/svg/states/state1.svg"   alt="">
-            <span>Feliz</span>
-          </div>
-
-          <div class="state">
-            <img src="../assets/img/svg/states/state1.svg"   alt="">
-            <span>Feliz</span>
-          </div>
-
-          <div class="state">
-            <img src="../assets/img/svg/states/state1.svg"   alt="">
-            <span>Feliz</span>
-          </div>
-
-          <div class="state">
-            <img src="../assets/img/svg/states/state1.svg"   alt="">
-            <span>Feliz</span>
-          </div>
-
-          <div class="state">
-            <img src="../assets/img/svg/states/state1.svg"   alt="">
-            <span>Feliz</span>
-          </div>
-
+        
          
         </div>
         
       </div>
 
       <div class="footer">
-        <a class="text-sm" href="">0 registros hoy</a>
+        <a class="text-sm" href="">Ver mis registros </a> <span class="material-symbols-outlined">
+          chevron_right
+          </span>
       </div>
 
     </section>
@@ -82,16 +58,12 @@ export default {
       
       
     </section>
+ 
 
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-     
-  
-   
   </div>
   <FooterMenu />
+   
+     
 </template>
 
  

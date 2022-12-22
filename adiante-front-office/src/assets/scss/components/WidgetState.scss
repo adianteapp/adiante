@@ -5,13 +5,18 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center; 
-        padding: 1em 1em;
-
+        align-items: baseline;  
+        padding: 0 .5rem;
+        margin-bottom: .5rem;
+        span{
+            font-size: $font-size-xs;
+            color: $neutral-50;
+        }
+        
     }
     .content{
         .states{ 
-            margin-left: 10px;
+            margin-left: .5rem;
             display: flex;
             flex-direction: row;
             align-items: flex-start;
@@ -43,6 +48,14 @@
     }
     .footer{
         float: right;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center; 
+        margin: .5rem 0rem;
+        color: $primary;
+        font-size: $font-size-small;
+
     }
     
 }
