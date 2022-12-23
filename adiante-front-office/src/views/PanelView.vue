@@ -73,7 +73,7 @@ export default {
         <div class="info">
           <h2>Tus tareas para hoy</h2> 
           <span>1 de 4 completadas</span>
-          <a href="#">Ver todas</a>
+          <a href="/agenda">Ver todas</a>
         </div>
         <div class="completed"> 
           <div class="flex-wrapper"> 
@@ -113,10 +113,76 @@ export default {
     </section>
 
     <section class="widget widget-actividades">
+  
 
     </section>
 
   </div>
+
+
+  <!-- Modal registro síntomas -->
+  <div class="modal fade" id="modalState" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalState" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">           
+          <h5 class="modal-title">Registro de síntomas</h5>
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Tienes alguno de estos síntomas?</p>
+          
+          
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="sintom1">
+            <label class="form-check-label" for="sintom1">
+              Síntoma
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="sintom2">
+            <label class="form-check-label" for="sintom2">
+              Síntoma
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="sintom3">
+            <label class="form-check-label" for="sintom3">
+              Síntoma
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary w-100"  data-bs-target="#modalFeedback" data-bs-toggle="modal" data-bs-dismiss="modal">Registrar síntomas</button>
+          <button type="button" class="btn btn-link w-100" data-bs-target="#modalFeedback" data-bs-toggle="modal" data-bs-dismiss="modal">No tengo ninguno</button>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- Modal feedback-->
+    <div class="modal fade" id="modalFeedback" tabindex="-1" aria-labelledby="modalFeedback" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalFeedback">Enhorabuena <img src="../assets/img/svg/celebrate.svg" alt=""></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            
+            <p>Has ganado <strong>2 puntos</strong> por registrar tu estado.</p>
+            <p>¡Sigue así!</p>
+          </div>
+          <div class="modal-footer"> 
+            <button type="button" class="btn btn-primary w-100"  data-bs-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   <FooterMenu />
    
      

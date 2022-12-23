@@ -1,0 +1,17 @@
+.modal-content{
+    .modal-header{
+        border-bottom: 1px solid $neutral-20 !important;
+        .modal-title{
+            font-weight: $font-weight-bold;
+        }
+
+    }
+    .modal-body{
+        strong{
+            color: $primary
+        }
+    }
+    .modal-footer{
+        border-top: 1px solid $neutral-20 !important;
+    }
+}
