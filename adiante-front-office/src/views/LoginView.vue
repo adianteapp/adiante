@@ -32,11 +32,22 @@
 
 
 <script>
+//import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
 export default {
   name: "Login",
   components: {},
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push("/profile");
+    }
+  },
   data() {
     const schema = yup.object().shape({
       username: yup.string().required("Username is required!"),
@@ -49,19 +60,13 @@ export default {
       schema,
     };
   },
-  computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    },
-  },
-  created() {
-    if (this.loggedIn) {
-      this.$router.push("/profile");
-    }
-  },
   methods: {
-    handleLogin(user) {
+    handleLogin() {
+
       this.loading = true;
+      var username = this.username;
+      var password = this.password;
+      var user =  {username,password};
 
       this.$store.dispatch("auth/login", user).then(
         () => {
