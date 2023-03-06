@@ -10,7 +10,7 @@
             <input type="text" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
            </div>
           <div class="mb-4">
-            <label for="InputPassword1" class="form-label">ContraseÃ±a</label>
+            <label for="InputPassword1" class="form-label">Contraseña</label>
             <input type="password" class="form-control" id="InputPassword1">
           </div>
           <button type="submit" class="btn btn-primary w-100">Acceder <span class="material-symbols-outlined">
@@ -19,7 +19,7 @@
         </div>
       </form>
       <div class="lost-pwd">
-        <button type="submit" class="btn btn-outline-primary w-100 mt-4">OlvidÃ© mi contraseÃ±a</button>
+        <button type="submit" class="btn btn-outline-primary w-100 mt-4">Olvidé mi contraseña</button>
       </div>
 
       <div class="about">
@@ -32,11 +32,18 @@
 
 
 <script>
-//import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
+
+import authService from "../services/auth.service";
 
 export default {
   name: "Login",
+  data() {
+            return {
+              username:null,
+              password:null,
+              loginError: null
+            }
+        },
   components: {},
   computed: {
     loggedIn() {
@@ -47,42 +54,39 @@ export default {
     if (this.loggedIn) {
       this.$router.push("/profile");
     }
-  },
-  data() {
-    const schema = yup.object().shape({
-      username: yup.string().required("Username is required!"),
-      password: yup.string().required("Password is required!"),
-    });
-
-    return {
-      loading: false,
-      message: "",
-      schema,
-    };
-  },
+  }, 
   methods: {
-    handleLogin() {
+
+    handleErrorMessage(loginResult){
+      if(loginResult.response && loginResult.response.data && loginResult.response.data.errorCode)
+        {
+          const errorTag = 'loginform_errorcode_'+loginResult.response.data.errorCode;
+          this.loginError = this.$t(errorTag);
+        }else
+        {
+          this.loginError = this.$t('loginform_errorcode_default');
+        }
+    }
+    
+    ,async handleLogin() {
 
       this.loading = true;
+     
       var username = this.username;
       var password = this.password;
-      var user =  {username,password};
+      const user =  {username,password};
 
-      this.$store.dispatch("auth/login", user).then(
-        () => {
-          this.$router.push("/profile");
-        },
-        (error) => {
-          this.loading = false;
-          this.message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-        }
-      );
-    },
-  },
-};
+      const loginResult = await authService.login(user);
+      if(loginResult.isAxiosError)
+      {
+        this.loading = false;
+        this.handleErrorMessage(loginResult);
+
+      }else{
+        this.loading = false;
+        this.$router.push("/panel");
+      }
+     }
+  }
+}
 </script>

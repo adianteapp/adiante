@@ -1,0 +1,11 @@
+{
+  "message": "hello i18n !!",
+  "loginform_label_user":"Usuario",
+  "loginform_label_pwd":"Contraseña",
+  "loginform_button_access":"Acceder",
+  "loginform_label_forgotpwd":"Olvidé mi contraseña",
+  "loginform_label_notclosesession":"No cerrar sesión",
+  "loginform_errorcode_1":"Usuario no encontrado.",
+  "loginform_errorcode_2":"Password incorrecto.",
+  "loginform_errorcode_default":"Error interno, inténtelo de nuevo más tarde."
+}

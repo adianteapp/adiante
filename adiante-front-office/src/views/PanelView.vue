@@ -1,15 +1,3 @@
-<script>
-import HeaderMenu from '../components/common/HeaderMenu.vue'
-import FooterMenu from '../components/common/FooterMenu.vue'
-
-export default {
-  components: {
-    HeaderMenu: HeaderMenu,
-    FooterMenu: FooterMenu
-  }
-}
-</script>
-
 <template>
   <HeaderMenu />
 
@@ -188,4 +176,29 @@ export default {
      
 </template>
 
- 
+<script>
+import HeaderMenu from '../components/common/HeaderMenu.vue'
+import FooterMenu from '../components/common/FooterMenu.vue'
+
+
+export default {
+  name: 'Panel',
+  components: {
+    HeaderMenu: HeaderMenu,
+    FooterMenu: FooterMenu
+  },
+  data() {
+            return {
+              currentUser:null
+            }
+        },
+  created() {
+      this.currentUser = this.$store.state.auth.user;
+  }, 
+  mounted() {
+    if (!this.currentUser) {
+      this.$router.push('/login');
+    }
+  }
+};
+</script>
