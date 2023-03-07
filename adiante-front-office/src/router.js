@@ -1,6 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Login from "./views/LoginView.vue";
-import Panel from "./views/PanelView.vue";   
 import Agenda from "./views/AgendaView.vue";   
 import About from "./views/AboutView.vue";
 // lazy-loaded
@@ -36,12 +35,6 @@ const routes = [
     path: "/agenda",
     name: "agenda",
     component: Agenda,
-  },
-  {
-    path: "/profile",
-    name: "profile",
-    // lazy-loaded
-    component: Panel,
   },
   {
     path: "/admin",
