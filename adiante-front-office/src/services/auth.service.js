@@ -1,23 +1,28 @@
 require('dotenv').config()
 import axios from 'axios';
 
-const API_URL = `${process.env.BACKEND_BASE_URL}`+'/api/auth/patient/';
+
+const API_URL = `${process.env.VUE_APP_BACKEND_BASE_URL}`+'/api/auth/patient/';
 
 class AuthService {
-  login(user) {
-    return axios
-      .post(API_URL + 'signin', {
+  
+
+
+ login(user) {
+    return  axios.post(API_URL + 'signin', {
         username: user.username,
         password: user.password
-      })
-      .then(response => {
-        if (response.data.accessToken) {
-          localStorage.setItem('user', JSON.stringify(response.data));
-        }
-
+      }).then((response) => {
+        localStorage.setItem('user', JSON.stringify(response.data));
+        //auth.login(user);
         return response.data;
+      })
+      .catch(function (error) {
+        return  error;
       });
+
   }
+
 
   logout() {
     localStorage.removeItem('user');

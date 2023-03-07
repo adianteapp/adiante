@@ -12,16 +12,15 @@ const authEnum = require("../services/auth/authEnum");
       switch  (loginResult.validationResult){
          case authEnum.LoginStatuses.Succesfull:
                 return res.status(200).send({
-                        id: loginResult.patient.id,
                         username: loginResult.patient.username,
                         email: loginResult.patient.email,
                         roles: "",
                         accessToken: loginResult.token
                       });
          case authEnum.LoginStatuses.UserNameNotFound:
-               return res.status(404).send({ message: "User Not found." });  
+               return res.status(404).send({ message: "User Not found.", errorCode: authEnum.LoginStatuses.UserNameNotFound });  
         case authEnum.LoginStatuses.WrongPassword:
-              return res.status(401).send({ accessToken: null, message: "Invalid Password!" });        
+              return res.status(401).send({ message: "Invalid Password!", errorCode: authEnum.LoginStatuses.WrongPassword  });        
       }
 
   };

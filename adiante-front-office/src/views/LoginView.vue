@@ -2,28 +2,29 @@
   <div class="login">
     <div class="content">
       <img alt="logo" class="logo" src="../assets/img/svg/logo.svg"/> 
-       
-      <form @submit="handleLogin">
+      <div class="alert error">{{loginError}}</div>
+      <form @submit.prevent="handleLogin">
         <div class="form-login">
           <div class="mb-3">
-            <label for="InputEmail1" class="form-label">Usuario</label>
-            <input type="text" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
+            <label for="InputEmail1" class="form-label">{{ $t('loginform_label_user') }}</label>
+            <input type="text"  v-model="username" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
            </div>
           <div class="mb-4">
-            <label for="InputPassword1" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="InputPassword1">
+            <label for="InputPassword1" class="form-label">{{ $t('loginform_label_pwd') }}</label>
+            <input type="password" v-model="password" class="form-control" id="InputPassword1">
           </div>
-          <button type="submit" class="btn btn-primary w-100">Acceder <span class="material-symbols-outlined">
+          <button type="submit" class="btn btn-primary w-100">{{ $t('loginform_button_access') }} <span class="material-symbols-outlined">
             login
             </span></button>
         </div>
       </form>
-      <div class="lost-pwd">
-        <button type="submit" class="btn btn-outline-primary w-100 mt-4">Olvidé mi contraseña</button>
-      </div>
 
+      <div class="lost-pwd">
+        <button type="submit" class="btn btn-outline-primary w-100 mt-4">{{ $t('loginform_label_forgotpwd') }}</button>
+      </div>
+      
       <div class="about">
-        <a href="">About us</a>
+        <a href="">{{ $t('loginform_label_aboutus') }}</a>
       </div>
 
     </div>
@@ -32,23 +33,17 @@
 
 
 <script>
-import * as yup from "yup";
-
+import authService from "../services/auth.service";
 export default {
   name: "Login",
-  components: {},
   data() {
-    const schema = yup.object().shape({
-      username: yup.string().required("Username is required!"),
-      password: yup.string().required("Password is required!"),
-    });
-
-    return {
-      loading: false,
-      message: "",
-      schema,
-    };
-  },
+            return {
+              username:null,
+              password:null,
+              loginError: null
+            }
+        },
+  components: {},
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
@@ -56,28 +51,37 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push("/profile");
+      this.$router.push("/panel");
     }
-  },
+  }, 
   methods: {
-    handleLogin(user) {
-      this.loading = true;
-
-      this.$store.dispatch("auth/login", user).then(
-        () => {
-          this.$router.push("/profile");
-        },
-        (error) => {
-          this.loading = false;
-          this.message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+    handleErrorMessage(loginResult){
+      if(loginResult.response && loginResult.response.data && loginResult.response.data.errorCode)
+        {
+          const errorTag = 'loginform_errorcode_'+loginResult.response.data.errorCode;
+          this.loginError = this.$t(errorTag);
+        }else
+        {
+          this.loginError = this.$t('loginform_errorcode_default');
         }
-      );
-    },
-  },
-};
+    }
+    
+    ,async handleLogin() {
+      this.loading = true;
+     
+      var username = this.username;
+      var password = this.password;
+      const user =  {username,password};
+      const loginResult = await authService.login(user);
+      if(loginResult.isAxiosError)
+      {
+        this.loading = false;
+        this.handleErrorMessage(loginResult);
+      }else{
+        this.loading = false;
+        this.$router.push("/panel");
+      }
+     }
+  }
+}
 </script>

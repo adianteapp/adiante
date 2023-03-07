@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  computed: {
+ /*  computed: {
     currentUser() {
       return this.$store.state.auth.user;
     },
@@ -32,7 +32,7 @@ export default {
     logOut() {
       this.$store.dispatch('auth/logout');
       this.$router.push('/login');
-    }
-  }
+    } 
+  }*/
 };
 </script>
