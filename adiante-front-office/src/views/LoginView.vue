@@ -44,7 +44,7 @@ export default {
               loginError: null
             }
         },
-  components: {},
+
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
@@ -58,12 +58,10 @@ export default {
   methods: {
 
     handleErrorMessage(loginResult){
-      if(loginResult.response && loginResult.response.data && loginResult.response.data.errorCode)
-        {
+      if(loginResult.response && loginResult.response.data && loginResult.response.data.errorCode){
           const errorTag = 'loginform_errorcode_'+loginResult.response.data.errorCode;
           this.loginError = this.$t(errorTag);
-        }else
-        {
+        }else{
           this.loginError = this.$t('loginform_errorcode_default');
         }
     }
