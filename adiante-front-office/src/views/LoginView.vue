@@ -18,6 +18,7 @@
             </span></button>
         </div>
       </form>
+      <div>
 
       <div class="lost-pwd">
         <button type="submit" class="btn btn-outline-primary w-100 mt-4">{{ $t('loginform_label_forgotpwd') }}</button>
