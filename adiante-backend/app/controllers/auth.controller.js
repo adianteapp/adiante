@@ -12,9 +12,7 @@ const authEnum = require("../services/auth/authEnum");
       switch  (loginResult.validationResult){
          case authEnum.LoginStatuses.Succesfull:
                 return res.status(200).send({
-                        username: loginResult.patient.username,
-                        email: loginResult.patient.email,
-                        roles: "",
+                        name: loginResult.patient.name,
                         accessToken: loginResult.token
                       });
          case authEnum.LoginStatuses.UserNameNotFound:

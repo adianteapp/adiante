@@ -2,8 +2,9 @@ import { createWebHistory, createRouter } from "vue-router";
 import Login from "./views/LoginView.vue";
 import Agenda from "./views/AgendaView.vue";   
 import About from "./views/AboutView.vue";
+//import Dashboard from "./views/DashboardView.vue";
 // lazy-loaded
-const Panel = () => import("./views/PanelView.vue")
+const Dashboard = () => import("./views/DashboardView.vue")
 const BoardAdmin = () => import("./components/BoardAdmin.vue")
 const BoardModerator = () => import("./components/BoardModerator.vue")
 const BoardUser = () => import("./components/BoardUser.vue")
@@ -27,9 +28,9 @@ const routes = [
     component: About,
   },
   {
-    path: "/panel",
-    name: "panel",
-    component: Panel,
+    path: "/dashboard",
+    name: "dashboard",
+    component: Dashboard,
   },
   {
     path: "/agenda",

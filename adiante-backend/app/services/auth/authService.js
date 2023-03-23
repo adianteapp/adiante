@@ -42,7 +42,7 @@ var bcrypt = require("bcryptjs");
         }else{
           validationResult = authEnum.LoginStatuses.InternalError;
         }
-        var token = jwt.sign({ id: patient.id }, config.secret, {
+        var token = jwt.sign({ id: patient.email }, config.secret, {
           expiresIn: `${process.env.PATIENT_ACCESS_TOKEN_TTL}` // 24 hours
         });
       }
