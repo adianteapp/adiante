@@ -7,5 +7,6 @@
   "loginform_label_aboutus":"Acerca de",
   "loginform_errorcode_1":"Usuario no encontrado.",
   "loginform_errorcode_2":"Password incorrecto.",
-  "loginform_errorcode_default":"Error interno, inténtelo de nuevo más tarde."
+  "loginform_errorcode_default":"Error interno, inténtelo de nuevo más tarde.",
+  "header_label_logout":"Finalizar sesión"
 }

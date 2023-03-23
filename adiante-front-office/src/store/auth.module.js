@@ -7,13 +7,7 @@ export const auth = {
   namespaced: true,
   state: initialState,
   actions: {
-     login({ commit }, user) {
-          commit('loginSuccess', user);
-     },
-    logout({ commit }) {
-       commit('logout');
-     }
-  },
+      },
   mutations: {
     loginSuccess(state, user) {
       state.status.loggedIn = true;
@@ -28,7 +22,4 @@ export const auth = {
       state.user = null;
     }
   },
-  getters:{
-    patientName : state => {return state.user.name}
-  }
 };
