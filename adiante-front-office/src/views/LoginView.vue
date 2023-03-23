@@ -51,7 +51,7 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push("/panel");
+      this.$router.push('/dashboard');
     }
   }, 
   methods: {
@@ -79,7 +79,9 @@ export default {
         this.handleErrorMessage(loginResult);
       }else{
         this.loading = false;
-        this.$router.push("/panel");
+        
+        this.$store.commit('auth/loginSuccess',  JSON.parse(loginResult));
+        this.$router.push('/dashboard');
       }
      }
   }

@@ -1,5 +1,3 @@
-
-
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
   ? { status: { loggedIn: true }, user }
@@ -9,12 +7,12 @@ export const auth = {
   namespaced: true,
   state: initialState,
   actions: {
-    login({ commit }, user) {
+     login({ commit }, user) {
           commit('loginSuccess', user);
-    },
+     },
     logout({ commit }) {
-      commit('logout');
-    }
+       commit('logout');
+     }
   },
   mutations: {
     loginSuccess(state, user) {
@@ -28,12 +26,9 @@ export const auth = {
     logout(state) {
       state.status.loggedIn = false;
       state.user = null;
-    },
-    registerSuccess(state) {
-      state.status.loggedIn = false;
-    },
-    registerFailure(state) {
-      state.status.loggedIn = false;
     }
+  },
+  getters:{
+    patientName : state => {return state.user.name}
   }
 };

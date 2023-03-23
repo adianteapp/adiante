@@ -4,9 +4,9 @@ const dao = require("../middleware/dao");
 
 async function getPatientByUsername(userName) {
 
-    const sqlQuery =   `SELECT id, username, email, password, createdAt, updatedAt 
-                        FROM users u  
-                        WHERE u.username ='${userName}'`;
+    const sqlQuery =   `SELECT id, name, email, password, createdAt, updatedAt 
+                        FROM patient p  
+                        WHERE p.email ='${userName}'`;
 
     const rows = await dao.executeQuery(sqlQuery);
   
