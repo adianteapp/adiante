@@ -35,7 +35,8 @@ app.get("/", (req, res) => {
 
 // routes
 logger.info("Mapping routes");
-require('./app/routes/auth.routes')(app);
+require('./app/modules/auth/auth.routes')(app);
+require('./app/modules/patientActivity/patientActivity.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.API_PORT || 8080;

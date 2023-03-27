@@ -1,31 +1,38 @@
 // Required Modules
 const config = require("../config/db.config.js");
+const util = require('util');
 
-// Fetch Connection
+//Logger imports
+const loggerConfig = require("./log4sConf");
+const logger = loggerConfig.fileAppenderLogger;
+
 async function fetchConn() {
   let conn = await config.pool.getConnection();
   return conn;
 }
 
-
-
-///
-///
-///
-async function executeQuery( sqlQuery) { 
-  let conn;
-  try {
-
-	conn = await fetchConn();
-
-	const rows = await conn.query(sqlQuery);
-  
-  return rows;
-  } finally {
-	if (conn) conn.release(); //release to pool
-  }
-}
-
 module.exports = {
-  executeQuery
-};
+
+  getConnection: async function () {
+    return fetchConn();
+  },
+
+
+  executeQuery: async function (sqlQuery) {
+    let conn;
+    try {
+
+      conn = await fetchConn();
+
+      const rows = await conn.query(sqlQuery);
+
+      return rows;
+    } catch (exception) {
+      logger.error("Error:" + exception + " executing query:" + sqlQuery)
+    }
+    finally {
+      if (conn) conn.release(); //release to pool
+    }
+  }
+
+}

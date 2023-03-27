@@ -1,5 +1,5 @@
-const { verifySignUp } = require("../middleware");
-const controller = require("../controllers/auth.controller");
+const { verifySignUp } = require("../../middleware");
+const controller = require("./auth.controller");
 
 
 module.exports = function(app) {
@@ -13,7 +13,7 @@ module.exports = function(app) {
 
 
 /// PATIENT 
-  app.post("/api/auth/patient/signin", controller.singinPatient);
+  app.post("/adiante/patient/auth/signin", controller.singinPatient);
 
 
 };
