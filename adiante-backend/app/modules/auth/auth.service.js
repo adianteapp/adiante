@@ -1,8 +1,10 @@
 require('dotenv').config()
 const config = require("../../config/auth.config");
-const authRepository = require("../../repositories/authRepository");
-const authEnum = require("./authEnum");
+const authRepository = require("./auth.repository");
+const authEnum = require("./auth.enum");
 
+const loggerConfig = require("../../middleware/log4sConf");
+const logger = loggerConfig.fileAppenderLogger;
 
 
 var jwt = require("jsonwebtoken");
@@ -47,4 +49,28 @@ var bcrypt = require("bcryptjs");
         });
       }
       return {validationResult,patient,token};
+  };
+
+
+   /**
+   * @description This method is in charge to check the existing of the patient in database based on the idPatient
+   * @param {idPatient} username
+   * @returns {patient}
+   */
+   exports.getPatientByPatientId = async (idPatient) => {
+      
+    let validationResult = authEnum.LoginStatuses.Succesfull;
+    let patient;
+    const queryResult = await authRepository.getPatientByPatientId(idPatient);
+
+    if(queryResult.length == 1){
+
+      patient = queryResult[0];
+
+    }else{
+       
+      logger.debug("Error retrieving patient with id:"+idPatient);
+
+    }
+    return patient;
   };

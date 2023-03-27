@@ -1,6 +1,6 @@
 
-const authService = require("../services/auth/authService");
-const authEnum = require("../services/auth/authEnum");
+const authService = require("./auth.service");
+const authEnum = require("./auth.enum");
 
 
 
@@ -12,6 +12,7 @@ const authEnum = require("../services/auth/authEnum");
       switch  (loginResult.validationResult){
          case authEnum.LoginStatuses.Succesfull:
                 return res.status(200).send({
+                        id: Number(loginResult.patient.id.toString()),
                         name: loginResult.patient.name,
                         accessToken: loginResult.token
                       });
