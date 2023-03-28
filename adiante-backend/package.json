@@ -1,10 +1,11 @@
 {
-  "name": "node-js-jwt-auth",
+  "name": "adiante-backend",
   "version": "1.0.0",
   "description": "Node.js Demo for JWT Authentication",
-  "main": "server.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc",
+    "dev": "nodemon ./src/index.ts"
   },
   "keywords": [
     "node.js",
@@ -13,7 +14,7 @@
     "express",
     "mariadb"
   ],
-  "author": "bezkoder",
+  "author": "adiante",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -21,8 +22,16 @@
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "log4js": "^6.7.1",
-    "mariadb": "^3.0.2",
-    "sequelize": "^5.21.3"
+    "log4js": "^6.9.1",
+    "mariadb": "^3.0.2" 
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/log4js": "^2.3.5",
+    "@types/node": "^18.15.10",
+    "ts-node": "^10.9.1"
   }
 }

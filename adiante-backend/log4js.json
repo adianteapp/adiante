@@ -1,0 +1,18 @@
+{
+    "appenders": {
+      "fileAppender": {
+        "type": "dateFile",
+        "filename": "C:/Logs/adiante/logs/ADIANTE-BACKEND-log",
+        "pattern": "yyyy-MM-dd.log",
+        "alwaysIncludePattern": true,
+        "maxSize": 1024,
+        "backups": 3
+      }
+    },
+    "categories": {
+      "default": {
+        "appenders": ["fileAppender"],
+        "level": "debug"
+      }
+    }
+  }
