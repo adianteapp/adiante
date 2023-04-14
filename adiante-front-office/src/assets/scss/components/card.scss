@@ -1,0 +1,66 @@
+.card{
+    border: 1px solid $neutral-30;
+    border-radius: $border-radius-widget;
+    padding: 10px;
+     
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 14px;
+    
+    cursor: pointer;
+    &:hover{
+        background-color: $neutral-10;
+    }
+   
+ 
+   
+    .img{ 
+        width: 80px;
+        img{
+            border-radius: 12px ;
+            width: 80px;
+            height: 80px;
+            object-fit: cover !important;
+        }
+        
+        
+    }
+
+    .content{
+        
+        .info{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding-bottom: 4px;
+            .title{
+                font-weight: $font-weight-bold;
+                font-size: $font-size-big;
+                color: $neutral-80 !important;
+            }
+             
+        }
+        .desc{
+            font-size: $font-size-small;
+            color: $neutral-50;
+           
+        }
+    }
+    .icon{
+        display: flex;
+        align-self: center;
+        span{
+            font-size: $font-size-big !important;
+           
+        }
+        
+    }
+    
+        .state{
+            font-size: $font-size-small;
+           
+             
+        }
+    
+}

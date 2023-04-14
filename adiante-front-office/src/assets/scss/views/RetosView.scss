@@ -1,0 +1,76 @@
+.retos-container{
+    padding: 0em 1em;
+  
+    a{
+        text-decoration: none !important;
+        h1{
+            color: $neutral-80 !important;
+        }
+    }
+
+    .header{
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+    }
+    h1{
+        font-size: $font-size-base !important;
+        text-align: left !important;
+        padding-top: 1em;
+        
+    }
+
+    img{
+        height: 160px;
+        object-fit: cover !important;
+        border-radius: 12px ;
+    }
+
+    .reto{
+        border: 1px solid $neutral-30;
+        border-radius: $border-radius-widget;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        gap: 14px;
+        cursor: pointer;
+        &:hover{
+            background-color: $neutral-10;
+        }
+        
+        .info{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding-bottom: 4px;
+            .title{
+                font-weight: $font-weight-bold;
+                font-size: $font-size-big;
+                color: $neutral-80 !important;
+            }
+             
+        }
+        .desc{
+            font-size: $font-size-small;
+            color: $neutral-50;
+           
+        }
+        .img{ 
+            img{
+                border-radius: 12px ;
+                width: 80px;
+                height: 80px;
+                object-fit: cover !important;
+            }
+            
+            
+        }
+        
+            .state{
+                font-size: $font-size-small;
+               
+                 
+            }
+        
+    }
+}

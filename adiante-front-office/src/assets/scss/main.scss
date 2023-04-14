@@ -4,14 +4,23 @@
 @import 'theme/buttons'; 
 @import 'theme/form'; 
 @import 'theme/modals'; 
+@import 'theme/layout'; 
+@import 'theme/alert'; 
+@import 'theme/navbar'; 
+@import 'theme/label'; 
 
 @import 'components/FooterMenu'; 
 @import 'components/HeaderMenu'; 
 @import 'components/WidgetHello'; 
 @import 'components/WidgetState'; 
 @import 'components/WidgetTask'; 
+@import 'components/WidgetRetos'; 
+@import 'components/WidgetActivity'; 
+
+@import 'components/card'; 
 
 @import 'views/HomeView.scss'; 
 @import 'views/LoginView.scss'; 
 @import 'views/PanelView.scss'; 
-@import 'views/AgendaView.scss'; 
+@import 'views/TaskView.scss'; 
+@import 'views/RetosView.scss'; 

@@ -1,5 +1,6 @@
 // View used as login form
-
+.form-login{ 
+}
 .login{ 
     background: url('../../assets/img/svg/home-bg.svg'), $primary;
     background-size: cover;
@@ -7,10 +8,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
     .content{  
+        max-width: 320px;
         .logo{ 
             max-height: 70px !important;  
-            margin: 2em 2em;
+            margin: 2em 5em;
         }
         .spinner-border{
             color: $neutral-50;
