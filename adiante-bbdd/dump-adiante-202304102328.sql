@@ -27,12 +27,13 @@ CREATE TABLE `answer` (
   `value` text COLLATE latin1_spanish_ci NOT NULL,
   `id_question` bigint(20) NOT NULL,
   `i18n_key` bigint(20) NOT NULL,
+  `hasIcon` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `answer_FK` (`id_question`),
   KEY `answer_FK_1` (`i18n_key`),
   CONSTRAINT `answer_FK` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`) ON DELETE CASCADE,
   CONSTRAINT `answer_FK_1` FOREIGN KEY (`i18n_key`) REFERENCES `translations` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +42,7 @@ CREATE TABLE `answer` (
 
 LOCK TABLES `answer` WRITE;
 /*!40000 ALTER TABLE `answer` DISABLE KEYS */;
+INSERT INTO `answer` VALUES (1,'getmood-q1-a1',1,4,1),(2,'getmood-q1-a2',1,5,1),(3,'getmood-q1-a3',1,6,1),(4,'getmood-q1-a4',1,7,1),(5,'getmood-q1-a5',1,8,1);
 /*!40000 ALTER TABLE `answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,6 +67,7 @@ CREATE TABLE `languages` (
 
 LOCK TABLES `languages` WRITE;
 /*!40000 ALTER TABLE `languages` DISABLE KEYS */;
+INSERT INTO `languages` VALUES (1,'es','es-ES'),(2,'gl','gl-ES');
 /*!40000 ALTER TABLE `languages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,9 +144,10 @@ CREATE TABLE `patient_activity_entry` (
   `id_task` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `patient_activity_entry_FK` (`id_patient`),
+  KEY `patient_activity_entry_FK_1` (`id_task`),
   CONSTRAINT `patient_activity_entry_FK` FOREIGN KEY (`id_patient`) REFERENCES `patient` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `patient_activity_entry_FK_1` FOREIGN KEY (`id`) REFERENCES `task` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  CONSTRAINT `patient_activity_entry_FK_1` FOREIGN KEY (`id_task`) REFERENCES `task` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,6 +156,7 @@ CREATE TABLE `patient_activity_entry` (
 
 LOCK TABLES `patient_activity_entry` WRITE;
 /*!40000 ALTER TABLE `patient_activity_entry` DISABLE KEYS */;
+INSERT INTO `patient_activity_entry` VALUES (1,'2023-03-26 21:11:09',1,1),(19,'2023-03-27 07:16:42',1,1),(21,'2023-03-27 07:37:47',1,1),(22,'2023-03-27 07:42:30',1,1),(23,'2023-03-27 07:46:56',1,1),(24,'2023-03-27 08:54:28',1,1),(25,'2023-03-28 16:02:07',1,1),(26,'2023-03-28 16:10:03',1,1),(27,'2023-03-28 16:15:59',1,1);
 /*!40000 ALTER TABLE `patient_activity_entry` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,7 +344,7 @@ DROP TABLE IF EXISTS `program`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `program` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code_name` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci NOT NULL,
   `description` varchar(200) COLLATE latin1_spanish_ci DEFAULT NULL,
   `start_datetime` datetime NOT NULL,
   `end_datetime` datetime DEFAULT NULL,
@@ -395,17 +400,17 @@ CREATE TABLE `question` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `value` text COLLATE latin1_spanish_ci DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
-  `id_questionary` bigint(20) NOT NULL,
+  `id_questionnaire` bigint(20) NOT NULL,
   `i18n_key` bigint(20) NOT NULL,
   `id_question_type` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `question_FK` (`id_questionary`),
+  KEY `question_FK` (`id_questionnaire`),
   KEY `question_FK_1` (`i18n_key`),
   KEY `question_FK_2` (`id_question_type`),
-  CONSTRAINT `question_FK` FOREIGN KEY (`id_questionary`) REFERENCES `questionary` (`id`),
+  CONSTRAINT `question_FK` FOREIGN KEY (`id_questionnaire`) REFERENCES `questionnaire` (`id`),
   CONSTRAINT `question_FK_1` FOREIGN KEY (`i18n_key`) REFERENCES `translations` (`id`),
   CONSTRAINT `question_FK_2` FOREIGN KEY (`id_question_type`) REFERENCES `question_type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -414,6 +419,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
+INSERT INTO `question` VALUES (1,'Get patient mood',1,1,3,1);
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -426,7 +432,7 @@ DROP TABLE IF EXISTS `question_type`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `question_type` (
   `id` bigint(20) NOT NULL,
-  `code_name` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci NOT NULL,
   `description` varchar(200) COLLATE latin1_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
@@ -438,147 +444,152 @@ CREATE TABLE `question_type` (
 
 LOCK TABLES `question_type` WRITE;
 /*!40000 ALTER TABLE `question_type` DISABLE KEYS */;
+INSERT INTO `question_type` VALUES (1,'qt-select-one','This kind of question shows multiple answers. Only is allow to select one question.'),(2,'qt-free-answer','There is no predefined answers. Patient introduces feedback through free text.'),(3,'qt-select-mult','This kind of question shows multiple answers. Only is allow to select one question.');
 /*!40000 ALTER TABLE `question_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `questionary`
+-- Table structure for table `questionnaire`
 --
 
-DROP TABLE IF EXISTS `questionary`;
+DROP TABLE IF EXISTS `questionnaire`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `questionary` (
+CREATE TABLE `questionnaire` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code_name` varchar(100) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci DEFAULT NULL,
   `description` varchar(200) COLLATE latin1_spanish_ci DEFAULT NULL,
   `i18n_key` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
-  `id_quertionary_type` bigint(20) NOT NULL,
+  `id_questionnaire_type` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `questionary_FK` (`id_quertionary_type`),
-  CONSTRAINT `questionary_FK` FOREIGN KEY (`id_quertionary_type`) REFERENCES `questionary_type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  KEY `questionary_FK` (`id_questionnaire_type`),
+  CONSTRAINT `questionary_FK` FOREIGN KEY (`id_questionnaire_type`) REFERENCES `questionnaire_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `questionary`
+-- Dumping data for table `questionnaire`
 --
 
-LOCK TABLES `questionary` WRITE;
-/*!40000 ALTER TABLE `questionary` DISABLE KEYS */;
-/*!40000 ALTER TABLE `questionary` ENABLE KEYS */;
+LOCK TABLES `questionnaire` WRITE;
+/*!40000 ALTER TABLE `questionnaire` DISABLE KEYS */;
+INSERT INTO `questionnaire` VALUES (1,'q-get-mood','Questionary to get patient mood selecting on single answer','2',1);
+/*!40000 ALTER TABLE `questionnaire` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `questionary_execution`
+-- Table structure for table `questionnaire_execution`
 --
 
-DROP TABLE IF EXISTS `questionary_execution`;
+DROP TABLE IF EXISTS `questionnaire_execution`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `questionary_execution` (
+CREATE TABLE `questionnaire_execution` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_questionary` bigint(20) NOT NULL,
+  `id_questionnaire` bigint(20) NOT NULL,
   `id_patient_activy_entry` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `questionary_execution_FK` (`id_questionary`),
+  KEY `questionary_execution_FK` (`id_questionnaire`),
   KEY `questionary_execution_FK_1` (`id_patient_activy_entry`),
-  CONSTRAINT `questionary_execution_FK` FOREIGN KEY (`id_questionary`) REFERENCES `questionary` (`id`),
+  CONSTRAINT `questionary_execution_FK` FOREIGN KEY (`id_questionnaire`) REFERENCES `questionnaire` (`id`),
   CONSTRAINT `questionary_execution_FK_1` FOREIGN KEY (`id_patient_activy_entry`) REFERENCES `patient_activity_entry` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `questionary_execution`
+-- Dumping data for table `questionnaire_execution`
 --
 
-LOCK TABLES `questionary_execution` WRITE;
-/*!40000 ALTER TABLE `questionary_execution` DISABLE KEYS */;
-/*!40000 ALTER TABLE `questionary_execution` ENABLE KEYS */;
+LOCK TABLES `questionnaire_execution` WRITE;
+/*!40000 ALTER TABLE `questionnaire_execution` DISABLE KEYS */;
+INSERT INTO `questionnaire_execution` VALUES (11,1,19),(13,1,21),(14,1,22),(15,1,23),(16,1,24),(17,1,25),(18,1,26),(19,1,27);
+/*!40000 ALTER TABLE `questionnaire_execution` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `questionary_execution_answer`
+-- Table structure for table `questionnaire_execution_answer`
 --
 
-DROP TABLE IF EXISTS `questionary_execution_answer`;
+DROP TABLE IF EXISTS `questionnaire_execution_answer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `questionary_execution_answer` (
+CREATE TABLE `questionnaire_execution_answer` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_question` bigint(20) NOT NULL,
   `free_answer_value` text COLLATE latin1_spanish_ci DEFAULT NULL,
   `id_answer` bigint(20) DEFAULT NULL,
-  `id_questionary_execution` bigint(20) NOT NULL,
+  `id_questionnaire_execution` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `patient_answer_FK` (`id_question`),
   KEY `patient_answer_FK_1` (`id_answer`),
-  KEY `patient_answer_FK_2` (`id_questionary_execution`),
+  KEY `patient_answer_FK_2` (`id_questionnaire_execution`),
   CONSTRAINT `patient_answer_FK` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`),
   CONSTRAINT `patient_answer_FK_1` FOREIGN KEY (`id_answer`) REFERENCES `answer` (`id`),
-  CONSTRAINT `patient_answer_FK_2` FOREIGN KEY (`id_questionary_execution`) REFERENCES `questionary_execution` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+  CONSTRAINT `patient_answer_FK_2` FOREIGN KEY (`id_questionnaire_execution`) REFERENCES `questionnaire_execution` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `questionary_execution_answer`
+-- Dumping data for table `questionnaire_execution_answer`
 --
 
-LOCK TABLES `questionary_execution_answer` WRITE;
-/*!40000 ALTER TABLE `questionary_execution_answer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `questionary_execution_answer` ENABLE KEYS */;
+LOCK TABLES `questionnaire_execution_answer` WRITE;
+/*!40000 ALTER TABLE `questionnaire_execution_answer` DISABLE KEYS */;
+INSERT INTO `questionnaire_execution_answer` VALUES (1,1,NULL,1,11),(2,1,NULL,1,13),(3,1,NULL,1,14),(4,1,NULL,1,15),(5,1,NULL,1,16),(6,1,NULL,1,17),(7,1,NULL,1,18),(8,1,NULL,1,19);
+/*!40000 ALTER TABLE `questionnaire_execution_answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `questionary_type`
+-- Table structure for table `questionnaire_type`
 --
 
-DROP TABLE IF EXISTS `questionary_type`;
+DROP TABLE IF EXISTS `questionnaire_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `questionary_type` (
+CREATE TABLE `questionnaire_type` (
   `id` bigint(20) NOT NULL,
-  `code_name` varchar(100) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci DEFAULT NULL,
   `description` varchar(300) COLLATE latin1_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `questionary_type`
+-- Dumping data for table `questionnaire_type`
 --
 
-LOCK TABLES `questionary_type` WRITE;
-/*!40000 ALTER TABLE `questionary_type` DISABLE KEYS */;
-/*!40000 ALTER TABLE `questionary_type` ENABLE KEYS */;
+LOCK TABLES `questionnaire_type` WRITE;
+/*!40000 ALTER TABLE `questionnaire_type` DISABLE KEYS */;
+INSERT INTO `questionnaire_type` VALUES (1,'qt-dashboard','This kind of questionary is show on the patients dashboard');
+/*!40000 ALTER TABLE `questionnaire_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `related_questionary_answer`
+-- Table structure for table `related_answer_task`
 --
 
-DROP TABLE IF EXISTS `related_questionary_answer`;
+DROP TABLE IF EXISTS `related_answer_task`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `related_questionary_answer` (
+CREATE TABLE `related_answer_task` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_answer` bigint(20) NOT NULL,
-  `id_questionary` bigint(20) NOT NULL,
+  `id_task` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `related_questionary_FK` (`id_questionary`),
   KEY `related_questionary_FK_1` (`id_answer`),
-  CONSTRAINT `related_questionary_FK` FOREIGN KEY (`id_questionary`) REFERENCES `questionary` (`id`) ON DELETE CASCADE,
+  KEY `related_answer_task_FK` (`id_task`),
+  CONSTRAINT `related_answer_task_FK` FOREIGN KEY (`id_task`) REFERENCES `task` (`id`),
   CONSTRAINT `related_questionary_FK_1` FOREIGN KEY (`id_answer`) REFERENCES `answer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `related_questionary_answer`
+-- Dumping data for table `related_answer_task`
 --
 
-LOCK TABLES `related_questionary_answer` WRITE;
-/*!40000 ALTER TABLE `related_questionary_answer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `related_questionary_answer` ENABLE KEYS */;
+LOCK TABLES `related_answer_task` WRITE;
+/*!40000 ALTER TABLE `related_answer_task` DISABLE KEYS */;
+/*!40000 ALTER TABLE `related_answer_task` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -590,19 +601,20 @@ DROP TABLE IF EXISTS `task`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `task` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code_name` varchar(100) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci DEFAULT NULL,
   `description` text COLLATE latin1_spanish_ci DEFAULT NULL,
   `id_task_type` bigint(20) DEFAULT NULL,
   `free_execution` tinyint(1) DEFAULT NULL,
   `i18n_key` bigint(20) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
+  `mandatory_feedback` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `task_FK` (`id_task_type`),
   KEY `task_FK_1` (`i18n_key`),
   CONSTRAINT `task_FK` FOREIGN KEY (`id_task_type`) REFERENCES `task_type` (`id`) ON DELETE CASCADE,
   CONSTRAINT `task_FK_1` FOREIGN KEY (`i18n_key`) REFERENCES `translations` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -611,6 +623,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
+INSERT INTO `task` VALUES (1,'t-01-get-mood','This task gets patients mood thrugh a questionary',1,1,1,'2023-03-25 08:23:55','2023-03-25 08:23:55',1);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -623,7 +636,7 @@ DROP TABLE IF EXISTS `task_atributte`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `task_atributte` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code_name` varchar(100) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci DEFAULT NULL,
   `i18n_key` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `task_atributte_FK` (`i18n_key`),
@@ -678,7 +691,7 @@ DROP TABLE IF EXISTS `task_execution_status`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `task_execution_status` (
   `id` bigint(20) NOT NULL,
-  `code_name` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci NOT NULL,
   `description` varchar(200) COLLATE latin1_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
@@ -694,31 +707,31 @@ LOCK TABLES `task_execution_status` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `task_questionary`
+-- Table structure for table `task_questionnaire`
 --
 
-DROP TABLE IF EXISTS `task_questionary`;
+DROP TABLE IF EXISTS `task_questionnaire`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `task_questionary` (
+CREATE TABLE `task_questionnaire` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_task` bigint(20) NOT NULL,
-  `id_questionary` bigint(20) DEFAULT NULL,
+  `id_questionnaire` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `task_questionary_FK` (`id_task`),
-  KEY `task_questionary_FK_1` (`id_questionary`),
+  KEY `task_questionary_FK_1` (`id_questionnaire`),
   CONSTRAINT `task_questionary_FK` FOREIGN KEY (`id_task`) REFERENCES `task` (`id`),
-  CONSTRAINT `task_questionary_FK_1` FOREIGN KEY (`id_questionary`) REFERENCES `questionary` (`id`)
+  CONSTRAINT `task_questionary_FK_1` FOREIGN KEY (`id_questionnaire`) REFERENCES `questionnaire` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `task_questionary`
+-- Dumping data for table `task_questionnaire`
 --
 
-LOCK TABLES `task_questionary` WRITE;
-/*!40000 ALTER TABLE `task_questionary` DISABLE KEYS */;
-/*!40000 ALTER TABLE `task_questionary` ENABLE KEYS */;
+LOCK TABLES `task_questionnaire` WRITE;
+/*!40000 ALTER TABLE `task_questionnaire` DISABLE KEYS */;
+/*!40000 ALTER TABLE `task_questionnaire` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -730,10 +743,10 @@ DROP TABLE IF EXISTS `task_type`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `task_type` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code_name` varchar(100) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci DEFAULT NULL,
   `description` varchar(100) COLLATE latin1_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -742,7 +755,37 @@ CREATE TABLE `task_type` (
 
 LOCK TABLES `task_type` WRITE;
 /*!40000 ALTER TABLE `task_type` DISABLE KEYS */;
+INSERT INTO `task_type` VALUES (1,'tt-questionnaire','This type represents the fulfillment of a specific questionnaire'),(2,'tt-challenge','This type represents an activity proposed by the profesional to patient.'),(3,'tt-scheduled-activy','To include actions like, have breakfast, meet with the alume professionals');
 /*!40000 ALTER TABLE `task_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `task_type_atributte`
+--
+
+DROP TABLE IF EXISTS `task_type_atributte`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `task_type_atributte` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `i18n_key` bigint(20) DEFAULT NULL,
+  `id_task_type` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `task_type_atributte_FK` (`i18n_key`),
+  KEY `task_type_atributte_FK_1` (`id_task_type`),
+  CONSTRAINT `task_type_atributte_FK` FOREIGN KEY (`i18n_key`) REFERENCES `translations` (`id`),
+  CONSTRAINT `task_type_atributte_FK_1` FOREIGN KEY (`id_task_type`) REFERENCES `task_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `task_type_atributte`
+--
+
+LOCK TABLES `task_type_atributte` WRITE;
+/*!40000 ALTER TABLE `task_type_atributte` DISABLE KEYS */;
+/*!40000 ALTER TABLE `task_type_atributte` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -754,9 +797,9 @@ DROP TABLE IF EXISTS `translations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `translations` (
   `id` bigint(20) NOT NULL,
-  `i18n_key` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `code_name` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `translations_un` (`i18n_key`)
+  UNIQUE KEY `translations_un` (`code_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -766,6 +809,7 @@ CREATE TABLE `translations` (
 
 LOCK TABLES `translations` WRITE;
 /*!40000 ALTER TABLE `translations` DISABLE KEYS */;
+INSERT INTO `translations` VALUES (2,'q-getmood'),(3,'q-getmood-q1'),(4,'q-getmood-q1-a1'),(5,'q-getmood-q1-a2'),(6,'q-getmood-q1-a3'),(7,'q-getmood-q1-a4'),(8,'q-getmood-q1-a5'),(1,'t-getmood');
 /*!40000 ALTER TABLE `translations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -795,6 +839,7 @@ CREATE TABLE `translations_i18n` (
 
 LOCK TABLES `translations_i18n` WRITE;
 /*!40000 ALTER TABLE `translations_i18n` DISABLE KEYS */;
+INSERT INTO `translations_i18n` VALUES (1,1,1,'Tarea para conocer el estado de ánimo'),(2,1,2,'Cuerstionaro para conocer el estado de ánimo'),(3,1,3,'¿Cómo te sientes ?'),(4,1,4,'Muy felíz'),(5,1,5,'Muy bien'),(6,1,6,'Indiferente'),(7,1,7,'Mal'),(8,1,8,'Muy mal');
 /*!40000 ALTER TABLE `translations_i18n` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -807,7 +852,7 @@ DROP TABLE IF EXISTS `working_group`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `working_group` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `code_name` varchar(100) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci DEFAULT NULL,
   `active` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
@@ -891,4 +936,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-23  9:36:57
+-- Dump completed on 2023-04-10 23:28:54

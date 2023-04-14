@@ -5,9 +5,7 @@ import About from "./views/AboutView.vue";
 //import Dashboard from "./views/DashboardView.vue";
 // lazy-loaded
 const Dashboard = () => import("./views/DashboardView.vue")
-const BoardAdmin = () => import("./components/BoardAdmin.vue")
-const BoardModerator = () => import("./components/BoardModerator.vue")
-const BoardUser = () => import("./components/BoardUser.vue")
+
 
 const routes = [
   {
@@ -36,25 +34,7 @@ const routes = [
     path: "/agenda",
     name: "agenda",
     component: Agenda,
-  },
-  {
-    path: "/admin",
-    name: "admin",
-    // lazy-loaded
-    component: BoardAdmin,
-  },
-  {
-    path: "/mod",
-    name: "moderator",
-    // lazy-loaded
-    component: BoardModerator,
-  },
-  {
-    path: "/user",
-    name: "user",
-    // lazy-loaded
-    component: BoardUser,
-  },
+  }
 ];
 
 const router = createRouter({

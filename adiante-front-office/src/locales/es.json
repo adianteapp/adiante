@@ -8,5 +8,9 @@
   "loginform_errorcode_1":"Usuario no encontrado.",
   "loginform_errorcode_2":"Password incorrecto.",
   "loginform_errorcode_default":"Error interno, inténtelo de nuevo más tarde.",
-  "header_label_logout":"Finalizar sesión"
+  "header_label_logout":"Finalizar sesión",
+  "dashboard_label_main_message":"Hola, {patientName}",
+  "taskprogress_label_notasks":"No tienes tareas programadas para hoy",
+  "taskprogress_label_todaytasks":"Tus tareas para hoy",
+  "taskprogress_label_today_progress":"{completed} de {total} completadas"
 }
