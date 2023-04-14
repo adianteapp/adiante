@@ -760,6 +760,35 @@ INSERT INTO `task_type` VALUES (1,'tt-questionnaire','This type represents the f
 UNLOCK TABLES;
 
 --
+-- Table structure for table `task_type_atributte`
+--
+
+DROP TABLE IF EXISTS `task_type_atributte`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `task_type_atributte` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `code_name` varchar(20) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `i18n_key` bigint(20) DEFAULT NULL,
+  `id_task_type` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `task_type_atributte_FK` (`i18n_key`),
+  KEY `task_type_atributte_FK_1` (`id_task_type`),
+  CONSTRAINT `task_type_atributte_FK` FOREIGN KEY (`i18n_key`) REFERENCES `translations` (`id`),
+  CONSTRAINT `task_type_atributte_FK_1` FOREIGN KEY (`id_task_type`) REFERENCES `task_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `task_type_atributte`
+--
+
+LOCK TABLES `task_type_atributte` WRITE;
+/*!40000 ALTER TABLE `task_type_atributte` DISABLE KEYS */;
+/*!40000 ALTER TABLE `task_type_atributte` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `translations`
 --
 
@@ -768,9 +797,9 @@ DROP TABLE IF EXISTS `translations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `translations` (
   `id` bigint(20) NOT NULL,
-  `i18n_key` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
+  `code_name` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `translations_un` (`i18n_key`)
+  UNIQUE KEY `translations_un` (`code_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -907,4 +936,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-28 21:25:17
+-- Dump completed on 2023-04-10 23:28:54

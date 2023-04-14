@@ -1,7 +1,7 @@
 require('dotenv').config()
 import axios from 'axios';
 
-const API_URL = `${process.env.VUE_APP_BACKEND_BASE_URL}`+'/adiante/patient/auth/';
+const API_URL = `${process.env.VUE_APP_BACKEND_BASE_URL}`+'/auth/';
 
 class AuthService {
   
@@ -28,13 +28,6 @@ class AuthService {
     localStorage.removeItem('user');
   }
 
-  register(user) {
-    return axios.post(API_URL + 'signup', {
-      username: user.username,
-      email: user.email,
-      password: user.password
-    });
-  }
 }
 
 export default new AuthService();
