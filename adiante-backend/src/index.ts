@@ -28,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 logger.info("Mapping routes");
 require('./modules/auth/auth.routes')(app);
 require('./modules/patientActivity/patientActivity.routes')(app);
+require('./modules/tasks/task.routes')(app);
 
 const PORT = process.env.API_PORT || 8080;
 app.listen(PORT, () => {
