@@ -22,3 +22,11 @@
     width: 100% !important;
 }
 
+.backlink{
+    font-size: $font-size-small;
+    text-align: right;
+    width: 100%;
+    span{
+        font-size: $font-size-small;
+    }
+}

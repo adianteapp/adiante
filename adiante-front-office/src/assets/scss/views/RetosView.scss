@@ -1,4 +1,4 @@
-.retos-container{
+.introView{
     padding: 0em 1em;
   
     a{
@@ -22,7 +22,9 @@
 
     img{
         height: 160px;
+        width: 100%;
         object-fit: cover !important;
+        margin-bottom: 10px;
         border-radius: 12px ;
     }
 

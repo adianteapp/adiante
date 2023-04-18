@@ -1,5 +1,4 @@
-<template>
-     <!-- Modal task delayed no form -->
+<template> 
   <div class="modal fade" id="type-1" tabindex="-1" aria-labelledby="modalid" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
