@@ -7,7 +7,15 @@
         <h1>{{ $t('dashboard_label_main_message',{patientName:patientName}) }}<img class="mx-2" src="../assets/img/svg/hand.svg">  </h1>
     </section>
 
-    <GetMoodQuestionnaire />
+    <Suspense>
+      <template #default>
+      <GetMoodQuestionnaire />
+      </template>
+      <template #fallback>
+        <div>Cargando...</div>
+      </template>
+    </Suspense>
+    
 
     <section class="widget widget-state">
 

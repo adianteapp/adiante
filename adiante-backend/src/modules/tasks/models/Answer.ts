@@ -1,5 +1,5 @@
 export class Answer {
-    id: number;
-    idQuestion: number;
-    i18n: string;
+    id: number | undefined;
+    idQuestion: number | undefined;
+    i18n: string | undefined;
   }

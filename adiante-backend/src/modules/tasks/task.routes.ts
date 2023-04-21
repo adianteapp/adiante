@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as controller from './task.controller';
 import authJwt from '../../middleware/authJwt';
 
-const taskRoutesBasePath = "/adiante/patient/tasks/";
+const taskRoutesBasePath = "/adiante/patient";
 module.exports = function(app: any) {
   app.use(function(req: Request, res: Response, next: Function) {
     res.header(
@@ -13,7 +13,7 @@ module.exports = function(app: any) {
   });
 
   app.get(
-    taskRoutesBasePath+"questionnaires/get-mood",
+    taskRoutesBasePath+"/:id/tasks/questionnaires/get-mood",
     [authJwt.verifyToken],
     controller.getMoodQuestionnaire
   );

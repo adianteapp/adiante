@@ -48,7 +48,7 @@ export async function mapToTaskQuestionnaire(queryResult: any[]): Promise<Task> 
       if (!currentQuestionnaire || currentQuestionnaire.id !== row.id_questionnaire.toString()) {
         currentQuestionnaire = new Questionnaire();
         currentQuestionnaire.id = row.id_questionnaire.toString();
-        currentQuestionnaire.questionnaire_type = new QuestionnaireType(row.questionnaire_type);
+        currentQuestionnaire.questionnaireType = new QuestionnaireType(row.questionnaire_type);
         currentQuestionnaire.questions = [];
         currentTask.questionnaire = currentQuestionnaire;
       }
@@ -57,8 +57,8 @@ export async function mapToTaskQuestionnaire(queryResult: any[]): Promise<Task> 
         currentQuestion = new Question();
         currentQuestion.id = row.id_question.toString();
         currentQuestion.idQuestionnaires = row.id_questionnaire.toString();
-        currentQuestion.question_i18n = row.question_value;
-        currentQuestion.question_type = new QuestionType(row.question_type);
+        currentQuestion.i18n = row.question_value;
+        currentQuestion.questionType = new QuestionType(row.question_type);
         currentQuestion.answers = [];
         currentQuestionnaire.questions.push(currentQuestion);
       }
