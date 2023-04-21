@@ -1,36 +1,23 @@
 <template>
- <div class="navbar-header">
- 
-  
-    <img alt="Adiante logo" class="logo" src="../../assets/logo.png">   
-  <div class="dropdown text-end">
-    <a href="#"  @click="handleLogout()" class="d-block link-dark text-decoration-none dropdown-toggle">
-      {{ $t('header_label_logout') }}
-      <img  src="../../assets/img/user-demo.jpg" width="32" height="32" class="rounded-circle">  
-    </a>
-   
-  </div>
-    
-    </div>
- 
+  <div class="navbar-header  fixed-top">
 
-<!-- Modal -->
-<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="menuModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        contenido de modal
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
+    <a href="/panel"><img alt="Adiante logo" class="logo" src="../../assets/logo.png"> </a>
+
+
+    <div class="dropdown text-end">
+      <button class="btn btn-menu small dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="../../assets/img/user-demo.jpg" width="32" height="32" class="rounded-circle">
+        <div class="name"> Nombre Apellido</div>
+      </button>
+      <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1"> 
+        <li><a class="dropdown-item" href="#">
+          <span class="material-symbols-outlined">
+          logout
+          </span> Cerrar sesión</a></li>
+      </ul>
     </div>
+ 
   </div>
-</div>
 
 
 

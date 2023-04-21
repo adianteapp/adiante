@@ -1,0 +1,77 @@
+.alert { 
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    gap: 20px; 
+    padding: 20px 15px;
+    color: $neutral-80;
+
+    p {
+        display: grid;
+        margin-bottom: 0;
+    }
+ 
+
+    &.error {
+        background-color: $error-light !important;
+        border: 0;
+        box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
+        border-radius: 4px;
+        .material-symbols-outlined::before{
+            content: "error";
+            color:  $error-dark;
+        }
+    }
+
+    &.info {
+        background-color: $error-light !important;
+        border: 0;
+        box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
+        border-radius: 4px;
+        .material-symbols-outlined::before{
+            content: "error";
+            color:  $error-dark  !important;;
+        }
+    }
+
+    &.error {
+        background-color: $error-light !important;
+        border: 0;
+        box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
+        border-radius: 4px;
+        .material-symbols-outlined::before{
+            content: "error";
+            color:  $error-dark;
+        }
+    }
+    &.success {
+        background-color: $success-light !important;
+        border: 0;
+        box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
+        border-radius: 4px;
+        .material-symbols-outlined::before{
+            content: "error";
+            color:  $success-dark;
+        }
+    }
+    &.warning {
+        background-color: $warning-light !important;
+        border: 0;
+        box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
+        border-radius: 4px;
+        .material-symbols-outlined::before{
+            content: "error";
+            color:  $warning-dark;
+        }
+    }
+    &.default {
+        background-color: $neutral-20 !important;
+        border: 0;
+        box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
+        border-radius: 4px;
+        .material-symbols-outlined::before{
+            content: "error";
+            color:  $neutral-80;
+        }
+    }
+}

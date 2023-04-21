@@ -3,7 +3,7 @@
 
     <ul class="nav">
         <li>
-          <a href="#" class="nav-link ">
+          <a href="#" class="nav-link">
             <div class="active"></div>
             <div class="icon icon-home"> </div>
           </a>
@@ -18,11 +18,7 @@
             <div class="icon icon-retos">  </div>
           </a>
         </li>
-        <li>
-          <a href="#" class="nav-link">
-            <div class="icon icon-chat"> </div>
-          </a>
-        </li>
+        
         <li>
           <a href="#" class="nav-link">
             <div class="icon icon-contact"> </div>

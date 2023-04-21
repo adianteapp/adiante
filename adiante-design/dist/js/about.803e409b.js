@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkadiante_design"]=self["webpackChunkadiante_design"]||[]).push([[443],{7381:function(n,a,e){e.r(a),e.d(a,{default:function(){return f}});var t=e(3396);const s={class:"about"},u=(0,t._)("h1",null,"This is an about page",-1),i=[u];function r(n,a){return(0,t.wg)(),(0,t.iD)("div",s,i)}var c=e(89);const d={},o=(0,c.Z)(d,[["render",r]]);var f=o}}]);
+//# sourceMappingURL=about.803e409b.js.map

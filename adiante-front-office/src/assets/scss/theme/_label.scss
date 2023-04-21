@@ -1,0 +1,63 @@
+// Task states
+
+.label{
+    font-size: $font-size-base;
+    align-items: center; 
+    height: 30px; 
+    display: flex;
+    span{
+      width: auto !important;
+      display: flex; 
+    }
+   
+      
+    &.incomplete{
+      span::before{ 
+        content: '';
+        background: url('../../../public/img/svg/icon/pending.svg');
+        background-size: cover;
+        width: 20px;
+        height: 20px; 
+        display: block;  
+        margin-right: 8px;
+  
+        
+      }
+    }
+  
+    &.completed{
+      span::before{  
+        content: '';
+        background: url('../../../public/img/svg/icon/ok.svg');
+        background-size: cover;
+        width: 20px;
+        height: 20px; 
+        display: block;  
+        margin-right: 8px;
+        
+      }
+     
+    }
+  
+    &.delayed{
+      span::before{   
+  
+        content: '';
+        background: url('../../../public/img/svg/icon/error.svg');
+        background-size: cover;
+        width: 20px;
+        height: 20px; 
+        display: block;  
+        margin-right: 8px; 
+      }
+    }
+  
+    &.small{ 
+      span::before{  
+        width: 15px;
+      height: 15px;
+        
+      }
+    }
+  }
+  

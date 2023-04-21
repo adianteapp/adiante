@@ -1,22 +1,18 @@
-
 .widget-state{
     width: 100%;
     .header{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: baseline;  
-        padding: 0 1rem;
+        align-items: baseline;   
         margin-bottom: .5rem;
         span{
             font-size: $font-size-xs;
             color: $neutral-50;
         }
-        
     }
     .content{
         .states{ 
-            margin-left: 1rem;
             display: flex;
             flex-direction: row;
             align-items: flex-start;
@@ -24,10 +20,16 @@
             gap: 10px;  
             height: 120px;
             overflow-x: scroll; 
-
+             overflow-y: hidden; 
             flex: none;
             order: 1;
             flex-grow: 0; 
+
+            &::-webkit-scrollbar {
+            width: auto;
+            height: 3px;
+            color: $neutral-20
+            }
         
             .state{
                 display: flex;
@@ -36,18 +38,20 @@
                 padding: .4em;
                 gap: 10px;
                 background: #FFFFFF; 
-                border: 1px solid #ECEDEF;
+                border: 1px solid $neutral-20;
                 box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
                 min-width: 75px;
                 min-height: 105px;
+                cursor: pointer;
+                &:hover{ 
+                    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.183);
+                }
                 span{
                     font-size: $font-size-xs;
                 }
             }
-        
         }
-        
     }
     .footer{
         float: right;
@@ -58,8 +62,6 @@
         margin: .5rem 0rem;
         color: $primary;
         font-size: $font-size-small;
-
     }
-    
 }
 

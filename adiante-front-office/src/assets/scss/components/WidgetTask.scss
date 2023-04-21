@@ -1,18 +1,32 @@
 
 .widget-task{
-    width: 100%;
-    padding: 0em 1em;
+    width: 100%; 
     max-width: 500px;
     float: left;
+    cursor: pointer;
+
+    a{
+      text-decoration: none;
+    }
+
+    h2{
+      color: $success-medium;
+    }
+
+   
     .content{
-        border: 1px solid #ECEDEF;
-        border-radius: 24px;
-        padding: 1.5em;
+        border: 1px solid $neutral-30;
+        border-radius: $border-radius-widget;
+        padding: 1.5em .8em;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        gap: 20px;
+        gap: 10px; 
+
+        &:hover{
+          box-shadow: 0px 4px 20px rgba(149, 149, 149, 0.183);
+      }
 
         .info{
             width: 60%; 
@@ -21,6 +35,7 @@
             align-items: flex-start;
             padding: 0px;
             gap: 8px;
+
             h2{
                 font-size: $font-size-xl;
                 font-weight: $font-weight-bold;
@@ -29,7 +44,7 @@
                 color: $neutral-50;
             }
             a{
-                color:  #50D2AB !important;
+                color:  $success-medium!important;
             }
         }
         .completed{
@@ -73,12 +88,12 @@
               }
                 
               .circular-chart.green .circle {
-                stroke: #50D2AB;
+                stroke: $success-medium;
               }
               
               .percentage {
                 text-anchor: middle;
-                fill: #50D2AB; 
+                fill: $success-medium; 
                 font-family: 'Poppins';
                 font-style: normal;
                 font-weight: 700;

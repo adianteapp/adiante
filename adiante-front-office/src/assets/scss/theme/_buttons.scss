@@ -1,8 +1,23 @@
 .btn{
     display: flex;
-    padding: .8em 1.6em;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     justify-content: center;
     border-radius: $border-radius-button;
+    height: 50px; 
+    padding: 1% 5%;
+    cursor: pointer;
+
+    &.big{
+        height: 55px;
+        padding: 0px 30px;
+    }
+    &.small{
+        height: 30px;
+        font-size: $font-size-small;
+        padding: 0px 10px;
+    }
     span{
         padding: 0em .4em;
     }
@@ -12,6 +27,17 @@
         color: $neutral-00 !important;
         &:hover{
             background-color: $primary-light-1 !important;
+        }
+        &:focus{
+            box-shadow: 0 0 0 0.2rem $primary-light-4 !important;
+        }
+    }
+    &.btn-secondary{
+        background-color: $neutral-20 !important;
+        border: 1px solid $neutral-20 !important;
+        color: $neutral-90 !important;
+        &:hover{
+            background-color: $neutral-30 !important;
         }
         &:focus{
             box-shadow: 0 0 0 0.2rem $primary-light-4 !important;
@@ -28,9 +54,64 @@
         }
     }
     &.btn-icon{
-
+        color: $primary;
+        display: flex;
+        align-items: center;
+        padding: 0;
+        &:hover{
+            color: $primary-light-2;
+            span{
+                color: $primary-light-2;
+                border: 1px solid $primary-light-2;
+            }
+             
+        }
+        span{
+            border: 1px solid $primary;
+            color: $primary;
+            border-radius: 2em;
+            padding: .5em;
+            font-size: $font-size-big;
+            margin-right: .5em;
+             
+        }
+       
     }
     &.btn-link{
         color: $primary!important;
+    }
+    
+}
+
+.btn-close{   
+    font-size: $font-size-xs; 
+    font-weight: $font-weight-bold;
+    padding-right: 1em;
+
+}
+.btn-menu{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: .5em 1em; 
+    border: 0;
+    cursor: pointer;
+    &:hover{
+        background-color: $neutral-10;
+    }
+    :focus{
+        border: 0;
+    }
+    &.close{
+        border-bottom: 0;
+        justify-content: flex-start;
+        .btn-icon{
+            span{
+                color: $error-medium;
+                border-color:  $error-medium;
+            }
+            
+        }
     }
 }

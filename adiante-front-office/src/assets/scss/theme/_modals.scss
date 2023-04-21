@@ -1,17 +1,40 @@
 .modal-content{
     .modal-header{
         border-bottom: 1px solid $neutral-20 !important;
+        padding: 20px 16px 20px;
         .modal-title{
             font-weight: $font-weight-bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-
+        h4{
+            margin-bottom: 0 !important;
+        }
     }
     .modal-body{
+        padding: 20px 16px 20px;
         strong{
             color: $primary
         }
+        &.video-container{
+            padding: 0;
+        }
     }
     .modal-footer{
+        padding: 20px 16px 20px;
         border-top: 1px solid $neutral-20 !important;
+    }
+}
+.modal-menu{
+    .modal-dialog{
+        
+        .modal-content{
+            min-height: 80vh !important;
+            
+            .modal-header{
+                padding: 20px 16px 20px;
+            }
+        }
     }
 }
