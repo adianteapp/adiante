@@ -48,6 +48,7 @@ import HeaderMenu from '../components/common/HeaderMenu.vue'
 import FooterMenu from '../components/common/FooterMenu.vue'
 import GetMoodQuestionnaire from '../components/questionnaires/questionnaire-types/get-mood/GetMood.vue';
 import TasksProgress from '../components/completed-tasks-progress/TasksProgress.vue';
+
 import { useStore } from 'vuex'
 
 import { computed } from 'vue'

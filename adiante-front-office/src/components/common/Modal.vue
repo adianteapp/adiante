@@ -4,12 +4,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <div class="title-task">
-            <h4>Title modal</h4>
+            <h4>{{title}}</h4>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-           Modal content
+          {{content}}
         </div>
         <div class="modal-footer footer-task-modal">
           <p class="title">Modal footer</p>
@@ -24,12 +24,14 @@
 
 </template> 
    
- <script>
-   export default {
-     name: 'Modal',
-     props: {
-       msg: String
-     }
-   }
-   </script>
-    
+<script>
+export default {
+  name: 'Modal',
+  setup(props) {
+    return {
+      title: props.title,
+      content: props.content
+    }
+  }
+}
+</script>    

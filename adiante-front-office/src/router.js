@@ -1,12 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Login from "./views/LoginView.vue";
-import Agenda from "./views/AgendaView.vue";   
 import About from "./views/AboutView.vue"; 
 
 //import Dashboard from "./views/DashboardView.vue";
 // lazy-loaded
 const Dashboard = () => import("./views/DashboardView.vue")
-
+const Agenda = () => import ("./views/AgendaView.vue");   
 
 const routes = [
   {
