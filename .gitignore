@@ -1,0 +1,4 @@
+
+*.json
+adiante-backend/node_modules/
+adiante-backend/dist/
