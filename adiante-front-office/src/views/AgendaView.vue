@@ -16,6 +16,7 @@ export default {
   <div class="container-fluid task-container">
 
     <div class="title">
+
       <div class="week">
         <div class="row">
           <div class="col">Lun <br /> 8</div>
@@ -27,6 +28,7 @@ export default {
           <div class="col">Dom <br /> 14</div>
         </div>
       </div>
+
       <div class="content">
         <div class="info">
           <h2>Tus tareas para hoy</h2>
