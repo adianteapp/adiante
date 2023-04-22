@@ -32,11 +32,6 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: "/ddashboard",
-    name: "ddashboard",
-    component: dDashboard,
-  },
-  {
     path: "/agenda",
     name: "agenda",
     component: Agenda,

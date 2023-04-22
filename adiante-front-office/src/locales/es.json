@@ -8,7 +8,7 @@
   "loginform_errorcode_1": "Usuario no encontrado.",
   "loginform_errorcode_2": "Password incorrecto.",
   "loginform_errorcode_default": "Error interno, inténtelo de nuevo más tarde.",
-  "header_label_logout": "Finalizar sesión",
+  "header_label_logout": "Cerrar sesión",
   "widgethello_text_hello": "Hola",
   "widgetstate_header_title": "¿Cómo te sientes?",
   "widgetstate_header_register": "registros hoy",
