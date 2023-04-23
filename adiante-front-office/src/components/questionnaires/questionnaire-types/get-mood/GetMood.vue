@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/valid-v-on -->
 <template>
+  
   <section class="widget widget-state">
     <div class="header">
       <h2>{{ (this.taskMoodQuestionnaire.questionnaire.questions)[0].i18n }}</h2>
@@ -11,6 +12,9 @@
           <span>{{ answer.i18n }}</span>
         </div>
       </div>
+      <div>
+        <GetMoodFeedbackModal    v-if="modalActive" @close="toggleModal" />
+      </div>
     </div>
   </section>
 </template>
@@ -21,14 +25,25 @@ import taskService from    "../../../../services/task.service";
 import { defineComponent } from "vue";
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import { ref } from "vue";
+import GetMoodFeedbackModal from "../../../feedback-modals/GetMoodFeedbackModal.vue";
+
 
 export default defineComponent({
   name: 'GetMood',
-    async setup() {
+  components:{
+    GetMoodFeedbackModal : GetMoodFeedbackModal
+  },
+  async setup() {
      
       const store = useStore();
       const patientId = computed( () => store.state.auth.user.id);
-      
+
+      const modalActive = ref(false);
+      const toggleModal = () => {
+                                  modalActive.value = !modalActive.value;
+                                };
+
     
       const moodQuestionnaireResult = await taskService.getMoodQuestionnaireTask(patientId.value);
       if(moodQuestionnaireResult.isAxiosError)
@@ -36,7 +51,7 @@ export default defineComponent({
         console.log("Error loading  GetMood questionnaire");
       }else{
         const taskMoodQuestionnaire = moodQuestionnaireResult.data.task;
-        return {taskMoodQuestionnaire};
+        return {modalActive, toggleModal,taskMoodQuestionnaire};
       }
   },
   methods: {
@@ -62,7 +77,7 @@ export default defineComponent({
         alert("Ha ocurrido un error salvando el estado del paciente");
       }else{
         this.loading = false;
-        alert("Estado del paciente salvado correctamente");
+        this.toggleModal();
       }
     },
 
