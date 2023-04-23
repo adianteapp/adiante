@@ -23,7 +23,8 @@
   "taskprogress_label_todaytasks": "Tus tareas para hoy",
   "taskprogress_label_today_progress": "{completed} de {total} completadas",
   "getmood_feedback_modal_title": "Registro de estado",
-  "getmood_feedback_modal_content_1": "Gracias por registrar tu estado de ánimo",
-  "getmood_feedback_modal_content_2": "Gracias indicár como te encuentras"
+  "getmood_feedback_modal_content_0": "Gracias por registrar tu estado de ánimo",
+  "getmood_feedback_modal_content_1": "Gracias indicár como te encuentras",
+  "modal_close_button_label":"Cerrar"
 }
 

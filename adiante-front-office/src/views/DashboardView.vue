@@ -31,9 +31,6 @@
     <section class="widget widget-task">
        <TasksProgress :completed="2" :total="10" />
     </section>
-    
-
-
   </div>
 
 
@@ -59,7 +56,7 @@ export default {
     HeaderMenu: HeaderMenu,
     FooterMenu: FooterMenu,
     GetMoodQuestionnaire: GetMoodQuestionnaire,
-    TasksProgress : TasksProgress,
+    TasksProgress : TasksProgress
 },
   setup() {
     const store = useStore();

@@ -1,6 +1,11 @@
 <template>
 
-<Modal :title="getmoodFeedbackModalTitle" :content="getmoodFeedbackModalContent"/>
+<Modal 
+    :title="getmoodFeedbackModalTitle" 
+    :content="getmoodFeedbackModalContent"
+    :showButtonClose="showButtonClose"
+    />
+
 
 </template>
 <script>
@@ -13,11 +18,12 @@
       Modal : Modal
      },
      setup(){
+
         const { t } = useI18n();
         const getmoodFeedbackModalTitle =  t('getmood_feedback_modal_title');
-
-        const getmoodFeedbackModalContent = getRandomFeedbackContent(2,'getmood_feedback_modal_content_')
-        return{getmoodFeedbackModalTitle,getmoodFeedbackModalContent}
+        const getmoodFeedbackModalContent =  t(getRandomFeedbackContent(2,'getmood_feedback_modal_content_'));
+        const showButtonClose = true;
+        return{getmoodFeedbackModalTitle,getmoodFeedbackModalContent,showButtonClose}
      }
 
    }
