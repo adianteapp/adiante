@@ -1,5 +1,5 @@
 <template> 
-  <div class="modal">
+  <div class="modal-box">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -21,11 +21,6 @@
   </div>
 
 </template> 
-<style>
-  .modal{
-    display:block !important;
-  }
-</style>
    
 <script>
 import { ref } from "vue";
