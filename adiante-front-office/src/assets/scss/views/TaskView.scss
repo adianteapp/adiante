@@ -108,7 +108,7 @@
 .task-container {
    
   .list-task{
-    padding-top: 180px;
+    padding-top: 170px;
     padding-bottom: 100px;
   }
 
@@ -116,19 +116,25 @@
     background-color: white;
     max-width: 500px;
     border-bottom: 1px solid $neutral-20;
-    height: 150px;
+    height: 160px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+    padding-top: 8px; 
+
     position: fixed;
-    padding-top: 14px; 
+    right: 0;
+    left: 0;
+    z-index: 10;
+    top: 50px;
+    margin: 0 auto;
  
     .week{
       background: linear-gradient(135deg, #7740ED 0%, #9163F4 53.12%, #BFA2FF 100%);
       border-radius: 15px;  
       display: flex;
       flex-direction: column;
-      height: 55px;
-      padding: 1.2em 1em;  
+      height: 70px;
+      padding: 1em 3em;  
       margin: .3em;
       
      
@@ -144,7 +150,7 @@
           min-height: 65px;
           align-items: center !important;
           justify-content: center;
-          cursor: pointer;
+          cursor: pointer !important;
           line-height: 28px;
           margin: 4px;
           font-weight: $font-weight-bold;
@@ -172,7 +178,7 @@
      order: 0;
      align-self: stretch;
      flex-grow: 0;
-     padding: 0px 10px;
+     padding: 0px 14px;
      height: 65px;
 
      .info{

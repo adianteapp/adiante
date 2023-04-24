@@ -5,6 +5,11 @@
     display: block;
  }
 
+ #app{
+    max-width: 500px;
+    margin: 0 auto;
+ }
+
  *, ::after, ::before {
     box-sizing: border-box;
 }
@@ -98,3 +103,4 @@ section{
 .mb-4{
     margin-bottom: 10px;
 }
+

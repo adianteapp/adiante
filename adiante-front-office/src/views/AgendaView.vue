@@ -51,10 +51,11 @@ export default {
     </div>
 
     
-    <div class="tareas">
-      <div class="tarea">
-        
-      </div>
+    <div class="list-task">
+
+     
+
+
     </div>
    
 

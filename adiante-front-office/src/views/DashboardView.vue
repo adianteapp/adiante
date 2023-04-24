@@ -14,27 +14,25 @@
       <template #fallback>
         <div>Cargando...</div>
       </template>
-    </Suspense>
-    
-
-    <section class="widget widget-state">
-
-  
-      <div class="footer d-none">
-        <a class="text-sm" href="">Ver mis registros </a> <span class="material-symbols-outlined">
-          chevron_right
-          </span>
-      </div>
-
-    </section>
+    </Suspense> 
 
     <section class="widget widget-task">
        <TasksProgress :completed="2" :total="10" />
     </section>
+
+
+ 
+
+
+
+ 
+   
+
+
+   
+
   </div>
-
-
-
+ 
   <FooterMenu />
    
      
@@ -44,7 +42,7 @@
 import HeaderMenu from '../components/common/HeaderMenu.vue'
 import FooterMenu from '../components/common/FooterMenu.vue'
 import GetMoodQuestionnaire from '../components/questionnaires/questionnaire-types/get-mood/GetMood.vue';
-import TasksProgress from '../components/completed-tasks-progress/TasksProgress.vue';
+import TasksProgress from '../components/completed-tasks-progress/TasksProgress.vue'; 
 
 import { useStore } from 'vuex'
 
