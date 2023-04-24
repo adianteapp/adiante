@@ -1,20 +1,19 @@
 <template>
- <div class="navbar navbar-footer fixed-bottom">
+ <div class="navbar-footer fixed-bottom">
 
     <ul class="nav">
         <li>
-          <a href="#" class="nav-link">
-            <div class="active"></div>
+          <a href="/dashboard" class="nav-link "> 
             <div class="icon icon-home"> </div>
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link">
+          <a href="/agenda" class="nav-link">
             <div class="icon icon-calendar"> </div>
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link active">
             <div class="icon icon-retos">  </div>
           </a>
         </li>
