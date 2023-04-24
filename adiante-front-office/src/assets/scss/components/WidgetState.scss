@@ -4,8 +4,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: baseline;   
-        margin-bottom: .5rem;
+        align-items: baseline;  
         span{
             font-size: $font-size-xs;
             color: $neutral-50;
@@ -17,13 +16,13 @@
             flex-direction: row;
             align-items: flex-start;
             padding: 0px;
-            gap: 10px;  
-            height: 120px;
+            gap: 10px;   
             overflow-x: scroll; 
              overflow-y: hidden; 
             flex: none;
             order: 1;
             flex-grow: 0; 
+            padding: 1em 0.4em;
 
             &::-webkit-scrollbar {
             width: auto;
@@ -61,7 +60,7 @@
         align-items: center; 
         margin: .5rem 0rem;
         color: $primary;
-        font-size: $font-size-small;
+        font-size: $font-size-sm;
     }
 }
 

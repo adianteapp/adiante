@@ -36,13 +36,13 @@
             padding-bottom: 4px;
             .title{
                 font-weight: $font-weight-bold;
-                font-size: $font-size-big;
+                font-size: $font-size-lg;
                 color: $neutral-80 !important;
             }
              
         }
         .desc{
-            font-size: $font-size-small;
+            font-size: $font-size-sm;
             color: $neutral-50;
            
         }
@@ -51,14 +51,14 @@
         display: flex;
         align-self: center;
         span{
-            font-size: $font-size-big !important;
+            font-size: $font-size-lg !important;
            
         }
         
     }
     
         .state{
-            font-size: $font-size-small;
+            font-size: $font-size-sm;
            
              
         }
