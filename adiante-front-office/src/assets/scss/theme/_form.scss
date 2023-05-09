@@ -146,8 +146,8 @@ textarea{
         }
         &.error {
             
-            .material-symbols-outlined::before{
-                content: "error";
+            i::before{
+                content: "\e016";
                 color:  $error-dark;
             }
             .label{
@@ -164,8 +164,8 @@ textarea{
         }
         &.success {
             
-            .material-symbols-outlined::before{
-                content: "check";
+            i::before{
+                content: "\e01c";
                 color:  $success-dark;
             }
             .label{
@@ -204,7 +204,7 @@ textarea{
  
 }
  .form-check {
-     display: flex;
+     display: flex !important;
      align-items: center;
      gap: 10px;
      margin-bottom: 8px !important;

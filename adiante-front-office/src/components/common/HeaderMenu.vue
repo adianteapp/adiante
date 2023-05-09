@@ -7,9 +7,7 @@
     <label class="dropdown">
 
       <div class="dd-button">
-        <span class="material-symbols-outlined">
-          person
-          </span> {{patientName}}
+        <i class="icon-user"></i>{{patientName}}
       </div>
     
       <input type="checkbox" class="dd-input" id="test">
@@ -18,9 +16,8 @@
          
         <li>
           <a class="dropdown-item" href="#" @click="handleLogout()">
-            <span class="material-symbols-outlined">
-            logout
-            </span>{{ $t('header_label_logout')}}</a>
+            <i class="icon-exit"></i>
+            {{ $t('header_label_logout')}}</a>
         </li>
       </ul>
       

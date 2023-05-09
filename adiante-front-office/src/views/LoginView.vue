@@ -13,9 +13,7 @@
             <label for="InputPassword1" class="form-label">{{ $t('loginform_label_pwd') }}</label>
             <input type="password" v-model="password" class="form-control" id="InputPassword1">
           </div>
-          <button type="submit" class="btn btn-primary w-100">{{ $t('loginform_button_access') }} <span class="material-symbols-outlined">
-            login
-            </span></button>
+          <button type="submit" class="btn btn-primary w-100">{{ $t('loginform_button_access') }} <i class="icon-navigate_next"></i></button>
         </div>
       </form>
 

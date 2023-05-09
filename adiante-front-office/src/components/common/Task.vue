@@ -5,8 +5,8 @@
       <div class="state delayed"><span> No completada</span></div>
     </div>
     <div class="content">
-      <div class="task-info date"><span class="icon material-symbols-outlined"></span> 00/00/0000 </div>
-      <div class="task-info time"><span class="icon material-symbols-outlined"></span> 11:00 </div>
+      <div class="task-info date"><i class="icon-date"></i> 00/00/0000 </div>
+      <div class="task-info time"><i class="icon-time"></i> 11:00 </div>
     </div>
     <div class="details">
       <p>Esta es la descripción larga de la tarea en donde se explica al usuario de manera detallada en qué
