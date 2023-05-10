@@ -16,9 +16,7 @@
         </div>
 
         <div class="icon">
-            <span class="material-symbols-outlined">
-                navigate_next
-                </span>
+          <i class="icon-navigate_next"></i>
         </div>
       </div>
 </template> 

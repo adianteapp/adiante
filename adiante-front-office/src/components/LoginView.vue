@@ -1,7 +1,7 @@
 <template>
   <div class="introView">
     <div class="backlink">
-      <a href="/retos"  ><span class="material-symbols-outlined"> arrow_back_ios </span> Volver al
+      <a href="/retos"  ><i class="icon-navigate_before"></i> Volver al
         listado</a>
     </div>
    

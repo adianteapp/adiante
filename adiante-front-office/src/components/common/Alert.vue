@@ -1,6 +1,6 @@
 <template>
   <div class="alert error" role="alert"> 
-    <span class="icon material-symbols-outlined"> </span> 
+    <i> </i> 
     <p>Texto del mensaje</p>    
   </div>
 </template> 
