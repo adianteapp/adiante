@@ -108,15 +108,13 @@
 .task-container {
    
   .list-task{
-    padding-top: 170px;
+    padding-top: 80px;
     padding-bottom: 100px;
   }
 
   .title{ 
     background-color: white;
-    max-width: 500px;
-    border-bottom: 1px solid $neutral-20;
-    height: 160px;
+    max-width: 500px;  
     display: flex;
     flex-direction: column; 
     padding-top: 8px; 
@@ -134,7 +132,7 @@
       display: flex;
       flex-direction: column;
       height: 70px;
-      padding: 1em 3em;  
+      padding: 45px 30px;  
       margin: .3em;
       
      
@@ -173,13 +171,13 @@
       width: 100%;
      display: flex;
      flex-direction: row;
-     justify-content: space-between;
+     justify-content: space-between; 
      align-items: center; 
      order: 0;
      align-self: stretch;
      flex-grow: 0;
-     padding: 0px 14px;
-     height: 65px;
+     padding: 0px 14px;  
+
 
      .info{
          width: 70%; 
@@ -260,8 +258,7 @@
 
 .list-task{
   width: 100%; 
-  overflow-y: visible !important;
- 
+  overflow-y: visible !important; 
   
   
   
