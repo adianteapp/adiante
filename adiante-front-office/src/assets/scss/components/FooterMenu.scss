@@ -11,25 +11,31 @@
         margin: 0.3em 0;
 
         .nav-link{
-            color: white;
+
+            i{
+                color: white;
             padding: 1em !important;
             display: inline-block;
             justify-content: center;
             align-items: center;
+            font-size: 25px !important;
 
+            
+            }
             &.active{
-                ::before{
-                    content: ".";
+                i::after{
+                    content: "";
                     width: 5px;
                     height: 5px;
                     border-radius: 3em;
                     background-color: #FC5C7F;
-                    margin-left: 9px;
-    position: absolute;
-    top: 10px;
+                    margin-left: -14px;
+                    position: absolute;
+                    top: 20px;
                 }
                 
             }
+            
             .icon{
                 width: 24px;
                 height: 24px;
