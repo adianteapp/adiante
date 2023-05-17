@@ -1,34 +1,56 @@
 <template>
-    <p class="header">Texto de la pregunta </p>
-
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="checkboxname" name="checkboxname">
-        <label class="form-check-label" for="checkboxname">
-            Answer text
+    <div>
+      <p class="header">{{ currentQuestion.i18n }}</p>
+  
+      <div class="form-check" v-for="(answer, index) in currentQuestion.answers" :key="index">
+        <input class="form-check-input" type="checkbox" @change="updateSelectedAnswers" :checked="isAnswerSelected(answer.id)" :id="answer.id">
+        <label class="form-check-label" :for="'answer-' + index">
+          {{ answer.i18n }}
         </label>
+      </div>
     </div>
+  </template>
+  
+  <script>
+  import { ref } from 'vue';
+  import { toRaw } from 'vue';
+  export default {
+    name: 'SelectMultQuestions',
+    props: ['question','selectedAnswers'],
+    setup(props) {
 
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="checkboxname" name="checkboxname">
-        <label class="form-check-label" for="checkboxname">
-            Answer text
-        </label>
-    </div>
+      const currentQuestion = ref(props.question);
+      const selectedAnswers = ref(props.selectedAnswers).value;
+      const currentAnswers= ref([]);
 
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="checkboxname" name="checkboxname">
-        <label class="form-check-label" for="checkboxname">
-            Answer text
-        </label>
-    </div>
-</template> 
-   
-<script>
+      if(selectedAnswers && (selectedAnswers.length > 0)){
 
-export default {
-    name: 'QuestionCheckbox',
-    props: {
-        msg: String
+        currentAnswers.value= selectedAnswers.filter(answers => answers.idQuestion == currentQuestion.value.id);
+      }
+
+
+      const updateSelectedAnswers = (event) => {
+          if (event.target.checked) {
+            currentAnswers.value.push( {idQuestion:currentQuestion.value.id,idAnswer:event.target.id} );
+          } else {
+            currentAnswers.value = currentAnswers.value.filter(answer => answer.idAnswer !== event.target.id);
+          }
+        
+        };
+
+    const isAnswerSelected = (answerId) => {
+      if(currentAnswers.value && (currentAnswers.value.length > 0)){
+        return currentAnswers.value.some((answer) => answer.idAnswer == answerId);
+      }
+    };
+
+
+     const getAnswers = () => {
+        return toRaw(currentAnswers.value);
+      };
+      
+      return { currentQuestion,updateSelectedAnswers,isAnswerSelected, getAnswers };
     }
-}
-</script>
+  }
+  </script>
+  
