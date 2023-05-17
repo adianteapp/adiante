@@ -16,20 +16,10 @@
       </template>
     </Suspense> 
 
+   
     <section class="widget widget-task">
        <TasksProgress :completed="2" :total="10" />
     </section>
-
-
- 
-
-
-
- 
-   
-
-
-   
 
   </div>
  

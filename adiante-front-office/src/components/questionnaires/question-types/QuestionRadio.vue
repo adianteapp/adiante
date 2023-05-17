@@ -1,34 +1,53 @@
 <template>
-    <p class="header">Texto de la pregunta </p>
-
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="radioname" id="radioname">
-        <label class="form-check-label" for="radioname">
-            Answer text
+    <div>
+      <p class="header">{{ currentQuestion.i18n }}</p>
+  
+      <div class="form-check" v-for="(answer, index) in currentQuestion.answers" :key="index">
+        <input class="form-check-input" type="radio"  @change="updateSelectedAnswers" :checked="isAnswerSelected(answer.id)" :id="answer.id">
+        <label class="form-check-label" :for="'answer-' + index">
+          {{ answer.i18n }}
         </label>
+      </div>
     </div>
+  </template> 
+  
+  <script>
+  import { ref } from 'vue';
+  import { toRaw } from 'vue';
+  export default {
+    name: 'SelectOneQuestion',
+    props: ['question','selectedAnswers'],
+    setup(props ) {
+      
+      const currentQuestion = ref(props.question);
+      const selectedAnswers = ref(props.selectedAnswers).value;
 
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="radioname" id="radioname">
-        <label class="form-check-label" for="radioname">
-            Answer text
-        </label>
-    </div>
+      const currentAnswers= ref();
+      if(selectedAnswers && (selectedAnswers.length > 0)){
 
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="radioname" id="radioname">
-        <label class="form-check-label" for="radioname">
-            Answer text
-        </label>
-    </div>
-</template> 
-   
-<script>
+        currentAnswers.value= selectedAnswers.filter(answers => answers.idQuestion == currentQuestion.value.id);
+      }
 
-export default {
-    name: 'QuestionRadio',
-    props: {
-        msg: String
+
+      const updateSelectedAnswers = (event) => {
+        currentAnswers.value = [ {idQuestion:currentQuestion.value.id,idAnswer:event.target.id}];
+    };
+
+
+    const getAnswers = () => {
+        return toRaw(currentAnswers.value);
+      };
+      
+   const isAnswerSelected = (answerId) => {
+      if(currentAnswers.value && (currentAnswers.value.length > 0)){
+        return currentAnswers.value.some((answer) => answer.idAnswer == answerId);
+      }
+    };
+
+
+
+      return { updateSelectedAnswers, getAnswers, isAnswerSelected ,currentQuestion};
     }
-}
-</script>
+  }
+  </script>
+  

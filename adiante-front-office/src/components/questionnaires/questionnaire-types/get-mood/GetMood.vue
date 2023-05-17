@@ -13,7 +13,7 @@
         </div>
       </div>
       <div>
-        <GetMoodFeedbackModal    v-if="modalActive" @close="toggleModal" />
+        <getMoodFeedbackModal    v-if="modalActive" @close="toggleModal" />
       </div>
     </div>
   </section>
@@ -28,11 +28,10 @@ import { computed } from 'vue'
 import { ref } from "vue";
 import GetMoodFeedbackModal from "../../../feedback-modals/GetMoodFeedbackModal.vue";
 
-
 export default defineComponent({
   name: 'GetMood',
   components:{
-    GetMoodFeedbackModal : GetMoodFeedbackModal
+    getMoodFeedbackModal : GetMoodFeedbackModal
   },
   async setup() {
      

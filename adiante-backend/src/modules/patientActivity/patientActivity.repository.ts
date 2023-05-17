@@ -39,7 +39,7 @@ async function insertPatientTaskQuestionnaireEntry(patientActivityData: any): Pr
 
 
 
-          const sqlQuestionnaireExecutionAnswer = "INSERT INTO adiante.questionnaire_execution_answer (id_question, id_answer, id_questionnaire_execution) VALUES";
+          const sqlQuestionnaireExecutionAnswer = "INSERT INTO questionnaire_execution_answer (id_question, id_answer, id_questionnaire_execution) VALUES";
           let valueParamList = "";
           for (const questionnaireExecutionAnswer of patientActivityData.questionnaireExecution.questionnaireExecutionAnswersList) {
             const valueTuple = "(id_question, id_answer, id_questionnaire_execution)";
