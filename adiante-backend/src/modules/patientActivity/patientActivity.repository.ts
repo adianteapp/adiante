@@ -1,13 +1,33 @@
 import dao from "../../middleware/dao";
 
-import loggerConf from '../../middleware/log4sConf';
-const logger = loggerConf.logger;
+import Logger from '../../config/logger';
 
 async function getPatientByUsername(userName: string): Promise<any> {
   const sqlQuery = `SELECT id, name, email, password, createdAt, updatedAt FROM patient p WHERE p.email ='${userName}'`;
   const rows = await dao.executeQuery(sqlQuery);
   return rows;
 }
+
+
+async function getPatientScheduledTasks(patientId: string , startDate: Date ,endDate:Date): Promise<any> {
+
+  const sqlQuery =`SELECT t.id AS 'taskId', tin.title_i18n AS 'taskTitle', tin.description_i18n AS 'taskDescription',
+                    CONVERT_TZ(pst.start_datetime, '+00:00', @@session.time_zone) AS 'startDateTimeLocal',
+                    CONVERT_TZ(pst.end_datetime, '+00:00', @@session.time_zone) AS 'endDateTimeLocal'
+                  FROM adiante.patient_scheduled_task pst
+                  INNER JOIN task t ON pst.id_task = t.id
+                  INNER JOIN task_i18n tin ON t.id = tin.id_task
+                  WHERE pst.id_patient = '${patientId}'
+                  AND pst.start_datetime >= '${startDate}'
+                  AND pst.end_datetime <  '${endDate}'`;
+
+  const rows = await dao.executeQuery(sqlQuery);
+  return rows;
+}
+
+
+
+
 
 async function insertPatientTaskEntry(patientActivityData: any): Promise<boolean> {
   // TODO: implementar esta función
@@ -65,7 +85,7 @@ async function insertPatientTaskQuestionnaireEntry(patientActivityData: any): Pr
 
           return true;
   } catch (err) {
-    logger.error("Error on patientActivity.repository.insertPatientTaskQuestionnaireEntry():" + err);
+    Logger.error("Error on patientActivity.repository.insertPatientTaskQuestionnaireEntry():" + err);
     if (connection) {
       await connection.rollback();
     }
@@ -76,4 +96,4 @@ async function insertPatientTaskQuestionnaireEntry(patientActivityData: any): Pr
   }
 }
 
-export { getPatientByUsername, insertPatientTaskEntry, insertPatientTaskQuestionnaireEntry };
+export { getPatientByUsername, insertPatientTaskEntry, insertPatientTaskQuestionnaireEntry,getPatientScheduledTasks };

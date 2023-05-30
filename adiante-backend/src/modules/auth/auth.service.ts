@@ -5,8 +5,7 @@ import config from '../../config/auth.config';
 import * as authRepository from './auth.repository';
 import * as authEnum from './auth.enum';
 
-import loggerConf from '../../middleware/log4sConf';
-const logger = loggerConf.logger;
+import Logger from '../../config/logger';
 
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
@@ -64,7 +63,7 @@ export const getPatientByPatientId = async (idPatient: string) => {
   if (queryResult.length == 1) {
     patient = queryResult[0];
   } else {
-    logger.debug('Error retrieving patient with id:' + idPatient);
+    Logger.debug('Error retrieving patient with id:' + idPatient);
   }
   return patient;
 };

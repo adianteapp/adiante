@@ -2,8 +2,7 @@ import { Request, Response } from 'express';
 import * as taskService from './task.service';
 
 
-import loggerConf from '../../middleware/log4sConf';
-const logger = loggerConf.logger;
+import Logger from '../../config/logger';
 
 export const getMoodQuestionnaire = async (req: Request, res: Response) => {
   try{
@@ -17,7 +16,7 @@ export const getMoodQuestionnaire = async (req: Request, res: Response) => {
     }
   }catch(err)
   {
-    logger.error(`ERROR retrieving GetMood questionnaire:`+err);
+    Logger.error(`ERROR retrieving GetMood questionnaire:`+err);
     return res.status(500).send({ message: "Internal server error" });
   }
 }

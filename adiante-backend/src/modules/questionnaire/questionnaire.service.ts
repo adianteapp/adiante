@@ -5,8 +5,8 @@ import questionnaireRepository from "./questionnaire.repository";
 import QuestionType from "./questionnaire.enum";
 import  TaskRecordingStatusses  from "../patientActivity/patientActivity.enum";
 
-import loggerConf from '../../middleware/log4sConf';
-const logger = loggerConf.logger;
+import Logger from '../../config/logger';
+
 
 /**
  * @description  This method is in charge to check the integrity of the reference data, idquestionnaire, idquestions and answers. Moreover in case of a free answer 
@@ -41,7 +41,7 @@ async function validateAnswersData(filledQuestionnaire: any, recoveredQuestionna
             let filteredQuestionAnswers = await filterRelatedQuestionAnswer(answer, recoveredQuestionnaire);
             let questionType = filteredQuestionAnswers[0].question_type;
             if (!questionType) {
-                logger.error("Error retrieving question_type from database for questionId:" + answer.idQuestion)
+                Logger.error("Error retrieving question_type from database for questionId:" + answer.idQuestion)
                 return TaskRecordingStatusses.patRecErrInternalError;
             }
 
@@ -63,7 +63,7 @@ async function validateAnswersData(filledQuestionnaire: any, recoveredQuestionna
         }
         return TaskRecordingStatusses.patRecOk;
     } else {
-        logger.error("Error saving patient activity. Provided questionnaireId:" + filledQuestionnaire.idQuestionnaire + " doesn't have related answers");
+        Logger.error("Error saving patient activity. Provided questionnaireId:" + filledQuestionnaire.idQuestionnaire + " doesn't have related answers");
         return TaskRecordingStatusses.patRecErrIncompleteQuestionnaireAnswers;
     }
 }

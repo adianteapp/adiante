@@ -20,7 +20,7 @@
    
 <script>
 export default {
-  name: 'Task',
+  name: 'ScheduledTask',
   props: {
     msg: String
   }

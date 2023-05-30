@@ -18,7 +18,7 @@
 
    
     <section class="widget widget-task">
-       <TasksProgress :completed="2" :total="10" />
+       <TasksProgress :completed="2" :total="10" :enableLinkToAgenda="true"/>
     </section>
 
   </div>

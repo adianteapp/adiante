@@ -17,8 +17,10 @@ import { PatientActivityEntry } from './domain/models/PatientActivityEntry';
 
 import * as questionnaireService from '../questionnaire/questionnaire.service';
 
-import loggerConf from '../../middleware/log4sConf';
-const logger = loggerConf.logger;
+import Logger from '../../config/logger';
+
+
+//#region  exported methods
 
 /**
  * @description This method is in charge to save the activity confirmed by the patient.
@@ -53,6 +55,8 @@ export const save = async (patientActivityDto: any) => {
    return { status: saveStatus };
 };
 
+
+//#endregion
 
 //#region Prepare functions to save data into repository
 
@@ -89,6 +93,8 @@ async function getPatientQuestionnaireData(filledQuestionnaire: any): Promise<Qu
 
    return questionnaireExecution;
 }
+
+
 //#endregion
 
 
@@ -140,7 +146,7 @@ async function validateExecutedTask(executedTask: any): Promise<TaskRecordingSta
 
    } else {
 
-      logger.error("Error saving patient activity. Invalid taskId:" + executedTask.idTask);
+      Logger.error("Error saving patient activity. Invalid taskId:" + executedTask.idTask);
       return TaskRecordingStatusses.patRecErrInvalidTaskId;
 
    }
@@ -152,7 +158,7 @@ async function validateIdPatient(patientActivityDto: any): Promise<TaskRecording
 
    if (!patientActivityDto || !(patientActivityDto.idPatient)) {
 
-      logger.error("Patientid not provided, activity can not be saved");
+      Logger.error("Patientid not provided, activity can not be saved");
       return TaskRecordingStatusses.patRecErrPatientNotFound;
    }
 
@@ -160,7 +166,7 @@ async function validateIdPatient(patientActivityDto: any): Promise<TaskRecording
 
    if (!patientValidation) {
 
-      logger.error("Patientid:" + patientActivityDto.idPatient + " not found, activity can not be saved");
+      Logger.error("Patientid:" + patientActivityDto.idPatient + " not found, activity can not be saved");
       return TaskRecordingStatusses.patRecErrPatientNotFound;
 
    } else {
@@ -172,7 +178,7 @@ async function validateExecutedTaskMinContent(executedTask: any): Promise<TaskRe
 
    if (!executedTask || !(executedTask.idTask)) {
 
-      logger.error("Error saving patient activity. No taskid provided");
+      Logger.error("Error saving patient activity. No taskid provided");
       return TaskRecordingStatusses.patRecErrInvalidTaskId
 
    } else {

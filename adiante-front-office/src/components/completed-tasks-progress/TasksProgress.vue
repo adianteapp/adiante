@@ -8,7 +8,7 @@
         <h2>{{ $t('taskprogress_label_todaytasks')}}</h2> 
 
         <span>{{ $t('taskprogress_label_today_progress',{completed:completed,total,total}) }}</span>
-        <a href="/agenda" class="btn btn-secondary small">{{ $t('widgettask_header_link') }}</a>
+        <a  v-if="showLinkToAgenda.value"  href="/agenda" class="btn btn-secondary small">{{ $t('widgettask_header_link') }}</a>
       </div>
         <div class="completed">
           <div class="flex-wrapper">
@@ -34,14 +34,14 @@
   </template>
   
   <script>
-  import {  computed } from 'vue';
+  import {  computed,ref } from 'vue';
   
   export default {
     name: 'TaskProgress',
-    props: ['completed','total',],
+    props: ['completed','total','enableLinkToAgenda','showProgressOnP','showProgressOnSpan'],
     setup(props) {
 
-      
+      const showLinkToAgenda = ref(props.enableLinkToAgenda);
       const percentage = computed(() => {
         if( props.total > 0)
         {
@@ -54,7 +54,7 @@
 
 
       return {
-        percentage
+        percentage,showLinkToAgenda
       };
     }
   }

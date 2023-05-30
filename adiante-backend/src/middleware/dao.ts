@@ -1,10 +1,9 @@
 // Required Modules
 import dbConfig from '../config/db.config.js';
-
+import Logger from '../config/logger'
 
 //Logger imports
-const loggerConfig = require("./log4sConf");
-const logger = loggerConfig.fileAppenderLogger;
+
 
 async function fetchConn() {
   let conn = await dbConfig.getConnection();
@@ -28,7 +27,7 @@ const dao = {
 
       return rows;
     } catch (exception) {
-      logger.error("Error:" + exception + " executing query:" + sqlQuery)
+      Logger.error("Error:" + exception + " executing query:" + sqlQuery)
     }
     finally {
       if (conn) conn.release(); //release to pool

@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
 import * as patientActivityService from './patientActivity.service';
 
-import  TaskRecordingStatusses  from "../patientActivity/patientActivity.enum";
+import TaskRecordingStatusses from "../patientActivity/patientActivity.enum";
+import Logger from '../../config/logger';
 
-import loggerConf from '../../middleware/log4sConf';
-const logger = loggerConf.logger;
 
 export const savePatientActivity = async (req: Request, res: Response) => {
   const saveResult = await patientActivityService.save(req.body);
@@ -35,7 +34,7 @@ export const savePatientActivity = async (req: Request, res: Response) => {
       return res.status(500).send({ message: "Internal server error" });
 
     default:
-      logger.error(`Unknown answer from patientActivityService.save(req.body): ${saveResult}`);
+      Logger.error(`Unknown answer from patientActivityService.save(req.body): ${saveResult}`);
       return res.status(500).send({ message: "Internal server error" });
   }
 }

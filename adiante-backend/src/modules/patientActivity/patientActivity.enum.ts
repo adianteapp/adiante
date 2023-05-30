@@ -11,4 +11,13 @@ export const enum TaskRecordingStatusses  {
    patRecErrInternalError = "PAT-REC-INTERNAL-ERROR",
 };
 
+
+
+// Common statuses
+export const enum PatientActivityStatusses  {
+   Ok = "OK"
+};
+
+
+
 export default TaskRecordingStatusses;
