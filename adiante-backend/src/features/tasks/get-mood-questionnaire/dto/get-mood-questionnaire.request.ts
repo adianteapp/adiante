@@ -1,3 +1,3 @@
 export interface GetMoodQuestionnaireRequest {
-    patientId: number;
+    patientId: string;
   }

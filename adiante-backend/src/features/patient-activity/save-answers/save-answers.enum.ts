@@ -6,6 +6,8 @@ export const enum SaveAnswersStatus  {
     InvalidTaskId = "InvalidTaskId",
     TaskNotAssignedToPatient = "TaskNotAssignedToPatient",
     IncompleteQuestionnaireId ="IncompleteQuestionnaireId",
+    QuestionnaireIdNotFound = "QuestionnaireIdNotFound",
+    QuestionIdNotFound = "QuestionIdNotFound",
     PatientNotFound = "PatientNotFound",
     InternalError = "InternalError",
  };

@@ -25,7 +25,6 @@ export class AuthController implements IAuthController{
       case LoginStatus.Succesfull:
          
         res.status(200).send({
-          id: Number(loginResult.id.toString()),
           name: loginResult.name,
           accessToken: loginResult.accessToken
         });

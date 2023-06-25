@@ -9,8 +9,8 @@ import { TasksController } from '../features/tasks/tasks.controller';
 import { ITasksController } from '../features/tasks/i-tasks.controller';
 import { IGetScheduledTaskHandler } from '../features/tasks/get-scheduled-tasks/i-get-scheduled-task.handler';
 import { GetScheduledTaskHandler } from '../features/tasks/get-scheduled-tasks/get-scheduled-task.handler';
-import { IGetTaskHandler } from '../features/tasks/get-task/i-get-task.handler';
-import { GetTaskHandler } from '../features/tasks/get-task/get-task.handler';
+import { IGetTaskHandler } from '../features/shared/get-task/i-get-task.handler';
+import { GetTaskHandler } from '../features/shared/get-task/get-task.handler';
 import { IGetTaskAttributesHandler } from '../features/shared/get-task-attributes/i-get-task-attributes.handler';
 import { IGetQuestionnaireHandler } from '../features/shared/get-questionnaire/i-get-questionnaire.handler';
 import { GetQuestionnaireHandler } from '../features/shared/get-questionnaire/get-questionnaire.handler';
@@ -19,7 +19,12 @@ import { GetMoodQuestionnaireHandler } from '../features/tasks/get-mood-question
 import { IGetMoodQuestionnaireHandler } from '../features/tasks/get-mood-questionnaire/i-get-mood-questionnaire.handler';
 import { IPatientActivityController } from '../features/patient-activity/i-patient-activity.controller';
 import { PatientActivityController } from '../features/patient-activity/patient-activity.controller';
-
+import { IPreparePatientActivityHandler } from '../features/patient-activity/save-answers/prepare-patient-activity/i-prepare-patient-activity.handler';
+import { PreparePatientActivityHandler } from '../features/patient-activity/save-answers/prepare-patient-activity/prepare-patient-activity.handler';
+import { ISaveAnswersHandler } from '../features/patient-activity/save-answers/i-save-answers.handler';
+import { SaveAnswersHandler } from '../features/patient-activity/save-answers/save-answers.handler';
+import { IGetTasksByTypeHandler } from '../features/tasks/get-tasks-by-type/i-get-task-by-type.handler';
+import { GetTasksByTypeHandler } from '../features/tasks/get-tasks-by-type/get-task-by-type.handler';
 class DiContainer {
   private container: Container;
 
@@ -43,7 +48,11 @@ class DiContainer {
     this.container.bind<IGetTaskAttributesHandler>("IGetTaskAttributesHandler").to(GetTaskAttributesHandler).inRequestScope;
     this.container.bind<IGetQuestionnaireHandler>("IGetQuestionnaireHandler").to(GetQuestionnaireHandler).inRequestScope;
     this.container.bind<IGetMoodQuestionnaireHandler>("IGetMoodQuestionnaireHandler").to(GetMoodQuestionnaireHandler).inRequestScope;
+    this.container.bind<IPreparePatientActivityHandler>("IPreparePatientActivityHandler").to(PreparePatientActivityHandler).inRequestScope;
+    this.container.bind<ISaveAnswersHandler>("ISaveAnswersHandler").to(SaveAnswersHandler).inRequestScope;
+    this.container.bind<IGetTasksByTypeHandler>("IGetTasksByTypeHandler").to(GetTasksByTypeHandler).inRequestScope;
   }
+
 
   public getContainer(): Container {
     return this.container;

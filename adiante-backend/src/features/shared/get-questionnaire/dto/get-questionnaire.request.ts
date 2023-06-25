@@ -1,5 +1,5 @@
 export interface GetQuestionnaireRequest {
-    taskId: number;
+    taskId: string;
     taskTypeCode:string;
-    relatedQuestionnaireId:number;
+    relatedQuestionnaireId:string;
   }

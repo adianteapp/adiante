@@ -7,22 +7,24 @@ export interface GetQuestionnaireResponse {
 
 
  export interface Questionnaire {
-   questionnaireId: number;
-   questionnaireTypeId: number;
+   questionnaireId: string;
+   questionnaireTypeId: string;
    questionnaireType: string;
    questions: Question[];
  }
  
  export interface Question {
-   questionId: number;
+   questionId: string;
    questionValue: string;
    questionType: string;
+   questionnaireId: string;
    answers: Answer[] | null;
  }
  
  export interface Answer {
-   answerId: number;
+   answerId: string;
+   questionId: string;
    answerValue: string;
-   answerRelatedTaskId: number | null;
+   answerRelatedTaskId: string | null;
  }
 

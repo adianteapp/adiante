@@ -1,5 +1,5 @@
 <template>
-  <HeaderMenu />
+  <headerMenu />
 
   <div class="container-fluid panel-container"> 
 
@@ -9,7 +9,8 @@
 
     <Suspense>
       <template #default>
-      <GetMoodQuestionnaire />
+      <!--<GetMoodQuestionnaire /> -->
+      <taskManager :questionnaireType="'qt-dashboard'"/>
       </template>
       <template #fallback>
         <div>Cargando...</div>
@@ -18,12 +19,12 @@
 
    
     <section class="widget widget-task">
-       <TasksProgress :completed="2" :total="10" :enableLinkToAgenda="true"/>
+       <tasksProgress :completed="2" :total="10" :enableLinkToAgenda="true"/>
     </section>
 
   </div>
  
-  <FooterMenu />
+  <footerMenu />
    
      
 </template>
@@ -31,7 +32,7 @@
 <script>
 import HeaderMenu from '../components/common/HeaderMenu.vue'
 import FooterMenu from '../components/common/FooterMenu.vue'
-import GetMoodQuestionnaire from '../components/questionnaires/questionnaire-types/get-mood/GetMood.vue';
+import TaskManager from '../components/tasks/TaskManager.vue';
 import TasksProgress from '../components/completed-tasks-progress/TasksProgress.vue'; 
 
 import { useStore } from 'vuex'
@@ -41,10 +42,10 @@ import { computed } from 'vue'
 export default {
   name: 'Dashboard',
   components: {
-    HeaderMenu: HeaderMenu,
-    FooterMenu: FooterMenu,
-    GetMoodQuestionnaire: GetMoodQuestionnaire,
-    TasksProgress : TasksProgress
+    headerMenu: HeaderMenu,
+    footerMenu: FooterMenu,
+    taskManager: TaskManager,
+    tasksProgress : TasksProgress
 },
   setup() {
     const store = useStore();

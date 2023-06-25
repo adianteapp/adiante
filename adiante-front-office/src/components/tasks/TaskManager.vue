@@ -2,168 +2,170 @@
   This component is in charge to load the cuestionnaries based on the cuestionnaire-type value
 -->
 <template> 
-     <QuestionnaireLoader :loadedTask="loadedTask" @evtPatientAnswers="handlePatientAnswersEvent"/>
-     <!--
-<component  :is="taskComponent" :loadedTask="loadedTask" @custom-event="handlePatientAnswersEvent"/>
-     -->
-     
+    <taskComponentsLoader v-if="componentsVisibility.showTaskOnContent" :loadedTask="loadedTask" @evtPatientAnswers="handlePatientAnswersEvent"/>
+    <div v-if="showTaskOnModalRef" >
+        <taskModal :task="modalLoadedTask" :showButtonClose="true" @evtModalPatientAnswers.once="handlePatientAnswersEvent" @evtCloseTaskModal="handleCloseTaskModalEvent"/>
+    </div>
+    
+    <getMoodFeedbackModal v-if="showMoodFeedbackModal" :showButtonClose="true"  @evtCloseTaskModal="handleCloseTaskModalEvent"/>
 </template> 
    
 
 <script>
 import { ref } from "vue";
 import patientService from "../../services/patient.service";
-import QuestionnaireLoader from "../questionnaires/QuestionnaireLoader.vue";
-import { useStore } from 'vuex'
+import taskService from    "../../services/task.service";
+import TaskComponentsLoader from "./TaskComponentsLoader.vue";
+import TaskModal from "./TaskModal.vue";
+import GetMoodFeedbackModal from "../feedback-modals/GetMoodFeedbackModal.vue";
+
 export default ({
   name: 'TaskManager',
+  props: ['taskId','questionnaireType','showOnModal'],
   components: {
-    QuestionnaireLoader:QuestionnaireLoader
+    taskComponentsLoader:TaskComponentsLoader,
+    taskModal:TaskModal,
+    getMoodFeedbackModal:GetMoodFeedbackModal
   },
- setup() {
+ async setup(props) {
 
 //#region Attributes init
-const store = useStore()
 
+const selectedTaskId = ref(props.taskId).value;
+const selectedQuestionnaireType = ref(props.questionnaireType).value;
+let showOnModal = ref(props.showOnModal).value;
 
-const loadedTask = {
-        idTask: 1,
-        codeName: "t-01-get-mood",
-        freeExecution: 1,
-        taskTitle:"Responde a la pregunta",
-        taskDescription:"Basado en tu estado de ánimo, vamos a pedirte que respondas a un par de preguntas:",
-        taskType: {
-            codeName: "tt-questionnaire"
-        },
-        questionnaire: {
-            questions: [
-                {
-                    answers: [
-                        {
-                            id: 6,
-                            idQuestion: 2,
-                            i18n: "Me siento triste"
-                        },
-                        {
-                            id: 7,
-                            idQuestion: 2,
-                            i18n: "Estoy muy cansado"
-                        },
-                        {
-                            id: 8,
-                            idQuestion: 2,
-                            i18n: "No me apetece hacer nada"
-                        }
-                    ],
-                    id: 2,
-                    i18n: "¿Tienes alguno de los siguientes sintomas?",
-                    questionType: {
-                        codeName: "qt-select-one"
-                    }
-                },  {
-                    answers: [
-                        {
-                            id: 9,
-                            idQuestion: 3,
+let componentsVisibility = {
+    showTaskOnContent : (showOnModal == true) ? false : true,
+    showTaskOnModal : (showOnModal == true) ? true : false,
+};
 
+const showTaskOnModalRef = ref(false);
+const showMoodFeedbackModal = ref(false);
 
-                            i18n: "Hablar con alguien"
-                        },
-                        {
-                            id: 10,
-                            idQuestion: 3,
-                            i18n: "Leer un libro"
-                        },
-                        {
-                            id: 11,
-                            idQuestion: 3,
-                            i18n: "Salir a caminar"
-                        }
-                    ],
-                    id: 3,
-                    i18n: "¿Qué crees que te animaría?",
-                    questionType: {
-                        codeName: "qt-select-mult"
-                    }
-                },  
-                {
-                    answers: [ ],
-                    id: 4,
-                    i18n: "Pregunta de respuesta libre",
-                    questionType: {
-                        codeName: "qt-free-answer"
-                    }
-                }
-
-
-            ],
-            id: 1,
-            questionnaireType: {
-                codeName: "qt-stepper"
-            }
-        }
-    };
-//const loadedTask = ref(props.loadedTask).value;
-const taskComponent = ref(null);
+let loadedTask = undefined;
+const modalLoadedTask = ref(undefined);
+const relatedTask = ref(undefined);
 
 
 
 //#endregion Attributes init
 
-//#region Functions declaration init
- 
-function loadTaskComponent(taskType){
- 
+//#region functions declaration to init task component
+async function initTaskComponent(){
+     const task = await retrieveTaskData(selectedTaskId,selectedQuestionnaireType);
+     (showOnModal == true)? modalLoadedTask.value = task : loadedTask = task;
+   
+     if(!task || !task.task.taskTypeCode){
+        console.log("Error loading task component for the criteria- taskId:"+selectedTaskId+" questionnaireType:"+selectedQuestionnaireType);
+     }
 
-     switch (taskType) {
-       case "tt-questionnaire":
-       taskComponent.value = QuestionnaireLoader;
-            break;
-       default:
-         console.log("Error there is no questionnaire for questionnaireType:"+taskType);
-         break;
+}
+
+
+async function retrieveTaskData(selectedTaskId,selectedQuestionnaireType){
+    const retrievedTask = await taskService.retrieveTaskData(selectedTaskId,selectedQuestionnaireType);
+      if(retrievedTask.isAxiosError)
+      {
+        console.log("Error loading  GetMood questionnaire");
+      }else{
+    
+        return retrievedTask.data;
       }
-    }
+}
+
+//#region Functions declaration to save patientActivity
+
+
+
 
 const handlePatientAnswersEvent = (msg) => {
     savePatientActivity(msg);
     };
 
+const handleCloseTaskModalEvent = () => {
+        showTaskOnModalRef.value = false;
+        showMoodFeedbackModal.value = true;
+    };
+
 
 async function savePatientActivity(patientActivity) {
 
-   
 
     //Retrieving info.
-    const patientId =  store.state.auth.user.id;
-    let questionnaireId = undefined;
-    if(loadedTask.questionnaire && loadedTask.questionnaire.id){
-        questionnaireId = loadedTask.questionnaire.id;
+    const savedTask = await retriveTaskData();
+    let auxQuestionnaireId = undefined;
+    if(savedTask.questionnaire && savedTask.questionnaire.questionnaireId){
+        auxQuestionnaireId = savedTask.questionnaire.questionnaireId;
     }
-    const taskId = loadedTask.id;
-
-    const saveResult = await patientService.saveQuestionnaire(patientId,taskId,questionnaireId,patientActivity);
+    const saveResult = await patientService.saveQuestionnaire(savedTask.task.taskId,auxQuestionnaireId,patientActivity.answersList);
     if(saveResult.isAxiosError)
     {
 
     alert("Ha ocurrido un error salvando el estado del paciente");
     }else{
-        alert("Actividad del paciente salvada correctamente");
+        handleSavePatientActivy(patientActivity);
     }
 }
 
+async function retriveTaskData(){
+    if( relatedTask.value && relatedTask.value.task)
+    {
+        return relatedTask.value
+    }else{
+        if(loadedTask){
+            return loadedTask;
+        }else{
+           return modalLoadedTask.value; 
+        }
+
+
+    }
+
+}
+
+
+
+
+async function handleSavePatientActivy(patientActivity){
+   if(patientActivity && patientActivity.answerRelatedTaskId){
+      //LoadRelatedTaskModal
+      loadRelatedTaskModal(patientActivity.answerRelatedTaskId);
+   }else{
+    showMoodFeedbackModal.value = true;
+    showTaskOnModalRef.value = false;
+   }
+}
+
+
+
+
+
+
+//#region functions to handle the related task for the pantient selected answer
+async function loadRelatedTaskModal(relatedTaskId){
+    modalLoadedTask.value =  await retrieveTaskData(relatedTaskId,null);
+    relatedTask.value = modalLoadedTask.value;
+    if(modalLoadedTask.value){
+        showTaskOnModalRef.value = true;
+    }else{
+        console.log("Error retrieving the relatedtask for taskId:"+relatedTaskId);
+        //show feedback anyway;
+        showMoodFeedbackModal.value = true;
+    }
+}
+
+//#endregion functions to handle the related task for the pantient selected answer
+
+
+
+
   
-//#endregion
+//#endregion Functions declaration to save patientActivity
 
-  //Init the components
-    if(loadedTask && loadedTask.taskType &&  loadedTask.taskType.codeName){
-        loadTaskComponent(loadedTask.taskType.codeName);
-  }else{
-    console.log("Error loading task component");
-  }
+  await initTaskComponent();
 
-
-  return{taskComponent,loadedTask,handlePatientAnswersEvent}
+  return{componentsVisibility,showTaskOnModalRef,loadedTask,modalLoadedTask,showMoodFeedbackModal,handlePatientAnswersEvent,handleCloseTaskModalEvent}
   }
 })
 </script>

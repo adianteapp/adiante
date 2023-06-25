@@ -1,6 +1,6 @@
 
 // Used on taskRecordingService
-export const enum TaskType {
+export enum TaskType {
    questionnaire = 'tt-questionnaire',
    challenge = 'tt-challenge',
    scheduledActivity = 'tt-scheduled-activity',

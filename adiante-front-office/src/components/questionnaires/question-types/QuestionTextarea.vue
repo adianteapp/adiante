@@ -1,5 +1,5 @@
 <template>
-    <p class="header">{{currentQuestion.i18n}}</p>
+    <p class="header">{{currentQuestion.questionValue}}</p>
 
     <div class="input-group">
         <textarea ref="answerInput" v-model="currentAnswer" class="form-control" placeholder="Placeholder text" aria-label="Placeholder text"></textarea>
@@ -19,16 +19,20 @@ export default {
         let currentAnswers = undefined;
         if(props.selectedAnswers != undefined)
          {
-              currentAnswers= props.selectedAnswers.find(answers => answers.idQuestion == currentQuestion.value.id);
+              currentAnswers= props.selectedAnswers.find(answers => answers.idQuestion == currentQuestion.value.questionId);
          }
 
         let currentAnswer =  currentAnswers && currentAnswers.freeAnswerValue ? ref(currentAnswers.freeAnswerValue)  : ref('');
 
         const getAnswers = () => {
-            return toRaw([{idQuestion:currentQuestion.value.id,freeAnswerValue:currentAnswer.value}]);
+            return toRaw([{idQuestion:currentQuestion.value.questionId,freeAnswerValue:currentAnswer.value}]);
         };
 
-        return { currentAnswer,currentQuestion, getAnswers};
+        const updateCurrentQuestion = (updatedQuestion) => {
+        currentQuestion.value= updatedQuestion
+      }; 
+
+        return { currentAnswer,currentQuestion,updateCurrentQuestion, getAnswers};
     }
 }
 </script>
