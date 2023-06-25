@@ -17,20 +17,27 @@
   "author": "adiante",
   "license": "ISC",
   "dependencies": {
+    "@types/morgan": "^1.9.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
+    "express-openapi": "^12.1.1",
+    "inversify": "^6.0.1",
+    "inversify-express-utils": "^6.4.3",
     "jsonwebtoken": "^8.5.1",
-    "log4js": "^6.9.1",
-    "mariadb": "^3.0.2" 
+    "mariadb": "^3.0.2",
+    "morgan": "^1.10.0",
+    "reflect-metadata": "^0.1.13",
+    "save": "^2.9.0",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/jsonwebtoken": "^9.0.1",
-    "@types/log4js": "^2.3.5",
     "@types/node": "^18.15.10",
     "ts-node": "^10.9.1"
   }

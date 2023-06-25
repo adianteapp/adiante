@@ -1,11 +1,11 @@
 <template>
     <div>
-      <p class="header">{{ currentQuestion.i18n }}</p>
+      <p class="header">{{ currentQuestion.questionValue }}</p>
   
       <div class="form-check" v-for="(answer, index) in currentQuestion.answers" :key="index">
-        <input class="form-check-input" type="radio"  @change="updateSelectedAnswers" :checked="isAnswerSelected(answer.id)" :id="answer.id">
+        <input class="form-check-input" type="radio"  @change="updateSelectedAnswers" :checked="isAnswerSelected(answer.answerId)" :id="answer.answerId">
         <label class="form-check-label" :for="'answer-' + index">
-          {{ answer.i18n }}
+          {{ answer.answerValue }}
         </label>
       </div>
     </div>
@@ -25,13 +25,18 @@
       const currentAnswers= ref();
       if(selectedAnswers && (selectedAnswers.length > 0)){
 
-        currentAnswers.value= selectedAnswers.filter(answers => answers.idQuestion == currentQuestion.value.id);
+        currentAnswers.value= selectedAnswers.filter(answers => answers.idQuestion == currentQuestion.value.questionId);
       }
 
 
       const updateSelectedAnswers = (event) => {
-        currentAnswers.value = [ {idQuestion:currentQuestion.value.id,idAnswer:event.target.id}];
+        currentAnswers.value = [ {idQuestion:currentQuestion.value.questionId,idAnswer:event.target.id}];
     };
+
+    const updateCurrentQuestion = (updatedQuestion) => {
+        currentQuestion.value= updatedQuestion
+      }; 
+      
 
 
     const getAnswers = () => {
@@ -46,7 +51,7 @@
 
 
 
-      return { updateSelectedAnswers, getAnswers, isAnswerSelected ,currentQuestion};
+      return {updateCurrentQuestion, updateSelectedAnswers, getAnswers, isAnswerSelected ,currentQuestion};
     }
   }
   </script>

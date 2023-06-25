@@ -5,6 +5,9 @@
       "target": "es6",
       "noImplicitAny": true,
       "moduleResolution": "node",
+      "types": ["reflect-metadata"],   //Inversify
+      "experimentalDecorators": true,  //Inversify
+      "emitDecoratorMetadata": true,   //Inversify
       "sourceMap": true,
       //"strict": true,
       "outDir": "dist",

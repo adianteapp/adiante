@@ -2,13 +2,13 @@
   This component is in charge to load the cuestionnaries based on the cuestionnaire-type value
 -->
 <template> 
-     <component  :is="questionnaireComponent" :loadedTask="questionnaireTask"  @evtPatientAnswers="handleCuestionnaireAnswersEvent"/>
+     <component  :is="questionnaireComponent" :loadedTask="questionnaireTask"/>
 </template> 
    
 
 <script>
-import StepperQuestions from "./questionnaire-types/get-mood/StepperQuestions.vue";
-import GetMood from "./questionnaire-types/get-mood/GetMood.vue";
+import StepperQuestions from "./questionnaire-types/StepperQuestions.vue";
+import GetMood from "./questionnaire-types/GetMood.vue";
 import { ref } from "vue";
 
 
@@ -19,7 +19,7 @@ export default({
     StepperQuestions,
     GetMood
   },
- setup(props,{ emit }) {
+ setup(props,{emit}) {
 
 //#region Attributes init
 
@@ -51,21 +51,21 @@ const questionnaireComponent = ref(null);
     }
 
 const handleCuestionnaireAnswersEvent = (msg) => {
-      emit('evtPatientAnswers',msg);
+      emit('evtModalPatientAnswers',msg);
     };
 
   
 //#endregion
 
   //Init the components
-  if(questionnaireTask &&  questionnaireTask.questionnaire && questionnaireTask.questionnaire.questionnaireType &&
-     questionnaireTask.questionnaire.questionnaireType.codeName){
-    loadQuestionnaireComponent(questionnaireTask.questionnaire.questionnaireType.codeName);
+  if(questionnaireTask &&  questionnaireTask.questionnaire && questionnaireTask.questionnaire.questionnaireType){
+    loadQuestionnaireComponent(questionnaireTask.questionnaire.questionnaireType);
   }else{
     console.log("Error loading questionnaire component");
   }
   
 
+  //return{questionnaireComponent,questionnaireTask,handleCuestionnaireAnswersEvent}
   return{questionnaireComponent,questionnaireTask,handleCuestionnaireAnswersEvent}
   }
 })
