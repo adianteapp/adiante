@@ -4,7 +4,8 @@
   
       <div class="form-check" v-for="(answer, index) in currentQuestion.answers" :key="index">
         <input class="form-check-input" type="radio"  @change="updateSelectedAnswers" :checked="isAnswerSelected(answer.answerId)" :id="answer.answerId">
-        <label class="form-check-label" :for="'answer-' + index">
+       <!-- <label class="form-check-label" :for="'answer-' + index"> -->
+        <label class="form-check-label" :for="answer.answerId"> 
           {{ answer.answerValue }}
         </label>
       </div>

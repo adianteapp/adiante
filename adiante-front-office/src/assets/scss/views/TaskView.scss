@@ -53,7 +53,7 @@
   }
  
     
-  &.incomplete{
+  &.waiting{
     span::before{ 
       content: '';
       background: url('../../assets/img/svg/icon/pending.svg');
@@ -67,7 +67,7 @@
     }
   }
 
-  &.completed{
+  &.success{
     span::before{  
       content: '';
       background: url('../../assets/img/svg/icon/ok.svg');

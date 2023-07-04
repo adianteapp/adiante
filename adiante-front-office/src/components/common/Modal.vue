@@ -19,9 +19,8 @@
       </div>
     </div>
   </div>
+</template>
 
-</template> 
-   
 <script>
 import { ref } from "vue";
 export default {
@@ -36,4 +35,4 @@ export default {
     return {buttonCloseEnabled,closeModal}
   }
 }
-</script>    
+</script>
