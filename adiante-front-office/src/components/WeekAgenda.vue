@@ -17,31 +17,35 @@ import {ref} from 'vue'
 export default({
   name:'WeekAgenda',
   setup(props,{emit}){
-    let currentDate = new Date();
-    const selectedDayIndex = ref((currentDate.getDay())-1);
-    let monday = new Date(currentDate);  
-    monday.setDate(monday.getDate() - currentDate.getDay() + 1)
+    
+
+
+    
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const diff = (dayOfWeek + 6) % 7;
+    const selectedDayIndex = ref(diff);
+    const mondayDate = new Date(today.setDate(today.getDate() - diff));
 
     const weekDays = []
     for (let i = 0; i < 7; i++) {
-      const day = new Date(monday)
+      const day = new Date(mondayDate)
       day.setDate(day.getDate() + i)
-      weekDays.push({day: day.getDate(), dateUtc: day.toISOString()})
+      weekDays.push({day: day.getDate(), date: day.toISOString().slice(0, 10) })
     }
 
     
     const changeSelectedDate = (index) => {
-      selectedDayIndex.value = index
+      selectedDayIndex.value = index;
+      triggerChangeDate();
     }
   
     const triggerChangeDate = () => {
       const selectedDate = (weekDays[selectedDayIndex.value]);
-      emit('evtAgendaChangeDate',selectedDate.dateUtc)
+      emit('evtAgendaChangeDate',selectedDate.date);
     };
 
-    //Initially it triggers the current date to notify to the parent component to load the tasks.
-    triggerChangeDate();
-   
+   triggerChangeDate();
   return {weekDays,selectedDayIndex,changeSelectedDate};
   
 }})

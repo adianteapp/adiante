@@ -149,14 +149,17 @@ async  getscheduledTasksFromDB(patientId: string , startDate: string ,endDate:st
 
     const languageId:string = langId != undefined ? langId : process.env.DEAFULT_LANGID;
 
-    const sqlQuery =`SELECT t.id AS 'taskId', tin.title_i18n AS 'taskTitle', tin.description_i18n AS 'taskDescription',
+    const sqlQuery =`SELECT pst.id  AS 'scheduledId',t.id as 'taskId', tt.code_name AS 'taskTypeCode', tin.title_i18n AS 'title', tin.description_i18n AS 'description',
                       CONVERT_TZ(pst.start_datetime, '+00:00', @@session.time_zone) AS 'startDateTimeLocal',
                       CONVERT_TZ(pst.end_datetime, '+00:00', @@session.time_zone) AS 'endDateTimeLocal',
-                      CONVERT_TZ(pae.entry_datetime , '+00:00', @@session.time_zone) AS 'executionDateTimeLocal'
+                      CONVERT_TZ(pae.entry_datetime , '+00:00', @@session.time_zone) AS 'executionDateTimeLocal',
+                      tq.id_questionnaire as 'relatedQuestionnaireId'
                     FROM patient_scheduled_task pst
                     INNER JOIN task t ON pst.id_task = t.id
+                    INNER JOIN task_type AS tt ON t.id_task_type = tt.id
                     INNER JOIN task_i18n tin ON t.id = tin.id_task
                     LEFT OUTER JOIN  patient_activity_entry pae ON pst.id_patient_activity_entry = pae.id 
+                    LEFT OUTER JOIN  task_questionnaire tq on tq.id_task = t.id
                     WHERE pst.id_patient = '${patientId}'
                     AND pst.start_datetime >= '${startDate}'
                     AND pst.end_datetime <  '${endDate}'

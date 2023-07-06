@@ -13,7 +13,7 @@
       <taskManager :questionnaireType="'qt-dashboard'"/>
       </template>
       <template #fallback>
-        <div>Cargando...</div>
+        <div>{{ $t('common.loading_text')}}</div>
       </template>
     </Suspense> 
 
@@ -37,25 +37,19 @@ import TasksProgress from '../components/completed-tasks-progress/TasksProgress.
 
 import { useStore } from 'vuex'
 
-import { computed } from 'vue'
-
 export default {
   name: 'Dashboard',
   components: {
     headerMenu: HeaderMenu,
     footerMenu: FooterMenu,
     taskManager: TaskManager,
-    tasksProgress : TasksProgress
-},
+    tasksProgress: TasksProgress
+  },
   setup() {
     const store = useStore();
-    const patientName = computed( () => store.state.auth.user.name);
-    return   {patientName}
-   },
-  mounted() {
-    if (!this.$store.state.auth) {
-      this .$router.push('/login');
-    }
+    const patientName = store.state.auth.user.name;
+    
+    return { patientName }
   }
 };
 </script>

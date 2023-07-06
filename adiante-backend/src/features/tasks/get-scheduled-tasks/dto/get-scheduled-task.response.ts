@@ -6,10 +6,13 @@ export interface GetScheduledTasksResponse {
 
 
 export interface ScheduledTask {
-    taskId: number;
-    taskTitle: string;
-    taskDescription: string;
+    scheduledId: string;
+    taskId:string;
+    title: string;
+    description: string;
     startDateTimeLocal: string;
     endDateTimeLocal: string;
     executionDateTimeLocal: string;
+    relatedQuestionnaireId:string;
+
   }

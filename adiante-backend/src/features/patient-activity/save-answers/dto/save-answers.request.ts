@@ -1,3 +1,4 @@
+
 export interface SaveAnswersRequest {
     patientId: string;
     executedTask: ExecutedTask;
@@ -15,8 +16,8 @@ export interface FilledQuestionnaire {
 }
 
 export interface ExecutedTask {
+    idScheduledTask: string;
     idTask: string;
-    executed:boolean;
     filledQuestionnaire: FilledQuestionnaire;
 }
 

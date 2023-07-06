@@ -1,13 +1,35 @@
 <template> 
         <div class="modal-body">
+          
+          <scheduledTask 
+              v-if="showScheduledTask"
+               :scheduledTaskData="loadedTask" 
+               :showFullInfo="true"/>
           <!-- Questionnaries content -->
-          <component  :is="questionComponent" :question="currentQuestion" :selectedAnswers="selectedAnswers" ref="questionComponentRef"></component>
+          <component  
+                  v-if="showQuestionnaire"
+                  :is="questionComponent" 
+                  :question="currentQuestion" 
+                  :selectedAnswers="selectedAnswers" 
+                  ref="questionComponentRef"/>
         </div>
         <div class="modal-footer footer-task-modal">
           <div class="buttons">
-            <button v-if="buttonsManager.buttonBackEnabled"  @click.prevent="backOnQuestion"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{$t('modal_prev_button_label')}}</button>          
-            <button v-if="buttonsManager.buttonNextEnabled"  @click.prevent="nextOnQuestion"  type="button" class="btn btn-primary" data-bs-dismiss="modal">{{$t('modal_next_button_label')}}</button>
-            <button v-if="buttonsManager.buttonFinishEnabled"   @click.prevent="finishQuestionnaire"  type="button" class="btn btn-primary" data-bs-dismiss="modal">{{$t('modal_finish_button_label')}}</button>           
+            <button v-if="buttonsManager.buttonCloseEnabled"  @click.prevent="closeQuestionnaire"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              {{$t('agenda.scheduled_task.modal.close')}}
+            </button>          
+            <button v-if="buttonsManager.buttonStartEnabled"  @click.prevent="startQuestionnaire"  type="button" class="btn btn-primary" data-bs-dismiss="modal">
+              {{$t('agenda.scheduled_task.modal.start')}}
+            </button>
+            <button v-if="buttonsManager.buttonBackEnabled"  @click.prevent="backOnQuestion"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              {{$t('modal_prev_button_label')}}
+            </button>          
+            <button v-if="buttonsManager.buttonNextEnabled"  @click.prevent="nextOnQuestion"  type="button" class="btn btn-primary" data-bs-dismiss="modal">
+              {{$t('modal_next_button_label')}}
+            </button>
+            <button v-if="buttonsManager.buttonFinishEnabled"   @click.prevent="finishQuestionnaire"  type="button" class="btn btn-primary" data-bs-dismiss="modal">
+              {{$t('modal_finish_button_label')}}
+            </button>           
           </div>
         </div>
 </template> 
@@ -18,15 +40,17 @@ import { defineComponent } from "vue";
 import QuestionCheckbox from "../question-types/QuestionCheckbox.vue";
 import QuestionRadio from "../question-types/QuestionRadio.vue";
 import QuestionTextarea from "../question-types/QuestionTextarea.vue";
+import ScheduledTask from "../../tasks/ScheduledTask.vue";
 import { ref,toRaw } from "vue";
 
 
 export default defineComponent({
   name: 'StepperQuestions',
   components: {
-     QuestionCheckbox,
-    QuestionRadio,
-   QuestionTextarea
+      scheduledTask:ScheduledTask,
+      QuestionCheckbox,
+      QuestionRadio,
+      QuestionTextarea
   },
   props:['loadedTask'],
   async setup(props,{ emit }) {
@@ -35,11 +59,19 @@ export default defineComponent({
 
 const loadedTask = ref(props.loadedTask).value;
   
+const showScheduledTask = ref( loadedTask.task.scheduledTaskId != undefined ? true : false);
+const showQuestionnaire = ref(loadedTask.task.scheduledTaskId == undefined ? true : false);
+
+
   let buttonsManager = {
+     buttonStartEnabled : showScheduledTask.value ?true :false,
+     buttonCloseEnabled : showScheduledTask.value ?true :false,
      buttonBackEnabled : false,
-     buttonNextEnabled : loadedTask.questionnaire.questions.length == 1 ? false: true ,
-     buttonFinishEnabled : loadedTask.questionnaire.questions.length == 1 ? true : false ,
+     buttonNextEnabled :   !showScheduledTask.value && loadedTask.questionnaire.questions.length > 1 ? true: false ,
+     buttonFinishEnabled : !showScheduledTask.value && loadedTask.questionnaire.questions.length == 1 ? true : false ,
   }
+
+
 
   let questionnaireCurrentIndex = ref(0);
 
@@ -69,6 +101,8 @@ const loadedTask = ref(props.loadedTask).value;
     updateButtonsVisibility(nextIndex);
 
   }
+
+ 
 
 
   function loadNextQuestionComponent(questionIndex){
@@ -119,9 +153,22 @@ const loadedTask = ref(props.loadedTask).value;
     }
   } 
 
+  const startQuestionnaire = () =>{
+      showScheduledTask.value = false;
+      showQuestionnaire.value = true;
+      buttonsManager.buttonStartEnabled = false;
+      buttonsManager.buttonCloseEnabled = false;
+      buttonsManager.buttonNextEnabled =   loadedTask.questionnaire.questions.length > 1 ? true: false;
+      buttonsManager.buttonFinishEnabled = loadedTask.questionnaire.questions.length == 1 ? true : false;
+  };
+
   const finishQuestionnaire = () =>{
     getAnswersFromCurrentComponent();
     emit('evtModalPatientAnswers', {answersList:toRaw(selectedAnswers.value)} );
+  };
+
+  const closeQuestionnaire = () =>{
+    emit('evtCloseTaskModal');
   };
 
 //#endregion
@@ -129,7 +176,8 @@ const loadedTask = ref(props.loadedTask).value;
   //Init the components
   loadNextQuestionComponent(0);
 
-  return{buttonsManager,questionComponent,questionComponentRef,currentQuestion,selectedAnswers,backOnQuestion,nextOnQuestion,finishQuestionnaire}
+  return{buttonsManager,questionComponent,questionComponentRef,currentQuestion,selectedAnswers,showScheduledTask,showQuestionnaire,
+         closeQuestionnaire,startQuestionnaire,backOnQuestion,nextOnQuestion,finishQuestionnaire}
   }
 })
 </script>

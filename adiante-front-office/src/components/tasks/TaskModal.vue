@@ -9,7 +9,11 @@
           <button v-if="enableButtonClose" type="button" @click="closeModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <taskComponentsLoader v-if="enableTaskComponentLoader" :loadedTask="retrievedTask" @evtModalPatientAnswers="handlePatientAnswersEvent"/>
+          <taskComponentsLoader v-if="enableTaskComponentLoader" 
+                                :loadedTask="retrievedTask" 
+                                @evtModalPatientAnswers="handlePatientAnswersEvent" 
+                                @evtCloseTaskModal="closeModal"
+                                @evtConfirmExecution="handleConfirmExecution"/>
         </div>
       </div>
     </div>
@@ -42,7 +46,11 @@ export default {
       emit('evtModalPatientAnswers',msg);
     };
 
-  return {enableTaskComponentLoader,retrievedTask,enableButtonClose,closeModal,handlePatientAnswersEvent}
+    const handleConfirmExecution = (msg) => {
+      emit('evtConfirmExecution',msg);
+    };
+
+  return {enableTaskComponentLoader,retrievedTask,enableButtonClose,closeModal,handlePatientAnswersEvent,handleConfirmExecution}
   }
 }
 </script>    

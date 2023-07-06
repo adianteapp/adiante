@@ -1,9 +1,10 @@
 export default function authHeader() {
-  let accessToken = JSON.parse(localStorage.getItem('user')).accessToken;
 
-  if (accessToken) {
-     return { 'x-access-token': accessToken };       // for Node.js Express back-end
-  } else {
-    return {};
+  const user = localStorage.getItem('user');
+  if (user) {
+    let accessToken = JSON.parse(user).accessToken;
+    return { 'x-access-token': accessToken };       // for Node.js Express back-end
+  }else {
+    return undefined;
   }
 }

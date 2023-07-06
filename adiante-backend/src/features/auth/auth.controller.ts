@@ -3,10 +3,11 @@ import { LoginRequest } from './login/dto/login.request';
 import { LoginResponse } from './login/dto/login.response';
 import {LoginStatus } from './login/login.enum';
 import * as express from 'express';
-import { controller, httpPost, request, response } from "inversify-express-utils";
+import { controller, httpGet, httpPost, request, response } from "inversify-express-utils";
 import { IAuthController } from './i-auth.controller';
 import { ILoginHandler } from './login/i-login.handler';
 import { inject } from 'inversify/lib/annotation/inject';
+import verifyToken from '../../middleware/token-validation.middleware';
 
 
 @controller("/auth")
@@ -40,5 +41,20 @@ export class AuthController implements IAuthController{
         res.status(500).send({ message: "Server error", errorCode: LoginStatus.InternalError }); 
     }
   }
+
+  @verifyToken
+  @httpGet("/session")
+  async validateToken(req: express.Request, res: express.Response ): Promise<void>{
+    const patientId :string = req.params.patientId !== undefined ? req.params.patientId:undefined;
+
+    if(patientId != undefined){
+      res.status(200).send();
+    }else{
+      res.status(403).send();
+    }
+       
+  }
+
+
 
 }

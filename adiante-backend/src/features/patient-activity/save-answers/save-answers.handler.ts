@@ -18,6 +18,10 @@ import { PatientActivityEntry, PreparePatientActivityResponse } from "./prepare-
 
 import { Question, Questionnaire } from "../../../features/shared/get-questionnaire/dto/get-questionnaire.response";
 import { FilledQuestionnaire } from "./dto/save-answers.request";
+import TaskType from "../../../features/shared/enums/task-type.enum";
+import { IGetScheduledTaskByIdHandler } from "../../../features/tasks/get-scheduled-task-by-id/i-get-scheduled-task-by-id.handler";
+import { GetScheduledTaskByIdRequest } from "../../../features/tasks/get-scheduled-task-by-id/dto/get-scheduled-task-by-id.request";
+import { GetScheduledTaskByIdResponse } from "../../../features/tasks/get-scheduled-task-by-id/dto/get-scheduled-task-by-id.response";
 
 @injectable()
 export class SaveAnswersHandler implements ISaveAnswersHandler{
@@ -27,6 +31,7 @@ export class SaveAnswersHandler implements ISaveAnswersHandler{
    @inject("IGetPatientHandler")private readonly getPatientHandler: IGetPatientHandler;
    @inject("IGetTaskHandler")private readonly getTasktHandler: IGetTaskHandler;
    @inject("IPreparePatientActivityHandler")private readonly preparePatientActivityHandler: IPreparePatientActivityHandler;
+   @inject("IGetScheduledTaskByIdHandler")private readonly getScheduledTaskByIdHandler: IGetScheduledTaskByIdHandler;
 
 
  /**
@@ -38,23 +43,28 @@ export class SaveAnswersHandler implements ISaveAnswersHandler{
         let saveAnswersResponse : SaveAnswersResponse = {}as SaveAnswersResponse;
         let validationResult :SaveAnswersStatus;
  
+
+
+        const getTaskHandlerRequest: GetTaskRequest = {taskId: saveAnswersRequest.executedTask.idTask, patientId:saveAnswersRequest.patientId} as GetTaskRequest;
+        const originalTask: GetTaskResponse = await this.getTasktHandler.execute(getTaskHandlerRequest);
+
         //apply validations
-        validationResult = await this.validatePatientActivityRequest(saveAnswersRequest);
+        validationResult = await this.validateRequest(saveAnswersRequest,originalTask);
      
         if (validationResult !== SaveAnswersStatus.Success) {
            return { status: validationResult };
         }
      
         //build the objects to save them into the database
-        const preparePatientActivityResponse: PreparePatientActivityResponse = await this.preparePatientActivityHandler.execute({patientActivityData:saveAnswersRequest} as PreparePatientActivityRequest);
+        const preparePatientActivityResponse: PreparePatientActivityResponse = await this.preparePatientActivityHandler.execute({patientActivityData:saveAnswersRequest,taskType:originalTask.task.taskTypeCode} as PreparePatientActivityRequest);
      
         //save the info
         let saveResult:boolean = false;
      
-        if (preparePatientActivityResponse.patientActivityEntry.questionnaireExecution) {
+        if (originalTask.task.taskTypeCode === TaskType.questionnaire) {
              saveResult = await this.insertPatientTaskQuestionnaireEntry(preparePatientActivityResponse.patientActivityEntry);
         } else {
-         saveResult = await this.insertPatientTaskExecutionEntry(preparePatientActivityResponse.patientActivityEntry);
+         saveResult = await this.insertPatientTaskExecutionEntry(preparePatientActivityResponse.patientActivityEntry, saveAnswersRequest.executedTask.idScheduledTask);
         }
      
         const saveStatus = saveResult ? SaveAnswersStatus.Success : SaveAnswersStatus.InternalError;
@@ -67,42 +77,88 @@ export class SaveAnswersHandler implements ISaveAnswersHandler{
  
  //#region Validations over player and task.
  
- async  validatePatientActivityRequest(saveAnswersRequest:SaveAnswersRequest): Promise<SaveAnswersStatus> {
+   async validateRequest(saveAnswersRequest: SaveAnswersRequest, originalTask: GetTaskResponse): Promise<SaveAnswersStatus> {
+
+      let validationResult: SaveAnswersStatus = SaveAnswersStatus.Success;
+
+      // PatientId validation
+      validationResult = await this.validateIdPatient(saveAnswersRequest.patientId);
+      if (validationResult !== SaveAnswersStatus.Success) {
+         return validationResult;
+      }
+
+      //validate that at least 1 activity is provide
+      validationResult = await this.validateMandatoryTaskId(saveAnswersRequest);
+      if (validationResult !== SaveAnswersStatus.Success) {
+         return validationResult;
+      }
+
+      if (originalTask && originalTask.task) {
+
+         //validate task type
+         switch (originalTask.task.taskTypeCode) {
+            case TaskType.completionCheck:
+               validationResult = await this.validateTaskTypeConfirmCompletion(saveAnswersRequest);
+               break;
+            case TaskType.questionnaire:
+               validationResult = await this.validateTaskTypeQuestionnaire(saveAnswersRequest, originalTask);
+               break;
+            default:
+               Logger.error("Error saving patient activity. Invalid task type retrived from DB:" + originalTask.task.taskTypeCode);
+               validationResult = SaveAnswersStatus.InternalError;
+               break;
+         }
+      } else {
+         Logger.error("Error saving patient activity. Invalid taskId:" + saveAnswersRequest.executedTask.idTask);
+         validationResult = SaveAnswersStatus.InvalidTaskId;
+      }
+
+      return validationResult;
+   }
+
+ async  validateTaskTypeConfirmCompletion(saveAnswersRequest:SaveAnswersRequest): Promise<SaveAnswersStatus> {
  
-    let validationResult: SaveAnswersStatus = SaveAnswersStatus.Success;
- 
-    // PatientId validation
-    validationResult = await this.validateIdPatient(saveAnswersRequest.patientId);
-    if (validationResult !== SaveAnswersStatus.Success) {
-       return validationResult;
-    }
- 
-    //validate that at least 1 activity is provide
-    validationResult = await this.validateMandatoryTaskId(saveAnswersRequest);
-    if (validationResult !== SaveAnswersStatus.Success) {
-       return validationResult;
-    }
- 
-    //validate task integrity references
-    validationResult = await this.validateTaskAnswers(saveAnswersRequest);
-    if (validationResult !== SaveAnswersStatus.Success) {
-       return validationResult;
-    }
- 
-    return validationResult;
+   let validationResult: SaveAnswersStatus = SaveAnswersStatus.Success;
+   const request: GetScheduledTaskByIdRequest = {scheduledId:saveAnswersRequest.executedTask.idScheduledTask } as GetScheduledTaskByIdRequest;
+   const response: GetScheduledTaskByIdResponse = await this.getScheduledTaskByIdHandler.execute(request);
+
+   if (response && response.scheduledId) {
+      //validate that the task is not already completed
+      validationResult = response.activityEntryId ? SaveAnswersStatus.ScheduledTaskAlreadyCompleted : SaveAnswersStatus.Success;
+
+      //validate that the task is assigned to the patient
+      if(validationResult == SaveAnswersStatus.Success){
+         validationResult = response.patientId != saveAnswersRequest.patientId ? SaveAnswersStatus.TaskNotAssignedToPatient : SaveAnswersStatus.Success;
+      }
+   }
+   else{
+      Logger.error("Error saving patient activity. Invalid scheduledTaskId:" + saveAnswersRequest.executedTask.idScheduledTask);
+      validationResult = SaveAnswersStatus.InvalidScheduledTaskId;
+   }
+
+   return validationResult;
  }
 
+
+
+ async  validateTaskTypeQuestionnaire(saveAnswersRequest:SaveAnswersRequest,task:GetTaskResponse): Promise<SaveAnswersStatus> {
+ 
+   let validationResult: SaveAnswersStatus = SaveAnswersStatus.Success;
+
+   //validate task integrity references
+   validationResult = await this.validateTaskAnswers(saveAnswersRequest,task);
+   if (validationResult !== SaveAnswersStatus.Success) {
+      return validationResult;
+   }
+
+   return validationResult;
+}
  
 
-
-
-
-
  
-   async validateTaskAnswers(saveAnswersRequest: SaveAnswersRequest): Promise<SaveAnswersStatus> {
+   async validateTaskAnswers(saveAnswersRequest: SaveAnswersRequest,getTaskResponse: GetTaskResponse): Promise<SaveAnswersStatus> {
 
-      const getTaskHandlerRequest: GetTaskRequest = {taskId: saveAnswersRequest.executedTask.idTask, patientId:saveAnswersRequest.patientId} as GetTaskRequest;
-      const getTaskResponse: GetTaskResponse = await this.getTasktHandler.execute(getTaskHandlerRequest);
+   
       let questionnaireValidation: SaveAnswersStatus = undefined;
 
       if (getTaskResponse && getTaskResponse.task ) {
@@ -326,7 +382,7 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
  
            return true;
    } catch (err) {
-     Logger.error("Error on patientActivity.repository.insertPatientTaskQuestionnaireEntry():" + err);
+     Logger.error("Error saving answers" + err);
      if (connection) {
        await connection.rollback();
      }
@@ -339,23 +395,32 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
 
 
 
- async  insertPatientTaskExecutionEntry(patientActivityData: PatientActivityEntry): Promise<boolean> {
+ async  insertPatientTaskExecutionEntry(patientActivityData: PatientActivityEntry,scheduledId:string): Promise<boolean> {
    let connection: any;
    try {
            connection = await dao.getConnection();
            connection.beginTransaction();
  
  
-           const sql = "INSERT INTO patient_activity_entry (entry_datetime, id_patient, id_task) VALUES(UTC_TIMESTAMP(), @p2, @p3);";
-           const sqlWithValues = sql
+           const sqlPatientActivityEntry = "INSERT INTO patient_activity_entry (entry_datetime, id_patient, id_task) VALUES(UTC_TIMESTAMP(), @p2, @p3);";
+           const sqlWithValues = sqlPatientActivityEntry
              .replace("@p2", patientActivityData.idPatient)
              .replace("@p3", patientActivityData.idTask);
            const result = await connection.execute(sqlWithValues);
+           const insertIdPatientActivityEntry = result.insertId;
+
+
+           const sqlUpdatePatientScheduledTask = "UPDATE patient_scheduled_task  SET id_patient_activity_entry = @activityEntryId  where id = @scheduledId;";
+           const sqlWithValues2 = sqlUpdatePatientScheduledTask
+             .replace("@activityEntryId", insertIdPatientActivityEntry)
+             .replace("@scheduledId", scheduledId);
+           await connection.execute(sqlWithValues2);
+           
            await connection.commit();
  
            return true;
    } catch (err) {
-     Logger.error("Error on patientActivity.repository.insertPatientTaskQuestionnaireEntry():" + err);
+     Logger.error("Error saving confirmation of the execution:" + err);
      if (connection) {
        await connection.rollback();
      }

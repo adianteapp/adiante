@@ -3,20 +3,24 @@
 -->
 <template> 
     <!-- <QuestionnaireLoader :loadedTask="loadedTask" @evtPatientAnswers="handlePatientAnswersEvent"/>-->
-    <component  :is="loaderComponent" :loadedTask="loadedTask"  @evtModalPatientAnswers="handlePatientAnswersEvent"/>
+    <component  :is="loaderComponent" 
+                :loadedTask="loadedTask"  
+                @evtModalPatientAnswers="handlePatientAnswersEvent" 
+                @evtCloseTaskManagerModal="handleCloseTaskModalEvent"/>
 </template> 
    
 
 <script>
 import { ref } from "vue";
 import QuestionnaireLoader from "../questionnaires/QuestionnaireLoader.vue";
-
+import CompletionCheckTasksLoader from "../completion-check/CompletionCheckTasksLoader.vue";
 
 export default ({
   name: 'TaskComponentsLoader',
   props: ['loadedTask'],
   components: {
-    QuestionnaireLoader:QuestionnaireLoader
+    QuestionnaireLoader,
+    CompletionCheckTasksLoader
   },
  async setup(props,{emit}) {
 
@@ -46,7 +50,10 @@ async function  getLoaderComponent(){
  
      switch (retrievedTask.task.taskTypeCode) {
        case "tt-questionnaire":
-       loaderComponent.value = QuestionnaireLoader;
+            loaderComponent.value = QuestionnaireLoader;
+            break;
+       case "tt-completion-check":
+            loaderComponent.value = CompletionCheckTasksLoader;
             break;
        default:
          console.log("Error retrieving loaderComponent for taskType:"+retrievedTask.task.taskTypeCode);
@@ -54,15 +61,25 @@ async function  getLoaderComponent(){
       }
     }
 
+    const handleConfirmExecution = (msg) => {
+      emit('evtConfirmExecution',msg);
+    };
+
     const handlePatientAnswersEvent = (msg) => {
       emit('evtModalPatientAnswers',msg);
     };
+
+const handleCloseTaskModalEvent = () => {
+  emit('evtCloseTaskModal');
+}
+
 
 
 await initTaskComponent();
 
 
-  return{loaderComponent,retrievedTask,handlePatientAnswersEvent}
+  return{loaderComponent,retrievedTask,
+        handlePatientAnswersEvent,handleConfirmExecution,handleCloseTaskModalEvent}
   }
 })
 </script>

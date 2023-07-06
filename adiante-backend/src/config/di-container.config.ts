@@ -25,6 +25,8 @@ import { ISaveAnswersHandler } from '../features/patient-activity/save-answers/i
 import { SaveAnswersHandler } from '../features/patient-activity/save-answers/save-answers.handler';
 import { IGetTasksByTypeHandler } from '../features/tasks/get-tasks-by-type/i-get-task-by-type.handler';
 import { GetTasksByTypeHandler } from '../features/tasks/get-tasks-by-type/get-task-by-type.handler';
+import { IGetScheduledTaskByIdHandler } from '../features/tasks/get-scheduled-task-by-id/i-get-scheduled-task-by-id.handler';
+import { GetScheduledTaskByIdHandler } from '../features/tasks/get-scheduled-task-by-id/get-scheduled-task-by-id.handler';
 class DiContainer {
   private container: Container;
 
@@ -51,6 +53,7 @@ class DiContainer {
     this.container.bind<IPreparePatientActivityHandler>("IPreparePatientActivityHandler").to(PreparePatientActivityHandler).inRequestScope;
     this.container.bind<ISaveAnswersHandler>("ISaveAnswersHandler").to(SaveAnswersHandler).inRequestScope;
     this.container.bind<IGetTasksByTypeHandler>("IGetTasksByTypeHandler").to(GetTasksByTypeHandler).inRequestScope;
+    this.container.bind<IGetScheduledTaskByIdHandler>("IGetScheduledTaskByIdHandler").to(GetScheduledTaskByIdHandler).inRequestScope;
   }
 
 
