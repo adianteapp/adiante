@@ -5,6 +5,8 @@ export const enum SaveAnswersStatus  {
     IncompleteQuestionnaireAnswers = "IncompleteQuestionnaireAnswers",
     InvalidTaskId = "InvalidTaskId",
     TaskNotAssignedToPatient = "TaskNotAssignedToPatient",
+    ScheduledTaskAlreadyCompleted = "ScheduledTaskAlreadyCompleted",
+    InvalidScheduledTaskId = "InvalidScheduledTaskId",
     IncompleteQuestionnaireId ="IncompleteQuestionnaireId",
     QuestionnaireIdNotFound = "QuestionnaireIdNotFound",
     QuestionIdNotFound = "QuestionIdNotFound",

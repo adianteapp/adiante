@@ -1,5 +1,6 @@
 require('dotenv').config()
 import axios from 'axios';
+import authHeader from './auth-header';
 
 const API_URL = `${process.env.VUE_APP_BACKEND_BASE_URL}`+'/auth/';
 
@@ -21,6 +22,20 @@ class AuthService {
         return  error;
       });
 
+  }
+
+
+  async validateToken() {
+    const validateToken = authHeader();
+      if(validateToken){
+        try {
+          await axios.get(API_URL + 'session', { headers: validateToken });
+          return true;
+        } catch (error) {
+          return false;
+        }    
+      }else return false;
+   
   }
 
 

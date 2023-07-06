@@ -1,5 +1,6 @@
 
 import winston from 'winston'
+import LokiTransport from 'winston-loki'
 import * as dotenv from 'dotenv';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
@@ -36,7 +37,9 @@ const errorTransport = new DailyRotateFile({
   maxFiles: `${process.env.API_LOG_MAX_DAYS}`
 });
 
-const transports = [
+
+ 
+ const transports = [ 
   new winston.transports.Console(),
   new DailyRotateFile({
     filename: `${process.env.API_LOG_FILE_AUDIT_NAME}`,
@@ -46,6 +49,14 @@ const transports = [
     
     maxSize: `${process.env.API_LOG_MAX_SIZE}`,
     maxFiles: `${process.env.API_LOG_MAX_DAYS}`
+    }),
+  new LokiTransport({
+    host: `${process.env.API_LOG_GRAFANA_LOKI_URL}`,
+    labels: { app: `${process.env.APP_NAME}`},
+    json: true,
+    format: winston.format.json(),
+    replaceTimestamp: true,
+    onConnectionError: (err) => console.error(err)
 })
 ]
 

@@ -42,6 +42,17 @@ async  savePatientActivity(patientActivity) {
     }
    return this.savePatientActivity (patientActivity);
  }
+
+ async  saveConfirmationExecution(taskId,scheduledId) {
+  const patientActivity = {
+executedTask:{
+    idTask: taskId,
+    idScheduledTask: scheduledId
+  }
+}
+return this.savePatientActivity (patientActivity);
+}
+
 }
 
 

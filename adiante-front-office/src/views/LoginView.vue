@@ -2,7 +2,7 @@
   <div class="login">
     <div class="content">
       <img alt="logo" class="logo" src="../assets/img/svg/logo.svg"/> 
-      <div v-if="loginError" class="alert error">{{loginError}}</div>
+      <div v-if="loginError != undefined" class="alert error">{{loginError}}</div>
       <form @submit.prevent="handleLogin">
         <div class="form-login">
           <div class="mb-3">

@@ -34,6 +34,7 @@ export class TasksController implements ITasksController {
   @inject("IGetMoodQuestionnaireHandler") private readonly _getMoodQuestionnaire: IGetMoodQuestionnaireHandler;
   @inject("IGetTasksByTypeHandler") private readonly _getTasksByTypeHandler: IGetTasksByTypeHandler;
 
+// GENERATE tests for all endpoints
 
 
   @verifyToken

@@ -30,7 +30,7 @@ export default {
 
     const buttonCloseEnabled = ref(props.showButtonClose);
     const closeModal = () => {
-      emit("close");
+      emit("evtCloseTaskModal");
     };
     return {buttonCloseEnabled,closeModal}
   }

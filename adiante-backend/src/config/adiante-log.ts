@@ -4,13 +4,7 @@ import Logger from './logger';
 export class AdianteLog{
 
     private static startingText: string = 
-    `#    ##        ###     ##                         ## #
-     #   ####        ##                                ## #
-     #  ##  ##       ##    ###      ####    #####     #####    #### #
-     #  ##  ##    #####     ##         ##   ##  ##     ##     ##  ## #
-     #  ######   ##  ##     ##      #####   ##  ##     ##     ###### #
-     #  ##  ##   ##  ##     ##     ##  ##   ##  ##     ## ##  ## #
-     #  ##  ##    ######   ####     #####   ##  ##      ###    ##### #`;
+    `########   ADIANTE PATIENT API   ########`;
 
  
     public static logApplicationStartingInit() {

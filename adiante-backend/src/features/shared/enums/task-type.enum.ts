@@ -3,7 +3,7 @@
 export enum TaskType {
    questionnaire = 'tt-questionnaire',
    challenge = 'tt-challenge',
-   scheduledActivity = 'tt-scheduled-activity',
+   completionCheck = 'tt-completion-check',
    guidedActivity = 'tt-guided-activity',
  }
  

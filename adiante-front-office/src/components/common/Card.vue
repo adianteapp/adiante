@@ -7,10 +7,13 @@
 
         <div class="content">
           <div class="info"> 
-            <span class="title">Title card</span>  <div class="label small completed"> <span></span></div>
+            <span class="title">currentScheduledTask.value.taskTitle</span>  
+            <div v-if="cardStatus.completed" class="label small completed"></div> 
+            <div v-if="cardStatus.delayed" class="label small delayed"></div>
+            <span></span>
         </div>
           <div class="desc">
-            Vestibulum lectus mauris ultrices eros cursus turpis massa tincidunt.
+            currentScheduledTask.value.taskDescription
           </div>
 
         </div>
@@ -22,11 +25,20 @@
 </template> 
    
  <script>
-   export default {
-     name: 'Card',
-     props: {
-       msg: String
-     }
-   }
+import { ref } from 'vue';
+export default {
+  name: 'Card',
+  props: ['scheduledTaskData'],
+  setup(props){
+    const currentScheduledTask = ref(props.scheduledTaskData);
+    const currentDate = new Date();
+    const cardStatus = {
+      completed : (currentScheduledTask.value.executionDateTimeLocal) ? true:false,
+      delayed :(currentScheduledTask.value.executionDateTimeLocal && currentDate > currentScheduledTask.value.endDateTimeLocal) ? false:true
+    }
+     return{currentScheduledTask,cardStatus}
+  }
+
+}
    </script>
     
