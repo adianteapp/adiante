@@ -39,15 +39,15 @@
       },
      "scheduled_task":{
       "status_delayed_msg":"Esta tarea tiene un retraso de {delayedTime}.",
-      "status_delayed":"No completada",
+      "status_delayed":"Retrasada",
       "status_completed":"Completada",
       "status_completed_msg":"Esta tarea se completó el {completedDate}.",
-      "status_pending":"Pendiente de completar",
+      "status_pending":"Pendiente",
       "status_pending_msg":"Todavía tienes tiempo, pero no te olvide de realizar esta tarea.",
       "modal":{
          "close" : "Cerrar",
          "start" : "Comenzar",
-         "confirm" : "Sí",
+         "confirm" : "Completar",
          "next" : "Siguiente"
       }
      }

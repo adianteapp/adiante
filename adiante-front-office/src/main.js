@@ -4,8 +4,7 @@ import router from "./router";
 import store from "./store";
 
 import { FontAwesomeIcon } from './plugins/font-awesome'
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap"
+
 import './assets/css/main.css';
 import 'material-symbols';
 import i18n from './locales/i18n'

@@ -7,7 +7,7 @@
         <span>1 {{ $t('widgettask_header_desc1') }} 4 {{ $t('widgettask_header_desc2') }}</span>
         <a href="/agenda" class="btn btn-secondary small">{{ $t('widgettask_header_link') }}</a>
       </div>
-      <div class="completed">
+      <div class="completed percent">
         <div class="flex-wrapper">
           <div class="single-chart">
             <svg viewBox="0 0 36 36" class="circular-chart green">

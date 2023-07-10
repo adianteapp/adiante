@@ -7,6 +7,7 @@
   font-size: $font-size-sm;
   display: flex !important;
   align-items: center;
+  gap: 4px;
   &.date{
     .icon::before{
       content: "calendar_month";
@@ -107,9 +108,9 @@
 //Task list container
 .task-container {
    
-  .list-task{
-    padding-top: 80px;
+  .list-task{ 
     padding-bottom: 100px;
+    margin-top: 102px;
   }
 
   .title{ 
@@ -143,8 +144,7 @@
         
         .col{
           text-align: center;
-          padding: 0em 8px;
-          max-width: 60px;  
+          padding: 0em 6px; 
           min-height: 65px;
           align-items: center !important;
           justify-content: center;
@@ -160,7 +160,7 @@
           &.active{
             background-color: white;
             color: $primary;
-            border-radius: 20px;
+            border-radius: 14px;
           }
           
         }
@@ -177,6 +177,7 @@
      align-self: stretch;
      flex-grow: 0;
      padding: 0px 14px;  
+     
 
 
      .info{
@@ -252,7 +253,25 @@
      
     }
   }
+  .percent{
+    width: 20% !important;
+  }
+  .info{
+    gap: 0 !important;
+  }
 
+  .widget-task{
+
+    .content{
+      border: 0 !important;
+      padding: 0 0.8em !important;
+    }
+    h2{
+      font-size: $font-size-lg !important;
+      color: $neutral-80; 
+    }
+
+  }
   
 }
 
@@ -343,8 +362,7 @@
     gap: 15px;
    
   }
-  .details{
-    border-bottom: 1px solid $neutral-20;
+  .details{ 
   padding: 5px 0px;
   width: 100%;
   }
@@ -354,76 +372,9 @@
 
 }
 
-// Task in modal
-.task-modal{    
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
-  gap: 8px;   
-  border-radius: $border-radius-widget;
-   
-   
-
-  
-  .title{
-    width: 100%;
-    display: flex; 
-    justify-content: space-between;  
-    border-bottom: 1px solid $neutral-20;
-    padding: 10px 0px; 
-    margin-bottom: 0!important;
-  }
-
-  
-  .detail{ 
-    width: 100%;
-  }
-    .content{ 
-      display: flex !important;
-      align-items: center;
-      vertical-align: middle;
-      gap: 12px;
-      margin-bottom: 10px;
-      
-
-      span{
-        font-size: $font-size-sm;
-        color: $neutral-40;
-        margin-right: 4px;
-      }
-    }
-    .state{
-      font-size: $font-size-sm;
-      width: 100%;
-      span::before{
-        font-size: $font-size-sm;
-      }
-    }
-  
  
 
  
-
-  
-}
-
-.footer-task-modal{
-  justify-content: left !important;
-  p{
-    font-weight: $font-weight-bold;
-  }
-  .buttons{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 20px;
-    button{
-      width: 100%;
-    }
-  }
-
-}
-
 //question
 
 .question{
@@ -456,14 +407,8 @@
   }
 }
 
-.modal-body{
-  .task{
-    padding: 0;
-    box-shadow: none;
-    border: 0;
-    margin-bottom: 0;
+ .modal-body{
+  .task-title{
+    display: none;
   }
-  .alert{
-    margin-bottom: 0;
-  }
-}
+ }

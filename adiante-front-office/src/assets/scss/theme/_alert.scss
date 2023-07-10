@@ -3,12 +3,15 @@
     flex-direction: row; 
     align-items: center;
     gap: 20px; 
-    padding: 20px 15px;
+    padding: 1.1875rem 1rem;
     color: $neutral-80;
+    margin-bottom: 8px;
+   
 
     p {
         display: grid;
         margin-bottom: 0;
+        font-size: $font-size-sm !important;
     }
  
 
@@ -24,7 +27,7 @@
     }
 
     &.info {
-        background-color: $error-light !important;
+        background-color: $info-light !important;
         border: 0;
         box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
         border-radius: 4px;
