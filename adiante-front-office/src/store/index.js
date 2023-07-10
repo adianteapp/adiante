@@ -1,10 +1,9 @@
 import { createStore } from "vuex";
-import { auth } from "./auth.module";
-import { storedTasks } from './tasks.module'
+import { auth } from "./auth.module"; 
 const store = createStore({
 
   modules: {
-    auth,storedTasks
+    auth
   },
 });
 

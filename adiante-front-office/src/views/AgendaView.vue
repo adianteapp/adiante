@@ -11,7 +11,9 @@
     <div class="content">
         
       <section class="widget widget-task small">
-            <taskProgress :completed="2" :total="10" :enableLinkToAgenda="true"/>
+            <taskProgress :tasks="scheduledTaskList" 
+                          :selectedDate="selectedDate" 
+                          :enableLinkToAgenda="false"/>
       </section>
       <Suspense>
         <template #default>
@@ -26,7 +28,7 @@
         <template #default>
           
           <div class="list-task">
-            <div v-for="(scheduledTaskItem) in state.scheduledTaskList" :key="scheduledTaskItem.scheduledId">
+            <div v-for="(scheduledTaskItem) in scheduledTaskList" :key="scheduledTaskItem.scheduledId">
               <scheduledTask :scheduledTaskData="scheduledTaskItem" @click.prevent="maximizeScheduledTask(scheduledTaskItem)"/>
             </div>
           </div>
@@ -41,7 +43,7 @@
   <footerMenu />
 </template>
 <script>
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 import HeaderMenu from '../components/common/HeaderMenu.vue'
 import FooterMenu from '../components/common/FooterMenu.vue'
 import WeekAgenda from '../components/WeekAgenda.vue';
@@ -63,9 +65,9 @@ export default {
 
   const enableTaskManager = ref(false);
   const selectedTask = ref(undefined);
-  const state = reactive({
-      scheduledTaskList: undefined
-    });
+  const scheduledTaskList = ref(undefined);
+  const selectedDate = ref(undefined);
+    
   
     const handleAgendaChangeDateEvent = (msg) => {
       retrieveScheduledTasks(msg);
@@ -81,7 +83,8 @@ export default {
     if(response.isAxiosError){
       console.log("Error retrieving scheduled tasks");
     }else{
-      state.scheduledTaskList = response.tasksList;
+      scheduledTaskList.value = response.tasksList;
+      selectedDate.value = date;
     }
   }
 
@@ -91,7 +94,7 @@ export default {
   }
 
 
-  return {state,enableTaskManager,selectedTask,
+  return {scheduledTaskList,selectedDate,enableTaskManager,selectedTask,
           handleAgendaChangeDateEvent, handleTaskModalCloseEvent,maximizeScheduledTask};
   }
 }

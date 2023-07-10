@@ -17,6 +17,7 @@
     "bootstrap": "^5.2.3",
     "core-js": "^3.6.5",
     "dotenv": "^16.0.3",
+    "i18n": "^0.15.1",
     "jquery": "^3.6.0",
     "material-symbols": "^0.4.2",
     "popper.js": "^1.16.1",
