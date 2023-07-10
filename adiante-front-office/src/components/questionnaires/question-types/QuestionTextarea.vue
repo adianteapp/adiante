@@ -2,7 +2,7 @@
     <p class="header">{{currentQuestion.questionValue}}</p>
 
     <div class="input-group">
-        <textarea ref="answerInput" v-model="currentAnswer" class="form-control" placeholder="Placeholder text" aria-label="Placeholder text"></textarea>
+        <textarea ref="answerInput" v-model="currentAnswer" class="form-control" placeholder="Escribe aquí tu respuesta" aria-label="Escribe aquí tu respuesta"></textarea>
     </div>
 
 </template> 

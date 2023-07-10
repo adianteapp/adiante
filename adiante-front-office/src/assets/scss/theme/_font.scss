@@ -47,7 +47,9 @@ h4, .h4{
 
 p{
     font-size: $font-size-base !important;
-    margin-bottom: 8px;
+     
+    margin: 0 !important;
+    padding-bottom: 8px;
     &.header{
         font-weight: $font-weight-bold;
     }

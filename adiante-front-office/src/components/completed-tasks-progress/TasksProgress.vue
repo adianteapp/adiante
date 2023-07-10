@@ -10,7 +10,7 @@
         <span>{{ $t('taskprogress_label_today_progress',{completed:completed,total,total}) }}</span>
         <a  v-if="showLinkToAgenda.value"  href="/agenda" class="btn btn-secondary small">{{ $t('widgettask_header_link') }}</a>
       </div>
-        <div class="completed">
+        <div class="completed percent">
           <div class="flex-wrapper">
             <div class="single-chart">
               <svg viewBox="0 0 36 36" class="circular-chart green">

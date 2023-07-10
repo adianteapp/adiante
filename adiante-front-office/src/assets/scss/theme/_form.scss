@@ -86,10 +86,11 @@ textarea{
         color: $neutral-80;
         background-color: $neutral-00;
         background-clip: padding-box;
-        border: 1px solid $neutral-20;
+         
         border-radius: $border-radius-input;
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-        border: 1px solid $neutral-60; 
+        border: 1px solid $neutral-30; 
+        min-height: 80px; 
 
         :hover {
             border-color: $primary;
@@ -98,9 +99,10 @@ textarea{
             border-color: $primary;
             outline: none;
           }
-        ::placeholder{
-              font-size: $font-size-base;
-              color: $neutral-50
+        &::placeholder{
+              font-size: $font-size-sm;
+              color: $neutral-20 !important;
+              font-family: 'Oxygen', sans-serif !important;
           }
           
          

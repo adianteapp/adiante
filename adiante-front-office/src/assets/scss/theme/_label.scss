@@ -1,13 +1,15 @@
 // Task states
 
 .label{
-    font-size: $font-size-base;
-    align-items: center; 
-    height: 30px; 
+    font-size: $font-size-sm; 
     display: flex;
+    align-items: center;  
+    padding-bottom: 8px;
+
     span{
       width: auto !important;
       display: flex; 
+      align-items: center;  
     }
    
       

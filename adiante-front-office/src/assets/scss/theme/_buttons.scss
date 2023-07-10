@@ -8,10 +8,13 @@
     height: 50px; 
     padding: 1% 5%;
     cursor: pointer;
+    font-size: $font-size-base;
+    font-weight: $font-weight-base;
 
     &.big{
         height: 55px;
         padding: 0px 30px;
+        font-size: $font-size-lg;
     }
     &.small{
         height: 30px;
@@ -93,6 +96,11 @@
     border: 0;
     border-radius: 0.375rem;
     opacity: .5;
+
+    &:before{
+        font-family: "Adiante";
+        content: "\e01b"; 
+    }
 }
 
 .btn-menu{

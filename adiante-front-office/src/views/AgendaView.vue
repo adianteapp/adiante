@@ -9,8 +9,8 @@
 
 
     <div class="content">
-        <div class="content"><br/><br/><br/><br/><br/></div>
-      <section class="widget widget-task">
+        
+      <section class="widget widget-task small">
             <taskProgress :completed="2" :total="10" :enableLinkToAgenda="true"/>
       </section>
       <Suspense>
