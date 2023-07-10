@@ -6,7 +6,7 @@
         :key="index"
         :class="['col', { active: index == selectedDayIndex }]"
         @click="changeSelectedDate(index)">
-        {{ $t('task_week_day'+index) }} <br /> {{ item.day }}
+        {{ $t('weekAgenda.task_week_day'+index) }} <br /> {{ item.day }}
       </div>
     </div>
   </div>
