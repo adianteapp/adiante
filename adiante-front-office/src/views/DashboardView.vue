@@ -22,6 +22,53 @@
        <tasksProgress  :enableLinkToAgenda="true"/>
     </section>
 
+    <div class="card">
+      <div class="container-card">
+        <div class="img">
+          <img src="../assets/img/svg/retos-icon.svg" class="icon-card" alt="">
+        </div>
+    
+        <div class="content">
+          <div class="info"> 
+            <span class="title">Retos</span>   
+        </div>
+          
+    
+        </div>
+      </div>
+
+
+      
+  
+      <div class="icon">
+        <i class="icon-navigate_next"></i>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="container-card">
+        <div class="img">
+          <img src="../assets/img/svg/relax-icon.svg" class="icon-card" alt="">
+        </div>
+    
+        <div class="content">
+          <div class="info"> 
+            <span class="title">Actividades</span>   
+        </div>
+          
+    
+        </div>
+      </div>
+
+
+      
+  
+      <div class="icon">
+        <i class="icon-navigate_next"></i>
+      </div>
+    </div>
+
+
   </div>
  
   <footerMenu />

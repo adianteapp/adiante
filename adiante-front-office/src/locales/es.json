@@ -32,7 +32,7 @@
   "task_week_day5": "sábado",
   "task_week_day6": "domingo",
   "dashboard_label_main_message": "Hola, {patientName}",
-  "taskprogress_label_notasks": "No tienes tareas programadas para {day}",
+  "taskprogress_label_notasks": "No tienes tareas programadas para el {day}",
   "taskprogress_label_day": "Tus tareas para {day}",
   "taskprogress_label_today":"hoy",
   "taskprogress_label_today_progress": "{completed} de {total} completadas",

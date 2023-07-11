@@ -1,12 +1,21 @@
 .card{
     border: 1px solid $neutral-30;
     border-radius: $border-radius-widget;
-    padding: 10px;
+    padding: 0.5em 1.5em;
      
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    gap: 14px;
+    justify-content: space-between;
+    gap:16px;
+    margin-bottom: 8px;
+
+    .container-card{
+
+        display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+    }
     
     cursor: pointer;
     &:hover{
@@ -23,11 +32,18 @@
             height: 80px;
             object-fit: cover !important;
         }
+        .icon-card{
+            
+            width: 40px;
+            height: 40px;
+        }
         
         
     }
 
     .content{
+        display: flex;
+        vertical-align: middle;
         
         .info{
             display: flex;

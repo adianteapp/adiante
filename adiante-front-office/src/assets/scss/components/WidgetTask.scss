@@ -2,8 +2,7 @@
 .widget-task{
     width: 100%; 
     max-width: 500px;
-    float: left;
-    cursor: pointer;
+    float: left; 
 
     a{
       text-decoration: none;
@@ -24,9 +23,7 @@
         align-items: center;
         gap: 16px; 
 
-        &:hover{
-          box-shadow: 0px 4px 20px rgba(149, 149, 149, 0.183);
-      }
+         
 
         .info{
             width: 60%; 
