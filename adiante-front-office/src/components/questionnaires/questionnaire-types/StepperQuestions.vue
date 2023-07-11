@@ -1,5 +1,4 @@
-<template> 
-        <div class="modal-body">
+<template>  
           
           <scheduledTask 
               v-if="showScheduledTask"
@@ -12,7 +11,7 @@
                   :question="currentQuestion" 
                   :selectedAnswers="selectedAnswers" 
                   ref="questionComponentRef"/>
-        </div>
+     
         <div class="modal-footer footer-task-modal">
           <div class="buttons">
             <button v-if="buttonsManager.buttonCloseEnabled"  @click.prevent="closeQuestionnaire"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">

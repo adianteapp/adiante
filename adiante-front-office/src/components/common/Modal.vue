@@ -7,6 +7,7 @@
             <h4>{{title}}</h4>
           </div>
           <button type="button" v-if="buttonCloseEnabled"  @click="closeModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          
         </div>
         <div class="modal-body">
           {{content}}

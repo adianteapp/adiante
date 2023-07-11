@@ -24,13 +24,32 @@
       </div>
 
       <div v-if="status.delayed" class="alert error" role="alert">
-        <p>{{ $t('agenda.scheduled_task.status_delayed_msg', { delayedTime: getDelayedTime }) }}</p>
+        <div class="icon">
+          <i></i>
+        </div>
+        <div class="alert-text">
+          {{ $t('agenda.scheduled_task.status_delayed_msg', { delayedTime: getDelayedTime }) }}
+        </div> 
+ 
       </div>
+
       <div v-if="status.pending" class="alert info" role="alert">
-        <p>{{ $t('agenda.scheduled_task.status_pending_msg') }}</p>
+        <div class="icon">
+          <i></i>
+        </div>
+        <div class="alert-text">
+          {{ $t('agenda.scheduled_task.status_pending_msg') }}
+        </div> 
       </div>
+
+
       <div v-if="status.completed" class="alert success" role="alert">
-        <p>{{ $t('agenda.scheduled_task.status_completed_msg', { completedDate: getComplitedTime }) }}</p>
+        <div class="icon">
+          <i></i>
+        </div>
+        <div class="alert-text">
+          {{ $t('agenda.scheduled_task.status_completed_msg', { completedDate: getComplitedTime }) }}
+        </div>  
       </div>
     </div>
 

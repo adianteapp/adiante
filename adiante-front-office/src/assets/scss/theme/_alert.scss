@@ -2,13 +2,13 @@
     display: flex;
     flex-direction: row; 
     align-items: center;
-    gap: 20px; 
+    gap: 8px !important; 
     padding: 1.1875rem 1rem;
     color: $neutral-80;
     margin-bottom: 8px;
    
 
-    p {
+    .alert-text {
         display: grid;
         margin-bottom: 0;
         font-size: $font-size-sm !important;
@@ -23,6 +23,7 @@
         i::before{
             content: "\e016";
             color:  $error-dark;
+            font-style: normal;
         }
     }
 
@@ -33,7 +34,8 @@
         border-radius: 4px;
         i::before{
             content: "\e016";
-            color:  $error-dark  !important;;
+            color:  $info-dark  !important;
+            font-style: normal;
         }
     }
 
@@ -45,6 +47,7 @@
         i::before{
             content: "\e016";
             color:  $error-dark;
+            font-style: normal;
         }
     }
     &.success {
@@ -53,8 +56,9 @@
         box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
         border-radius: 4px;
         i::before{
-            content: "\e016";
+            content: "\e01c";
             color:  $success-dark;
+            font-style: normal;
         }
     }
     &.warning {
@@ -65,6 +69,7 @@
         i::before{
             content: "\e016";
             color:  $warning-dark;
+            font-style: normal;
         }
     }
     &.default {

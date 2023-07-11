@@ -1,0 +1,81 @@
+<template>
+
+  <div class="container-fluid">
+    <h2>Page title</h2>
+
+
+    <div class="card">
+      <div class="img">
+        <img src="../../../public/img/demo/reto.jpg" alt="">
+      </div>
+  
+      <div class="content">
+        <div class="info"> 
+          <span class="title">Title card</span>  <div class="label small completed"> <span></span></div>
+      </div>
+        <div class="desc">
+          Vestibulum lectus mauris ultrices eros cursus turpis massa tincidunt.
+        </div>
+  
+      </div>
+  
+      <div class="icon">
+        <i class="icon-navigate_next"></i>
+      </div>
+    </div>
+  
+    <div class="card">
+      <div class="img">
+        <img src="../../../public/img/demo/reto.jpg" alt="">
+      </div>
+  
+      <div class="content">
+        <div class="info"> 
+          <span class="title">Title card</span>  <div class="label small completed"> <span></span></div>
+      </div>
+        <div class="desc">
+          Vestibulum lectus mauris ultrices eros cursus turpis massa tincidunt.
+        </div>
+  
+      </div>
+  
+      <div class="icon">
+        <i class="icon-navigate_next"></i>
+      </div>
+    </div>
+  
+    <div class="card">
+      <div class="img">
+        <img src="../../../public/img/demo/reto.jpg" alt="">
+      </div>
+  
+      <div class="content">
+        <div class="info"> 
+          <span class="title">Title card</span>  <div class="label small completed"> <span></span></div>
+      </div>
+        <div class="desc">
+          Vestibulum lectus mauris ultrices eros cursus turpis massa tincidunt.
+        </div>
+  
+      </div>
+  
+      <div class="icon">
+        <i class="icon-navigate_next"></i>
+      </div>
+    </div>
+
+  </div>
+  
+</template> 
+   
+<script>
+export default {
+  name: 'ActivitiesView',
+  props: {
+    msg: String
+  }
+}
+</script>
+    
+
+    
