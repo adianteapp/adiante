@@ -9,7 +9,7 @@ import * as dotenv from 'dotenv';
 import { IGetPatientHandler } from "../../shared/get-patient/i-get-patient.handler";
 import { GetPatientResponse } from "../../shared/get-patient/dto/get-patient.response";
 import { GetPatientRequest } from "../../shared/get-patient/dto/get-patient.request";
-import { Task } from "../../../features/shared/get-task/dto/get-task.response";
+import { Task, TaskAttribute } from "../../../features/shared/get-task/dto/get-task.response";
 
 
 @injectable()
@@ -107,22 +107,70 @@ async  getsTasksByTypeFromDB(selectedTaskType:string,langId?:string): Promise<Ta
 
     const languageId:string = langId != undefined ? langId : process.env.DEAFULT_LANGID;
 
-    const sqlQuery =`SELECT t.id AS 'taskId', tin.title_i18n AS 'taskTitle', tin.description_i18n AS 'taskDescription'
+    const sqlQuery =`SELECT
+                            t.id AS 'taskId', tin.title_i18n AS 'title', tin.description_i18n AS 'description',tin.additional_info_i18n AS 'additionalInfo',
+                            tt.code_name AS 'taskTypeCode',tav.id_task as 'attributeTaskId',
+                            ta.code_name as 'attributeCode',tav.value  as 'attributeValue'
                     FROM  task t 
                     INNER JOIN task_type tt ON t.id_task_type = tt.id
                     INNER JOIN task_i18n tin ON t.id = tin.id_task
-                    WHERE tt.code_name = '${selectedTaskType}' AND tin.id_language= '${languageId}'`;
-  
+                    LEFT OUTER JOIN task_attribute_value tav on tav.id_task = t.id
+                    LEFT OUTER JOIN task_attribute ta on ta.id = tav.id_task_attribute
+                    WHERE tt.code_name =  '${selectedTaskType}' AND tin.id_language= '${languageId}'`;
+
     const rows = await dao.executeQuery(sqlQuery);
     
     if(rows && rows.length > 0){
 
-        retrievedTaskList = JSON.parse(JSON.stringify(rows, (_, value) => typeof value === 'bigint' ? value.toString() : value)) as  Task[];
+        retrievedTaskList = await this.mapToTaskList(rows);
     }
 
     return retrievedTaskList;
   }
   
+
+
+  private async  mapToTaskList(queryResult: any[]): Promise<Task[]> {
+
+
+    let taskList: Task[] = [];
+    let currentAttribute: TaskAttribute | undefined;
+    let currentTask: Task | undefined;
+  
+    queryResult.forEach((row) => {
+  
+      if (!currentTask || currentTask.taskId  !== row.taskId.toString()) {
+        currentTask = {
+          taskId : row.taskId.toString(),
+          title : row.title,
+          description : row.description,
+          taskTypeCode : row.taskTypeCode,
+          additionalInfo : row.additionalInfo,
+          taskAttributeList : []
+        } as Task;
+
+      }
+  
+      if (row.attributeCode != undefined && row.attributeTaskId.toString() == currentTask.taskId) {
+
+        currentAttribute = {
+            attributeValue : row.attributeValue,
+            attributeCode : row.attributeCode,
+        } as TaskAttribute;
+        
+        currentTask.taskAttributeList.push(currentAttribute);
+      }
+      taskList.push(currentTask);
+    });
+  
+    return taskList;
+  }
+
+
+
+
+
+
 
 
 //#endregion

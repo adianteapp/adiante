@@ -6,7 +6,9 @@ import authService from "./services/auth.service";
 //import Dashboard from "./views/DashboardView.vue";
 // lazy-loaded
 const Dashboard = () => import("./views/DashboardView.vue")
-const Agenda = () => import ("./views/AgendaView.vue");     
+const Agenda = () => import ("./views/AgendaView.vue"); 
+const Activities = () => import ("./views/ActivitiesView.vue");  
+const IntroActivity = () => import ("./views/IntroActivityView.vue");  
 const routes = [
   {
     path: "/",
@@ -36,7 +38,20 @@ const routes = [
     name: "agenda",
     component: Agenda,
     meta: {checkAuth: true}
-  } 
+  },
+  {
+    path: "/activities",
+    name: "activities",
+    component: Activities,
+    meta: {checkAuth: true}
+  },
+  {
+    path: "/activity-intro",
+    name: "activity-intro",
+    component: IntroActivity,
+    meta: {checkAuth: true,
+          }
+  }  
 ];
 
 const router = createRouter({

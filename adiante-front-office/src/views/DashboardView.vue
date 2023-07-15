@@ -22,51 +22,41 @@
        <tasksProgress  :enableLinkToAgenda="true"/>
     </section>
 
-    <div class="card">
-      <div class="container-card">
-        <div class="img">
-          <img src="../assets/img/svg/retos-icon.svg" class="icon-card" alt="">
-        </div>
-    
-        <div class="content">
-          <div class="info"> 
-            <span class="title">Retos</span>   
-        </div>
-          
-    
-        </div>
-      </div>
-
-
+      <div class="card">
+        <routerLink class="container-card"  to="/activities?type=tt-challenge">
+            <div class="img">
+              <img src="../assets/img/svg/retos-icon.svg" class="icon-card" alt="">
+            </div>
       
-  
-      <div class="icon">
-        <i class="icon-navigate_next"></i>
-      </div>
-    </div>
+            <div class="content">
+              <div class="info"> 
+                <span class="title">{{$t('challenges.title')}}</span>   
+              </div>
+            </div>
+        </routerLink> 
 
-    <div class="card">
-      <div class="container-card">
-        <div class="img">
-          <img src="../assets/img/svg/relax-icon.svg" class="icon-card" alt="">
+        <div class="icon">
+          <i class="icon-navigate_next"></i>
         </div>
+
+      </div>
+
+      <div class="card">
+        <routerLink class="container-card"  to="/activities?type=tt-guided-activity">
+            <div class="img">
+              <img src="../assets/img/svg/relax-icon.svg" class="icon-card" alt="">
+            </div>
     
-        <div class="content">
-          <div class="info"> 
-            <span class="title">Actividades</span>   
+            <div class="content">
+                <div class="info"> 
+                  <span class="title">{{ $t('guided_activities.title')}}</span>   
+                </div>
+            </div>
+        </routerLink> 
+        <div class="icon">
+          <i class="icon-navigate_next"></i>
         </div>
-          
-    
-        </div>
-      </div>
-
-
-      
-  
-      <div class="icon">
-        <i class="icon-navigate_next"></i>
-      </div>
-    </div>
+     </div>
 
 
   </div>
@@ -81,7 +71,7 @@ import HeaderMenu from '../components/common/HeaderMenu.vue'
 import FooterMenu from '../components/common/FooterMenu.vue'
 import TaskManager from '../components/tasks/TaskManager.vue';
 import TasksProgress from '../components/completed-tasks-progress/TasksProgress.vue'; 
-
+import { RouterLink } from 'vue-router';
 import { useStore } from 'vuex'
 
 export default {
@@ -90,6 +80,7 @@ export default {
     headerMenu: HeaderMenu,
     footerMenu: FooterMenu,
     taskManager: TaskManager,
+    routerLink: RouterLink,
     tasksProgress: TasksProgress
   },
   setup() {

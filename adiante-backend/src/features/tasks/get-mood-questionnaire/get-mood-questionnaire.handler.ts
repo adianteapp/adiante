@@ -12,7 +12,7 @@ import { GetTaskResponse } from "../../../features/shared/get-task/dto/get-task.
 import { GetTaskRequest } from "../../../features/shared/get-task/dto/get-task.request";
 import TaskType from "../../../features/shared/enums/task-type.enum";
 import { IGetTaskHandler } from "../../../features/shared/get-task/i-get-task.handler";
-import {QuestionnaireType} from "../../../features/shared/enums/task-type.enum copy";
+import {QuestionnaireType} from "../../shared/enums/questionnaire-type.enum";
 
 @injectable()
 export class GetMoodQuestionnaireHandler implements IGetMoodQuestionnaireHandler {

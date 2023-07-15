@@ -13,5 +13,12 @@ export interface Task {
     title: string;
     description: string;
     mandatoryFeedback: boolean;
+    additionalInfo: string | null;
     relatedQuestionnaireId: string | null;
+    taskAttributeList: TaskAttribute[] | null;
   }
+
+export interface TaskAttribute{
+  attributeCode:string;
+  attributeValue:string;
+}

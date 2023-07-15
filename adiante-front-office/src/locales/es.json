@@ -36,13 +36,25 @@
   "taskprogress_label_day": "Tus tareas para {day}",
   "taskprogress_label_today":"hoy",
   "taskprogress_label_today_progress": "{completed} de {total} completadas",
-  "getmood_feedback_modal_title": "Registro de estado",
-  "getmood_feedback_modal_content_0": "Gracias por registrar tu estado de ánimo",
-  "getmood_feedback_modal_content_1": "Gracias indicár como te encuentras",
   "modal_close_button_label":"Cerrar",
   "modal_prev_button_label":"Volver",
   "modal_next_button_label":"Siguiente",
   "modal_finish_button_label":"Finalizar",
+  "feedback_modal":{
+    "tt-challenge":{
+      "title" : "Reto completado",
+      "content": "Enhorabuena, has completado el reto correctamente. Sigue así!"
+    },
+    "tt-completion-check":{
+      "title" : "Tarea completada",
+      "content": "Enhorabuena, has completado la tarea correctamente. Sigue así!"
+    },
+    "getmood":{
+      "title": "Registro de estado",
+      "content_0": "Gracias por registrar tu estado de ánimo",
+      "content_1": "Gracias indicar como te encuentras"
+    }
+  },
   "agenda":{
       "general_feedback" : {
          "title" : "Tarea completada",
@@ -62,6 +74,19 @@
          "next" : "Siguiente"
       }
      }
+  },
+  "challenges":{
+      "title":"Retos",
+      "general_feedback" : {
+       
+      }
+  },
+  "guided_activities":{
+   "title":"Actividades"
+  },
+  "intro_activities":{
+   "backLink":"Volver al listado",
+   "startChallengeButton":"Comenzar reto"
   }
 }
 

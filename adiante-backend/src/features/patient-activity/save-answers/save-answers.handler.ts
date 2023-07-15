@@ -61,7 +61,7 @@ export class SaveAnswersHandler implements ISaveAnswersHandler{
         //save the info
         let saveResult:boolean = false;
      
-        if (originalTask.task.taskTypeCode === TaskType.questionnaire) {
+        if (originalTask.task.taskTypeCode === TaskType.questionnaire || originalTask.task.taskTypeCode === TaskType.challenge) {
              saveResult = await this.insertPatientTaskQuestionnaireEntry(preparePatientActivityResponse.patientActivityEntry);
         } else {
          saveResult = await this.insertPatientTaskExecutionEntry(preparePatientActivityResponse.patientActivityEntry, saveAnswersRequest.executedTask.idScheduledTask);
@@ -103,6 +103,10 @@ export class SaveAnswersHandler implements ISaveAnswersHandler{
             case TaskType.questionnaire:
                validationResult = await this.validateTaskTypeQuestionnaire(saveAnswersRequest, originalTask);
                break;
+           case TaskType.challenge:
+                  //Challenges can have a related questionnaire.
+                  validationResult = await this.validateTaskTypeQuestionnaire(saveAnswersRequest, originalTask);
+                  break;
             default:
                Logger.error("Error saving patient activity. Invalid task type retrived from DB:" + originalTask.task.taskTypeCode);
                validationResult = SaveAnswersStatus.InternalError;

@@ -20,15 +20,3 @@ services:
     entrypoint:
      - /usr/bin/loki
      - -config.file=/etc/config/loki.yaml
-
-  # If enabled, add database backup PlatformDB_GameEngine.bak in build/sqlserver/ folder
-  #sqlserver:
-  #  image: gameengine.sql
-  #  build:
-  #    context: .
-  #    dockerfile: sqlserver/Dockerfile
-  #  environment:
-  #    - SA_PASSWORD=Pass@word
-  #    - ACCEPT_EULA=Y
-  #  ports:
-  #    - ${SQL_PORT:-5433}:1433

@@ -74,7 +74,15 @@ export class TaskService {
       });
   }
 
-
+  async getTasksByType(taskType) {
+    return axios.get(API_URL + '/tasks/type/' + taskType, { headers: authHeader() })
+      .then((response) => {
+        return response.data;
+      })
+      .catch(function (error) {
+        return error;
+      });
+  }
 
 
 

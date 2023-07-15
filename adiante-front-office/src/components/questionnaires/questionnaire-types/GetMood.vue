@@ -11,9 +11,6 @@
           <span>{{ answer.answerValue }}</span>
         </div>
       </div>
-      <div>
-        <getMoodFeedbackModal v-if="modalActive" @close="toggleModal" />
-      </div>
     </div>
   </section>
 </template>
@@ -22,13 +19,10 @@
 
 import { defineComponent } from "vue";
 import { ref } from "vue";
-import GetMoodFeedbackModal from "../../feedback-modals/GetMoodFeedbackModal.vue";
 
 export default defineComponent({
   name: 'GetMood',
-  components: {
-    getMoodFeedbackModal: GetMoodFeedbackModal
-  },
+
   props: ['loadedTask'],
   async setup(props,{ emit }) {
 

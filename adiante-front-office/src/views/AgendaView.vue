@@ -19,7 +19,7 @@
         <template #default>
             <taskManager v-if="enableTaskManager" 
                         :showOnModal="true"
-                        :scheduledTask="selectedTask"      
+                        :taskData="selectedTask"      
                         @evtCloseTaskManagerModal="handleTaskModalCloseEvent" />
         </template>
       </Suspense>
