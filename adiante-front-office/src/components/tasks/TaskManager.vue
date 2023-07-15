@@ -13,15 +13,11 @@
                    @evtCloseTaskModal="handleCloseTaskModalEvent" 
                    @evtConfirmExecution="handleConfirmExecution"/>
     </div>
-    
-    <getMoodFeedbackModal v-if="showMoodFeedbackModal" 
-                            :showButtonClose="true"  
-                            @evtCloseTaskModal="handleCloseGetMoodFeedback"/>
 
     <generalFeedbackModal v-if="showGeneralFeedbackModal" 
-                            :showButtonClose="true"  
-                            :title="$t('agenda.general_feedback.title')" 
-                            :content="$t('agenda.general_feedback.content')"
+                            :showButtonClose="true"
+                            :isGetMoodFeedback="isMoodQuestionnaire"  
+                            :taskType="feedbackModalTaskType"
                             @evtCloseTaskModal="handleCloseGeneralFeedback"/>
 
 </template> 
@@ -33,17 +29,15 @@ import patientService from "../../services/patient.service";
 import taskService from    "../../services/task.service";
 import TaskComponentsLoader from "./TaskComponentsLoader.vue";
 import TaskModal from "./TaskModal.vue";
-import Modal from "../common/Modal.vue";
-import GetMoodFeedbackModal from "../feedback-modals/GetMoodFeedbackModal.vue";
+import GeneralFeedbackModal from "../feedback-modals/GeneralFeedbackModal.vue";
 
 export default ({
   name: 'TaskManager',
-  props: ['taskId','questionnaireType','showOnModal','scheduledTask'],
+  props: ['taskId','questionnaireType','showOnModal','taskData'],
   components: {
     taskComponentsLoader:TaskComponentsLoader,
     taskModal:TaskModal,
-    generalFeedbackModal:Modal,
-    getMoodFeedbackModal:GetMoodFeedbackModal
+    generalFeedbackModal:GeneralFeedbackModal
   },
  async setup(props,{emit}) {
 
@@ -51,8 +45,10 @@ export default ({
 
 const selectedTaskId = ref(props.taskId).value;
 const selectedQuestionnaireType = ref(props.questionnaireType).value;
-const providedScheduledTask = ref(props.scheduledTask).value;
+const providedScheduledTask = ref(props.taskData).value;
+const feedbackModalTaskType = ref(undefined);
 let showOnModal = ref(props.showOnModal).value;
+
 
 let componentsVisibility = {
     showTaskOnContent : (showOnModal == true) ? false : true,
@@ -60,7 +56,6 @@ let componentsVisibility = {
 };
 
 const showTaskOnModalRef = ref( showOnModal ? true:false);
-const showMoodFeedbackModal = ref(false);
 const showGeneralFeedbackModal = ref(false);
 
 const isMoodQuestionnaire = selectedQuestionnaireType != null && selectedQuestionnaireType == "qt-dashboard" ? true : false;
@@ -109,9 +104,15 @@ async function addScheduledTaskInfoToTask(task){
 
 
 async function retrieveTaskData(selectedTaskId,selectedQuestionnaireType,providedTask){
+    
     if(providedTask && providedTask.taskTypeCode == "tt-completion-check"){
                 return getTaskFromScheduledTask(providedTask);
     }
+
+    if(providedTask && providedTask.task.relatedQuestionnaireId != null && providedTask.questionnaire != null){
+                return providedTask;
+    }
+
 
     const taskId = (providedTask && providedTask.relatedQuestionnaireId != null) ? providedTask.taskId : selectedTaskId;
 
@@ -127,11 +128,12 @@ async function retrieveTaskData(selectedTaskId,selectedQuestionnaireType,provide
 //#region Functions declaration to save patientActivity
 
 const handleCloseGetMoodFeedback = () => {
-       showMoodFeedbackModal.value = false;
+    showGeneralFeedbackModal.value = false;
     };  
 
  const handleCloseGeneralFeedback = () => {
       showGeneralFeedbackModal.value = false;
+      emit('evtCloseTaskManagerModal');
     };  
 
 const handleConfirmExecution = (msg) => {
@@ -145,8 +147,8 @@ async function saveConfirmationExecution(msg){
     alert("Ha ocurrido un error salvando el estado del paciente");
     }else{
         showTaskOnModalRef.value = false;
-
-        isMoodQuestionnaire ? showMoodFeedbackModal.value = true : showGeneralFeedbackModal.value = true;
+        feedbackModalTaskType.value = isMoodQuestionnaire ? undefined:  modalLoadedTask.value.task.taskTypeCode;
+        showGeneralFeedbackModal.value = true;
     }
 }
 
@@ -203,7 +205,8 @@ async function handleSavePatientActivy(patientActivity){
    }else{
       //CloseTaskModal
       showTaskOnModalRef.value = false;
-      isMoodQuestionnaire ? showMoodFeedbackModal.value = true : showGeneralFeedbackModal.value = true;
+      showGeneralFeedbackModal.value = true;
+      feedbackModalTaskType.value = isMoodQuestionnaire ? undefined:  modalLoadedTask.value.task.taskTypeCode;
    }
 }
 
@@ -217,7 +220,8 @@ async function loadRelatedTaskModal(relatedTaskId){
     }else{
         console.log("Error retrieving the relatedtask for taskId:"+relatedTaskId);
         //show feedback anyway;
-        isMoodQuestionnaire ? showMoodFeedbackModal.value = true : showGeneralFeedbackModal.value = true;
+        showGeneralFeedbackModal.value = true;
+        feedbackModalTaskType.value = isMoodQuestionnaire ? undefined:  modalLoadedTask.value.task.taskTypeCode;
     }
 }
 
@@ -231,7 +235,7 @@ async function loadRelatedTaskModal(relatedTaskId){
 
   await initTaskComponent();
 
-  return{componentsVisibility,showTaskOnModalRef,loadedTask,modalLoadedTask,showMoodFeedbackModal,showGeneralFeedbackModal,
+  return{componentsVisibility,showTaskOnModalRef,loadedTask,modalLoadedTask,showGeneralFeedbackModal,isMoodQuestionnaire,feedbackModalTaskType,
         handlePatientAnswersEvent,handleCloseTaskModalEvent,handleConfirmExecution,handleCloseGetMoodFeedback,handleCloseGeneralFeedback}
   }
 })

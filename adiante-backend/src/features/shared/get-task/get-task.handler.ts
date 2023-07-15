@@ -1,6 +1,6 @@
 import { injectable, inject } from "inversify";
 import { GetTaskRequest } from "./dto/get-task.request";
-import { GetTaskResponse, Task } from "./dto/get-task.response";
+import { GetTaskResponse, Task, TaskAttribute } from "./dto/get-task.response";
 import { IGetTaskHandler } from "./i-get-task.handler";
 import { GetTaskStatus } from "./get-task.enum";
 import * as dotenv from 'dotenv';
@@ -127,43 +127,81 @@ export class GetTaskHandler implements IGetTaskHandler {
 
 //#region queries to database
 
-private async getTaskByIdFromDB(taskId:string,langId?:string):Promise<Task>{
-  let retrievedTask: Task = undefined
+  private async getTaskByIdFromDB(taskId: string, langId?: string): Promise<Task> {
+        let retrievedTask: Task = undefined
 
-  const languageId:string = langId != undefined ? langId : process.env.DEAFULT_LANGID
+        const languageId: string = langId != undefined ? langId : process.env.DEAFULT_LANGID
 
 
-  const sqlQuery =`SELECT t.id AS 'taskId',
-  tt.code_name AS 'taskTypeCode',
-  tin.title_i18n AS 'title',
-  tin.description_i18n AS 'description',
-  t.mandatory_feedback AS 'mandatoryFeedback',
-  tq.id_questionnaire AS 'relatedQuestionnaireId'
-FROM task AS t
-INNER JOIN task_type AS tt ON t.id_task_type = tt.id
-INNER JOIN task_i18n AS tin ON t.id = tin.id_task
-LEFT JOIN task_questionnaire AS tq ON tq.id_task = t.id
-WHERE t.id = '${taskId}' AND tin.id_language = '${languageId}'`;
+        const sqlQuery = `SELECT t.id AS 'taskId',
+                              tt.code_name AS 'taskTypeCode',
+                              tin.title_i18n AS 'title',
+                              tin.description_i18n AS 'description',
+                              tin.additional_info_i18n AS 'additionalInfo',
+                              t.mandatory_feedback AS 'mandatoryFeedback',
+                              tav.id_task as 'attributeTaskId',
+                              ta.code_name as 'attributeCode',tav.value  as 'attributeValue',
+                              tq.id_questionnaire AS 'relatedQuestionnaireId'
+                            FROM task AS t
+                            INNER JOIN task_type AS tt ON t.id_task_type = tt.id
+                            INNER JOIN task_i18n AS tin ON t.id = tin.id_task
+                            LEFT OUTER JOIN task_attribute_value tav on tav.id_task = t.id
+                            LEFT OUTER JOIN task_attribute ta on ta.id = tav.id_task_attribute
+                            LEFT JOIN task_questionnaire AS tq ON tq.id_task = t.id
+                            WHERE t.id = '${taskId}' AND tin.id_language = '${languageId}'`;
 
-    const rows = await dao.executeQuery(sqlQuery);
-    
-    if(rows && rows.length > 0){
+        const rows = await dao.executeQuery(sqlQuery);
 
-        const taskList = JSON.parse(JSON.stringify(rows, (_, value) => typeof value === 'bigint' ? value.toString() : value)) as Task[];
-        
-        if(taskList && taskList.length == 1){
+        if (rows && rows.length > 0) {
 
-          retrievedTask = taskList[0]
+          retrievedTask = await this.mapToTask(rows);
 
-        }else{
+        } else {
 
-          if(rows.length > 1){
-            Logger.error("TaskId:"+taskId+" gives more than 1 result");
-          }
+          Logger.error("TaskId:" + taskId + " gives more than 1 result");
+
         }
+        return retrievedTask;
+  }
+
+
+private async  mapToTask(queryResult: any[]): Promise<Task> {
+
+
+  let currentAttribute: TaskAttribute | undefined;
+  let currentTask: Task | undefined;
+
+  queryResult.forEach((row) => {
+
+    if (!currentTask || currentTask.taskId  !== row.taskId.toString()) {
+      currentTask = {
+        taskId : row.taskId.toString(),
+        title : row.title,
+        description : row.description,
+        taskTypeCode : row.taskTypeCode,
+        additionalInfo : row.additionalInfo,
+        relatedQuestionnaireId : row.relatedQuestionnaireId.toString(),
+        taskAttributeList : []
+      } as Task;
+
     }
-  return retrievedTask;
+
+    if (row.attributeCode != undefined && row.attributeTaskId.toString() == currentTask.taskId.toString()) {
+
+      currentAttribute = {
+          attributeValue : row.attributeValue,
+          attributeCode : row.attributeCode,
+      } as TaskAttribute;
+      
+      currentTask.taskAttributeList.push(currentAttribute);
+    }
+  });
+
+  return currentTask;
 }
+
+
+
 
 //#endregion queries to database
 

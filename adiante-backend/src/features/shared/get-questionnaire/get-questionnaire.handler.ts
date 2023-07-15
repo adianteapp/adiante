@@ -31,7 +31,7 @@ export class GetQuestionnaireHandler implements IGetQuestionnaireHandler {
     }
 
     if(getQuestionnaireRequest.relatedQuestionnaireId !== undefined){
-      relatedQuestionnaire = await this.getQuestionnaireByIdFromDB(getQuestionnaireRequest.relatedQuestionnaireId);
+      relatedQuestionnaire = await this.getQuestionnaireByIdFromDB(getQuestionnaireRequest.taskId,getQuestionnaireRequest.relatedQuestionnaireId);
     }
 
     getQuestionnaireResponse = {questionnaire:relatedQuestionnaire ,status:GetQuestionnaireStatus.Succesfull};
@@ -62,7 +62,7 @@ export class GetQuestionnaireHandler implements IGetQuestionnaireHandler {
 
 //#region queries to database
 
-  private async getQuestionnaireByIdFromDB(questionnaireId: string, langId?: string): Promise<Questionnaire> {
+  private async getQuestionnaireByIdFromDB(taskId:string,questionnaireId: string, langId?: string): Promise<Questionnaire> {
     let retrievedQuestionnaire: Questionnaire = undefined
 
     const languageId: string = langId != undefined ? langId : process.env.DEAFULT_LANGID
@@ -90,7 +90,7 @@ export class GetQuestionnaireHandler implements IGetQuestionnaireHandler {
         LEFT OUTER JOIN answer a ON a.id_question = q2.id
         LEFT OUTER JOIN answer_i18n ain ON a.id = ain.id_answer
         LEFT OUTER JOIN related_answer_task rat ON a.id = rat.id_answer
-        WHERE q.id = '${questionnaireId}'  AND q2in.id_language = '${languageId}' AND ( ain.id_language = '${languageId}' OR  a.id IS NULL)`;
+        WHERE t.id = '${taskId}' AND q.id = '${questionnaireId}'  AND q2in.id_language = '${languageId}' AND ( ain.id_language = '${languageId}' OR  a.id IS NULL)`;
 
 
     const rows = await dao.executeQuery(sqlQuery);

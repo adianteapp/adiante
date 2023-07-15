@@ -55,6 +55,9 @@ async function  getLoaderComponent(){
        case "tt-completion-check":
             loaderComponent.value = CompletionCheckTasksLoader;
             break;
+       case "tt-challenge":
+            loaderComponent.value = QuestionnaireLoader;
+            break;
        default:
          console.log("Error retrieving loaderComponent for taskType:"+retrievedTask.task.taskTypeCode);
          break;
