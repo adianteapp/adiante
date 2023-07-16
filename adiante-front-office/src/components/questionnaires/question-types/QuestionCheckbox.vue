@@ -1,7 +1,7 @@
 <template>
     <div>
       <p class="header">{{ currentQuestion.questionValue }}</p>
-  
+      <div v-if="validationError" class="alert error">{{ $t('questionnaires.question_types.multiple_choice.validation_error') }}</div>
       <div class="form-check" v-for="(answer, index) in currentQuestion.answers" :key="index">
         <input class="form-check-input" type="checkbox" @change="updateSelectedAnswers" :checked="isAnswerSelected(answer.answerId)" :id="answer.answerId">
       <!-- <label class="form-check-label" :for="'answer-' + index">-->
@@ -24,6 +24,7 @@
       const currentQuestion = ref(props.question);
       const selectedAnswers = ref(props.selectedAnswers).value;
       const currentAnswers= ref([]);
+      const validationError= ref(false);
 
       if(selectedAnswers && (selectedAnswers.length > 0)){
 
@@ -46,6 +47,14 @@
       }
     };
 
+    const validateAnswers = () => {
+        if(currentAnswers.value && (currentAnswers.value.length > 0)){
+          return true;
+        }else{
+          validationError.value=true;
+          return false;
+        }
+      };
 
      const getAnswers = () => {
         return toRaw(currentAnswers.value);
@@ -55,7 +64,8 @@
         currentQuestion.value= updatedQuestion
       }; 
       
-      return { currentQuestion,updateSelectedAnswers,isAnswerSelected, getAnswers ,updateCurrentQuestion};
+      return { currentQuestion,validationError,
+               updateSelectedAnswers,isAnswerSelected, getAnswers ,updateCurrentQuestion,validateAnswers};
     }
   }
   </script>

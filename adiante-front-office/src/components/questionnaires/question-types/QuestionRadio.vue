@@ -1,7 +1,7 @@
 <template>
     <div>
       <p class="header">{{ currentQuestion.questionValue }}</p>
-  
+      <div v-if="validationError" class="alert error">{{ $t('questionnaires.question_types.single_choice.validation_error') }}</div>
       <div class="form-check" v-for="(answer, index) in currentQuestion.answers" :key="index">
         <input class="form-check-input" type="radio"  @change="updateSelectedAnswers" :checked="isAnswerSelected(answer.answerId)" :id="answer.answerId">
        <!-- <label class="form-check-label" :for="'answer-' + index"> -->
@@ -22,15 +22,15 @@
       
       const currentQuestion = ref(props.question);
       const selectedAnswers = ref(props.selectedAnswers).value;
-
+      const validationError= ref(false);
       const currentAnswers= ref();
-      if(selectedAnswers && (selectedAnswers.length > 0)){
 
+      if(selectedAnswers && (selectedAnswers.length > 0)){
         currentAnswers.value= selectedAnswers.filter(answers => answers.idQuestion == currentQuestion.value.questionId);
       }
 
 
-      const updateSelectedAnswers = (event) => {
+    const updateSelectedAnswers = (event) => {
         currentAnswers.value = [ {idQuestion:currentQuestion.value.questionId,idAnswer:event.target.id}];
     };
 
@@ -38,7 +38,14 @@
         currentQuestion.value= updatedQuestion
       }; 
       
-
+      const validateAnswers = () => {
+        if(currentAnswers.value && (currentAnswers.value.length > 0)){
+          return true;
+        }else{
+          validationError.value=true;
+          return false;
+        }
+      };
 
     const getAnswers = () => {
         return toRaw(currentAnswers.value);
@@ -52,7 +59,8 @@
 
 
 
-      return {updateCurrentQuestion, updateSelectedAnswers, getAnswers, isAnswerSelected ,currentQuestion};
+      return {currentQuestion,validationError,
+              updateCurrentQuestion, updateSelectedAnswers, getAnswers, isAnswerSelected ,validateAnswers};
     }
   }
   </script>

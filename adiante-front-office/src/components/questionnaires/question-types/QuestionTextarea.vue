@@ -30,9 +30,15 @@ export default {
 
         const updateCurrentQuestion = (updatedQuestion) => {
         currentQuestion.value= updatedQuestion
-      }; 
+      };
 
-        return { currentAnswer,currentQuestion,updateCurrentQuestion, getAnswers};
+      const validateAnswers = () => {
+        // Initially there is no validation on free answer questions.
+          return true;
+      };
+
+        return { currentAnswer,currentQuestion,
+                 updateCurrentQuestion, getAnswers,validateAnswers};
     }
 }
 </script>

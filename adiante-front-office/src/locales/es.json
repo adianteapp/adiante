@@ -40,6 +40,16 @@
   "modal_prev_button_label":"Volver",
   "modal_next_button_label":"Siguiente",
   "modal_finish_button_label":"Finalizar",
+  "questionnaires":{
+    "question_types":{
+      "single_choice":{
+        "validation_error":"Por favor, selecciona una opción"
+      },
+      "multiple_choice":{
+        "validation_error":"Por favor, selecciona al menos una opción"
+      }
+    }
+  },
   "feedback_modal":{
     "tt-challenge":{
       "title" : "Reto completado",
