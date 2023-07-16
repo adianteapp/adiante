@@ -62,7 +62,12 @@ export class SaveAnswersHandler implements ISaveAnswersHandler{
         let saveResult:boolean = false;
      
         if (originalTask.task.taskTypeCode === TaskType.questionnaire || originalTask.task.taskTypeCode === TaskType.challenge) {
-             saveResult = await this.insertPatientTaskQuestionnaireEntry(preparePatientActivityResponse.patientActivityEntry);
+            if(saveAnswersRequest.executedTask.idScheduledTask){
+               saveResult = await this.insertPatientTaskScheduledQuestionnaireEntry(preparePatientActivityResponse.patientActivityEntry ,saveAnswersRequest.executedTask.idScheduledTask);
+            }else{
+               saveResult = await this.insertPatientTaskQuestionnaireEntry(preparePatientActivityResponse.patientActivityEntry);
+            }
+            
         } else {
          saveResult = await this.insertPatientTaskExecutionEntry(preparePatientActivityResponse.patientActivityEntry, saveAnswersRequest.executedTask.idScheduledTask);
         }
@@ -351,6 +356,72 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
            const insertIdPatientActivityData = result1.insertId;
  
  
+ 
+           const sqlQuestionnaireExecution = "INSERT INTO questionnaire_execution (id_questionnaire, id_patient_activy_entry) VALUES(@id_questionnaire, @id_patient_activy_entry)";
+           const sqlQuestionnaireExecutionWithValues = sqlQuestionnaireExecution
+             .replace("@id_questionnaire", patientActivityData.questionnaireExecution.idQuestionnaire)
+             .replace("@id_patient_activy_entry", insertIdPatientActivityData);
+           const resultQuestionnaireExecution = await connection.execute(sqlQuestionnaireExecutionWithValues);
+           const insertIdQuestionnaireExecution = resultQuestionnaireExecution.insertId;
+ 
+ 
+ 
+           const sqlQuestionnaireExecutionAnswer = "INSERT INTO questionnaire_execution_answer (id_question, free_answer_value ,id_answer, id_questionnaire_execution) VALUES";
+           let valueParamList = "";
+           for (const questionnaireExecutionAnswer of patientActivityData.questionnaireExecution.questionnaireExecutionAnswersList) {
+             const valueTuple = "(id_question, free_answer_value, id_answer, id_questionnaire_execution)";
+ 
+             const paramIdquestion = questionnaireExecutionAnswer.idQuestion;
+             const paramIdAnswer = questionnaireExecutionAnswer.idAnswer ?  questionnaireExecutionAnswer.idAnswer: "NULL";
+             const paramFreeAnswerValue = questionnaireExecutionAnswer.freeAnswerValue ?  "'"+questionnaireExecutionAnswer.freeAnswerValue+"'": "NULL";
+             const paramIdQuestionnaireExecution = insertIdQuestionnaireExecution;
+ 
+             const valueTupleReplaced = valueTuple
+               .replace("id_question", paramIdquestion)
+               .replace("id_answer", paramIdAnswer)
+               .replace("free_answer_value", String(paramFreeAnswerValue))
+               .replace("id_questionnaire_execution", paramIdQuestionnaireExecution);
+             valueParamList = valueParamList + valueTupleReplaced + ",";
+           }
+           valueParamList = valueParamList.substring(0, valueParamList.length - 1);
+           let sqlQuestionnaireExecutionAnswerWithValues = sqlQuestionnaireExecutionAnswer + valueParamList;
+           await connection.execute(sqlQuestionnaireExecutionAnswerWithValues);
+
+           await connection.commit();
+ 
+           return true;
+   } catch (err) {
+     Logger.error("Error saving answers" + err);
+     if (connection) {
+       await connection.rollback();
+     }
+     return false;
+   } finally {
+
+     await connection.end();
+   }
+ }
+
+
+ async  insertPatientTaskScheduledQuestionnaireEntry(patientActivityData: PatientActivityEntry,scheduledTaskId:string): Promise<boolean> {
+   let connection: any;
+   try {
+           connection = await dao.getConnection();
+           connection.beginTransaction();
+ 
+ 
+           const sql = "INSERT INTO patient_activity_entry (entry_datetime, id_patient, id_task) VALUES(UTC_TIMESTAMP(), @p2, @p3);";
+           const sqlWithValues = sql
+             .replace("@p2", patientActivityData.idPatient)
+             .replace("@p3", patientActivityData.idTask);
+           const result1 = await connection.execute(sqlWithValues);
+           const insertIdPatientActivityData = result1.insertId;
+ 
+           const sqlUpdatePatientScheduledTask = "UPDATE patient_scheduled_task  SET id_patient_activity_entry = @activityEntryId  where id = @scheduledId;";
+           const sqlWithValues2 = sqlUpdatePatientScheduledTask
+             .replace("@activityEntryId", insertIdPatientActivityData)
+             .replace("@scheduledId", scheduledTaskId);
+           await connection.execute(sqlWithValues2);
  
            const sqlQuestionnaireExecution = "INSERT INTO questionnaire_execution (id_questionnaire, id_patient_activy_entry) VALUES(@id_questionnaire, @id_patient_activy_entry)";
            const sqlQuestionnaireExecutionWithValues = sqlQuestionnaireExecution

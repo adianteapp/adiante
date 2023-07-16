@@ -92,14 +92,14 @@ async function getTaskFromScheduledTask(scheduledTask){
     return task;
 }
 
-async function addScheduledTaskInfoToTask(task){
-    if(task && task.task && providedScheduledTask != null ){
-        task.task.scheduledTaskId = providedScheduledTask.scheduledId;
-        task.task.startDateTimeLocal =providedScheduledTask.startDateTimeLocal;
-        task.task.endDateTimeLocal =providedScheduledTask.endDateTimeLocal;
-        task.task.executionDateTimeLocal =providedScheduledTask.executionDateTimeLocal;
+async function addScheduledTaskInfoToTask(taskData){
+    if(taskData && taskData.task && providedScheduledTask != null ){
+        taskData.task.scheduledTaskId = providedScheduledTask.scheduledId;
+        taskData.task.startDateTimeLocal =providedScheduledTask.startDateTimeLocal;
+        taskData.task.endDateTimeLocal =providedScheduledTask.endDateTimeLocal;
+        taskData.task.executionDateTimeLocal =providedScheduledTask.executionDateTimeLocal;
     }
-    return task;
+    return taskData;
 }
 
 
@@ -171,7 +171,7 @@ async function savePatientActivity(patientActivity) {
     if(savedTask.questionnaire && savedTask.questionnaire.questionnaireId){
         auxQuestionnaireId = savedTask.questionnaire.questionnaireId;
     }
-    const saveResult = await patientService.saveQuestionnaire(savedTask.task.taskId,auxQuestionnaireId,patientActivity.answersList);
+    const saveResult = await patientService.saveQuestionnaire(savedTask.task.taskId,savedTask.task.scheduledTaskId,auxQuestionnaireId,patientActivity.answersList);
     if(saveResult.isAxiosError)
     {
           alert("Ha ocurrido un error salvando el estado del paciente");
