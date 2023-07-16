@@ -180,7 +180,7 @@ private async  mapToTask(queryResult: any[]): Promise<Task> {
         description : row.description,
         taskTypeCode : row.taskTypeCode,
         additionalInfo : row.additionalInfo,
-        relatedQuestionnaireId : row.relatedQuestionnaireId.toString(),
+        relatedQuestionnaireId : row.relatedQuestionnaireId ? row.relatedQuestionnaireId.toString(): undefined,
         taskAttributeList : []
       } as Task;
 
