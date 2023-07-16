@@ -109,10 +109,9 @@ async function retrieveTaskData(selectedTaskId,selectedQuestionnaireType,provide
                 return getTaskFromScheduledTask(providedTask);
     }
 
-    if(providedTask && providedTask.task.relatedQuestionnaireId != null && providedTask.questionnaire != null){
+    if(providedTask && providedTask.questionnaire != null){
                 return providedTask;
     }
-
 
     const taskId = (providedTask && providedTask.relatedQuestionnaireId != null) ? providedTask.taskId : selectedTaskId;
 
@@ -159,7 +158,6 @@ const handlePatientAnswersEvent = (msg) => {
     };
 
 const handleCloseTaskModalEvent = () => {
-
             emit('evtCloseTaskManagerModal');
     };
 

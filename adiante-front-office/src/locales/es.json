@@ -49,6 +49,10 @@
       "title" : "Tarea completada",
       "content": "Enhorabuena, has completado la tarea correctamente. Sigue así!"
     },
+    "tt-questionnaire":{
+      "title" : "Tarea completada",
+      "content": "Enhorabuena, has completado la tarea correctamente. Sigue así!"
+    },
     "getmood":{
       "title": "Registro de estado",
       "content_0": "Gracias por registrar tu estado de ánimo",
