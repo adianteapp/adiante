@@ -158,6 +158,7 @@ const handlePatientAnswersEvent = (msg) => {
     };
 
 const handleCloseTaskModalEvent = () => {
+            showTaskOnModalRef.value = false;
             emit('evtCloseTaskManagerModal');
     };
 
