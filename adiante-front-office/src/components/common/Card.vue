@@ -2,7 +2,8 @@
     <div class="card">
 
         <div class="img">
-          <img :src="getMainImage" alt="">
+          <img v-if="getMainImage()" :src="getMainImage()" alt="">
+          <img v-else src="../../assets/img/demo/reto1.jpg" alt="">
         </div>
 
         <div class="content">
@@ -23,7 +24,7 @@
 </template> 
    
  <script>
-import { ref,computed } from 'vue';
+import { ref } from 'vue';
 export default {
   name: 'Card',
   props: ['taskData'],
@@ -31,19 +32,16 @@ export default {
     const task = ref(props.taskData).value;
 
 
-    const getMainImage = computed (() => {
+    const getMainImage = () => {
       let imagePath = undefined;
-      //const defaultPath = "../../../public/img/demo/reto.jpg"
-      const defaultPath = "../../assets/img/demo/reto1.jpg";
+  
       if( task != null && task.taskAttributeList != null && task.taskAttributeList.length > 0){
           
           const imageUri = task.taskAttributeList.find(attribute => attribute.attributeCode === "ImageUri")?.attributeValue;
-          imagePath = imageUri != null ? imageUri : defaultPath;
-      }else{
-         imagePath = defaultPath;
+          imagePath = imageUri != null ? imageUri : undefined;
       }
       return imagePath;
-    });
+    };
 
 
 

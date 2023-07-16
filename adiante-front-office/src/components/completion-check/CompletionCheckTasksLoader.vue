@@ -24,7 +24,7 @@ components: {
     const enableScheduledTask = retrievedTask != null ? true : false;
 
 
-    const isTaskExecuted = retrievedTask != null && retrievedTask.scheduledInfo && retrievedTask.scheduledInfo.executionDateTimeLocal != null ? true : false;
+    const isTaskExecuted = retrievedTask != null && retrievedTask.task != null &&  retrievedTask.task.executionDateTimeLocal != null ? true : false;
 
     let buttonsManager = {
      close : true,

@@ -9,8 +9,9 @@
                   v-if="showQuestionnaire"
                   :is="questionComponent" 
                   :question="currentQuestion" 
-                  :selectedAnswers="selectedAnswers" 
-                  ref="questionComponentRef"/>
+                  :selectedAnswers="selectedAnswers"
+                  :key="currentQuestion.questionId"
+                  ref="questionComponentRef" />
      
         <div class="modal-footer footer-task-modal">
           <div class="buttons">
@@ -94,11 +95,21 @@ const showQuestionnaire = ref(loadedTask.task.scheduledTaskId == undefined ? tru
   };
 
   function changeQuestionComponent(nextIndex){
+   
+    //To avoid the validation on the last question
+    if(nextIndex > questionnaireCurrentIndex.value){
+      if(validateAnswersOnComponent()){
 
-    getAnswersFromCurrentComponent();
-    loadNextQuestionComponent(nextIndex);
-    updateButtonsVisibility(nextIndex);
+        getAnswersFromCurrentComponent();
+        loadNextQuestionComponent(nextIndex);
+        updateButtonsVisibility(nextIndex);
+      }
 
+    }else{
+      getAnswersFromCurrentComponent();
+      loadNextQuestionComponent(nextIndex);
+      updateButtonsVisibility(nextIndex);
+    }
   }
 
  
@@ -137,12 +148,19 @@ const showQuestionnaire = ref(loadedTask.task.scheduledTaskId == undefined ? tru
     buttonsManager.buttonFinishEnabled = nextIndex == (loadedTask.questionnaire.questions.length - 1) ? true: false;
   }
 
+
+  function validateAnswersOnComponent(){
+    return questionComponentRef.value.validateAnswers();
+  }
+
+
   function getAnswersFromCurrentComponent(){
    
    
     //Clean previous answers for the current question.
     selectedAnswers.value =  Array.from(toRaw(selectedAnswers.value).filter(answer => answer.idQuestion != currentQuestion.value.questionId));
    
+
     let currentAnswers = questionComponentRef.value.getAnswers();
     console.log("Retrieved answers:"+currentAnswers);
 

@@ -30,10 +30,11 @@ async  savePatientActivity(patientActivity) {
                     }
  * @returns 
  */
-   async  saveQuestionnaire(taskId,idQuestionnaire,answersList) {
+   async  saveQuestionnaire(taskId,scheduledId,idQuestionnaire,answersList) {
       const patientActivity = {
     executedTask:{
         idTask: taskId,
+        idScheduledTask: scheduledId,
         filledQuestionnaire:{
           idQuestionnaire: idQuestionnaire,
           answersList: answersList

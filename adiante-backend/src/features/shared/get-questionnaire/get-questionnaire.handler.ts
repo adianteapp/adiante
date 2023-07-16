@@ -90,7 +90,8 @@ export class GetQuestionnaireHandler implements IGetQuestionnaireHandler {
         LEFT OUTER JOIN answer a ON a.id_question = q2.id
         LEFT OUTER JOIN answer_i18n ain ON a.id = ain.id_answer
         LEFT OUTER JOIN related_answer_task rat ON a.id = rat.id_answer
-        WHERE t.id = '${taskId}' AND q.id = '${questionnaireId}'  AND q2in.id_language = '${languageId}' AND ( ain.id_language = '${languageId}' OR  a.id IS NULL)`;
+        WHERE t.id = '${taskId}' AND q.id = '${questionnaireId}'  AND q2in.id_language = '${languageId}' AND ( ain.id_language = '${languageId}' OR  a.id IS NULL)
+        ORDER BY a.id DESC`;
 
 
     const rows = await dao.executeQuery(sqlQuery);

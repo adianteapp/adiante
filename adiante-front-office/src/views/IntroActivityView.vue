@@ -13,7 +13,8 @@
                  {{$t('intro_activities.backLink')}}
           </a>
         </div>
-        <img :src="getMainImage()" alt="">
+        <img v-if="getMainImage()" :src="getMainImage()" alt="">
+        <img v-else src="../assets/img/demo/reto1.jpg" alt="">
         <div v-if="retrievedTask.task.additionalInfo != null"  v-html="retrievedTask.task.additionalInfo"></div>
         <div v-else>{{retrievedTask.task.description}}</div>
     
@@ -76,15 +77,12 @@ export default {
 
     const getMainImage =  () => {
       let imagePath = undefined;
-      const defaultPath = "../assets/img/demo/reto.jpg"
 
       if(retrievedTask.value != null && retrievedTask.value.task != null && 
          retrievedTask.value.task.taskAttributeList != null && retrievedTask.value.task.taskAttributeList.length > 0){
           
           const imageUri = retrievedTask.value.task.taskAttributeList.find(attribute => attribute.attributeCode === "ImageUri")?.attributeValue;
-          imagePath = imageUri != null ? imageUri : defaultPath;
-      }else{
-         imagePath = defaultPath;
+          imagePath = imageUri != null ? imageUri : undefined;
       }
       return imagePath;
     };
