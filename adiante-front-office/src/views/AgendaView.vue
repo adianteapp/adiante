@@ -75,6 +75,8 @@ export default {
 
     const handleTaskModalCloseEvent = () => {
       enableTaskManager.value = false;
+      scheduledTaskList.value = undefined;
+      retrieveScheduledTasks(selectedDate.value);
     };
 
   async function retrieveScheduledTasks(date){
