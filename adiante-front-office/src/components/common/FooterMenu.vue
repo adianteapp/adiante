@@ -28,10 +28,10 @@
         </li>
         
         <li>
-          <a v-if="activeLinks.contact" href="#" class="nav-link  active">
+          <a v-if="activeLinks.contact" href="/contact" class="nav-link  active">
             <i class="icon-menu-contact"> </i>
           </a>
-          <a v-else href="#" class="nav-link  ">
+          <a v-else href="/contact" class="nav-link  ">
             <i class="icon-menu-contact"> </i>
           </a>
         </li>
