@@ -18,6 +18,8 @@ export interface GetQuestionnaireResponse {
    questionValue: string;
    questionType: string;
    questionnaireId: string;
+   questionOrder:number;
+   mandatory: boolean;
    answers: Answer[] | null;
  }
  
@@ -26,5 +28,6 @@ export interface GetQuestionnaireResponse {
    questionId: string;
    answerValue: string;
    answerRelatedTaskId: string | null;
+   answerOrder:number;
  }
 

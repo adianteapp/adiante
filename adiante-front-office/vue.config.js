@@ -7,16 +7,7 @@ module.exports = {
     'vue'
   ],
 
-  configureWebpack: {
-    devtool: 'source-map',
-    resolve: {
-      fallback: {
-        path: require.resolve('path-browserify'),
-        os: require.resolve('os-browserify/browser'),
-        fs: false
-      }
-    }
-  },
+
 
   pluginOptions: {
     i18n: {
