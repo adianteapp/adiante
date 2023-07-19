@@ -1,5 +1,6 @@
 
 import winston from 'winston'
+import TransportStream from 'winston-transport'
 import LokiTransport from 'winston-loki'
 import * as dotenv from 'dotenv';
 import DailyRotateFile from 'winston-daily-rotate-file';
@@ -38,10 +39,26 @@ const errorTransport = new DailyRotateFile({
 });
 
 
- 
- const transports = [ 
-  new winston.transports.Console(),
-  new DailyRotateFile({
+let transports: TransportStream[] = [];
+
+if( `${process.env.API_LOG_FILE_LOKI_TRANSPORT_ENABLED}` == '1'){
+  transports.push(new LokiTransport({
+    host: `${process.env.API_LOG_GRAFANA_LOKI_URL}`,
+    labels: { app: `${process.env.APP_NAME}`},
+    json: true,
+    format: winston.format.json(),
+    replaceTimestamp: true,
+    onConnectionError: (err) => console.error(err)
+  }))
+}
+
+if( `${process.env.API_LOG_CONSOLE_TRANSPORT_ENABLED}` == '1'){
+  transports.push( new winston.transports.Console())
+}
+
+
+if( `${process.env.API_LOG_FILE_TRANSPORT_ENABLED}` == '1'){
+  transports.push(new DailyRotateFile({
     filename: `${process.env.API_LOG_FILE_AUDIT_NAME}`,
     dirname: `${process.env.API_LOG_PATH}`,
     datePattern: 'YYYY-MM-DD',
@@ -49,16 +66,9 @@ const errorTransport = new DailyRotateFile({
     
     maxSize: `${process.env.API_LOG_MAX_SIZE}`,
     maxFiles: `${process.env.API_LOG_MAX_DAYS}`
-    }),
-  new LokiTransport({
-    host: `${process.env.API_LOG_GRAFANA_LOKI_URL}`,
-    labels: { app: `${process.env.APP_NAME}`},
-    json: true,
-    format: winston.format.json(),
-    replaceTimestamp: true,
-    onConnectionError: (err) => console.error(err)
-})
-]
+    }))
+}
+
 
 const Logger = winston.createLogger({
   level: level(),
