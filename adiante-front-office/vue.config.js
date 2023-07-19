@@ -3,8 +3,19 @@ module.exports = {
     port: 8081
   },
 
+  transpileDependencies: [
+    'vue'
+  ],
+
   configureWebpack: {
-    devtool: 'source-map'
+    devtool: 'source-map',
+    resolve: {
+      fallback: {
+        path: require.resolve('path-browserify'),
+        os: require.resolve('os-browserify/browser'),
+        fs: false
+      }
+    }
   },
 
   pluginOptions: {

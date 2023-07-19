@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "tsc": "tsc",
-    "dev": "nodemon ./src/index.ts"
+    "dev": "nodemon ./src/index.ts",
+    "build": "tsc",
+    "start": "node ./dist/index.js"
   },
   "testMatch": [
     "**/__tests__/**/*.ts?(x)",
