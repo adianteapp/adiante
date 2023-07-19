@@ -1,0 +1,66 @@
+version: '3.4'
+services:
+  grafana:
+    image: grafana/grafana
+    environment: 
+      - GF_SECURITY_ADMIN_PASSWORD=password1
+    ports:
+      - ${GRAFANA_PORT:-3000}:3000
+    volumes:
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml 
+    networks:
+      - adiante_network   
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    volumes:
+     - ./loki/loki.yaml:/etc/config/loki.yaml
+    entrypoint:
+     - /usr/bin/loki
+     - -config.file=/etc/config/loki.yaml
+    networks:
+      - adiante_network
+  
+  adiante-patient-backend:
+    image: ${DOCKER_REGISTRY:-adnt}/adiante-patient-backend:${TAG:-latest}
+    build:
+      context: ../adiante-backend/
+      dockerfile: ./Dockerfile
+    environment:
+      - DB_HOST=host.docker.internal
+      - DB_USER=root
+      - DB_PASSWORD=Admin1234
+      - LOKI_HOST=loki
+      - LOKI_PORT=3100
+      - API_LOG_PATH=C:/Logs/adiante/docker/
+    ports:
+      - "8082:8082"
+    volumes:
+      - C:/Logs/adiante/docker/:/var/log/adiante/patientBackend
+    networks:
+      - adiante_network
+
+  adiante-patient:
+    image: ${DOCKER_REGISTRY:-adnt}/adiante-patient:${TAG:-latest}
+    build:
+      context: ../adiante-front-office/
+      dockerfile: ./Dockerfile
+    environment:
+      - DB_HOST=host.docker.internal
+      - DB_USER=root
+      - DB_PASSWORD=Admin1234
+      - LOKI_HOST=loki
+      - LOKI_PORT=3100
+      - API_LOG_PATH=C:/Logs/adiante/docker/
+    ports:
+      - "8081:8081"
+    networks:
+      - adiante_network
+
+networks:
+  adiante_network:
+    driver: bridge

@@ -3,9 +3,11 @@ module.exports = {
     port: 8081
   },
 
-  configureWebpack: {
-    devtool: 'source-map'
-  },
+  transpileDependencies: [
+    'vue'
+  ],
+
+
 
   pluginOptions: {
     i18n: {

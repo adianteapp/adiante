@@ -167,7 +167,7 @@ async function savePatientActivity(patientActivity) {
 
 
     //Retrieving info.
-    const savedTask = await retriveTaskData();
+    const savedTask = patientActivity.task;
     let auxQuestionnaireId = undefined;
     if(savedTask.questionnaire && savedTask.questionnaire.questionnaireId){
         auxQuestionnaireId = savedTask.questionnaire.questionnaireId;
@@ -180,21 +180,6 @@ async function savePatientActivity(patientActivity) {
           handleSavePatientActivy(patientActivity);
     }
 }
-
-async function retriveTaskData(){
-    if( relatedTask.value && relatedTask.value.task)
-    {
-        return relatedTask.value
-    }else{
-        if(loadedTask){
-            return loadedTask;
-        }else{
-           return modalLoadedTask.value; 
-        }
-    }
-}
-
-
 
 
 async function handleSavePatientActivy(patientActivity){

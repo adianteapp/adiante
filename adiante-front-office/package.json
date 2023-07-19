@@ -8,6 +8,12 @@
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
+  "resolutions": {
+    "webpack": "^5.0.0",
+    "fs": "graceful-fs",
+    "path": "path-browserify",
+    "os": "os-browserify"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
@@ -21,7 +27,7 @@
     "jquery": "^3.6.0",
     "material-symbols": "^0.4.2",
     "popper.js": "^1.16.1",
-    "vue": "^3.0.0",
+    "vue": "^3.2.13",
     "vue-i18n": "^9.1.0",
     "vue-router": "^4.0.6",
     "vuex": "^4.0.2"
@@ -31,7 +37,7 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/compiler-sfc": "^3.3.4",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",

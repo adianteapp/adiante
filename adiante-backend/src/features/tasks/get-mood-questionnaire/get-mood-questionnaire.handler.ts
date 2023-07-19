@@ -10,9 +10,10 @@ import Logger from '../../../config/logger';
 import { IGetMoodQuestionnaireHandler } from "./i-get-mood-questionnaire.handler";
 import { GetTaskResponse } from "../../../features/shared/get-task/dto/get-task.response";
 import { GetTaskRequest } from "../../../features/shared/get-task/dto/get-task.request";
-import TaskType from "../../../features/shared/enums/task-type.enum";
 import { IGetTaskHandler } from "../../../features/shared/get-task/i-get-task.handler";
 import {QuestionnaireType} from "../../shared/enums/questionnaire-type.enum";
+import { Answer } from "../../../features/shared/get-questionnaire/dto/get-questionnaire.response";
+import { Question } from "../../../features/shared/get-questionnaire/dto/get-questionnaire.response";
 
 @injectable()
 export class GetMoodQuestionnaireHandler implements IGetMoodQuestionnaireHandler {
@@ -42,12 +43,33 @@ export class GetMoodQuestionnaireHandler implements IGetMoodQuestionnaireHandler
     }
 
     const executionStatus:GetMoodQuestionnaireStatus = taskResponse.questionnaire != undefined ? GetMoodQuestionnaireStatus.Succesfull : GetMoodQuestionnaireStatus.NoContent;
+
+    if(executionStatus == GetMoodQuestionnaireStatus.Succesfull){
+      let orderedQuestions:Question[] = [];
+      for(const question of taskResponse.questionnaire.questions){
+        question.answers = await this.orderAnswers(question.answers);
+        orderedQuestions.push(question);
+      }
+      taskResponse.questionnaire.questions = orderedQuestions;
+    }
+
     getMoodQuestionnaireResponse = {task:taskResponse.task,questionnaire:taskResponse.questionnaire,status:executionStatus} as GetMoodQuestionnaireResponse ;
 
 
     return getMoodQuestionnaireResponse;
   }
 
+
+
+  private async orderAnswers(answers:Answer[]):Promise<Answer[]>{
+    let orderedAnswers:Answer[] = undefined;
+
+    if(answers && answers.length > 0){
+      orderedAnswers = answers.sort((a,b) => a.answerOrder - b.answerOrder);
+    }
+
+    return orderedAnswers;
+  }
 
   
 

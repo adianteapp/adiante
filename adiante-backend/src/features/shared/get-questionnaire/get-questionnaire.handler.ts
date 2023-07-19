@@ -75,9 +75,12 @@ export class GetQuestionnaireHandler implements IGetQuestionnaireHandler {
           qt.code_name AS 'questionnaireType',
           q2.id AS 'questionId',
           q2in.i18n_value AS 'questionValue',
+          q2.order AS 'questionOrder',
+          q2.mandatory AS 'mandatory',
           qt2.code_name AS 'questionType',
           a.id AS 'answerId',
           ain.i18n_value AS 'answerValue',
+          a.order AS 'answerOrder',
           rat.id_task AS 'answerRelatedTaskId'
         FROM task t
         INNER JOIN task_type tt ON t.id_task_type = tt.id
@@ -134,6 +137,8 @@ export class GetQuestionnaireHandler implements IGetQuestionnaireHandler {
           questionnaireId : row.questionnaireId.toString(),
           questionValue : row.questionValue,
           questionType : row.questionType,
+          questionOrder : row.questionOrder,
+          mandatory : row.mandatory == 1 ? true : false,
           answers : []
         } as Question;
         
@@ -145,6 +150,7 @@ export class GetQuestionnaireHandler implements IGetQuestionnaireHandler {
           answerId : row.answerId.toString(),
           questionId : row.questionId.toString(),
           answerValue : row.answerValue,
+          answerOrder : row.answerOrder,
           answerRelatedTaskId : anwerRelatedTaskId,
         } as Answer;
   

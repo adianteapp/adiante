@@ -38,7 +38,7 @@ export default defineComponent({
     }
 
     const finishQuestionnaire = (answer) =>{
-      const pantientAnswers =  {answersList:[{idQuestion:answer.questionId,idAnswer:answer.answerId}],answerRelatedTaskId:answer.answerRelatedTaskId };
+      const pantientAnswers =  {answersList:[{idQuestion:answer.questionId,idAnswer:answer.answerId}],answerRelatedTaskId:answer.answerRelatedTaskId,task: moodQuestionnaireResult };
     emit('evtPatientAnswers', pantientAnswers );
   };
 
