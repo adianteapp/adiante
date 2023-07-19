@@ -181,7 +181,7 @@ const showQuestionnaire = ref(loadedTask.task.scheduledTaskId == undefined ? tru
 
   const finishQuestionnaire = () =>{
     getAnswersFromCurrentComponent();
-    emit('evtModalPatientAnswers', {answersList:toRaw(selectedAnswers.value)} );
+    emit('evtModalPatientAnswers', {answersList:toRaw(selectedAnswers.value),task:loadedTask} );
   };
 
   const closeQuestionnaire = () =>{
