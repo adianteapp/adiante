@@ -10,7 +10,7 @@ body{
  
 a{
     color: $primary !important;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 h1, .h1{
@@ -18,7 +18,7 @@ h1, .h1{
     font-size: $font-size-h1;
     line-height:  $font-size-h1+4;
     font-weight: $font-weight-bold;
-    margin: 0.2em 0;
+    margin: 8px 0;
 }
 
 h2, .h2{
@@ -26,7 +26,7 @@ h2, .h2{
     font-size: $font-size-h2;
     line-height:  $font-size-h2+4;
     font-weight: $font-weight-bold;
-    margin: 0.2em 0;
+    margin: 8px 0;
 }
 
 h3, .h3{
@@ -34,7 +34,7 @@ h3, .h3{
     font-size: $font-size-h3;
     line-height:  $font-size-h3+4;
     font-weight: $font-weight-base;
-    margin: 0.2em 0;
+    margin: 8px 0;
 }
 
 h4, .h4{
@@ -42,7 +42,7 @@ h4, .h4{
     font-size: $font-size-h4;
     line-height:  $font-size-h4+4;
     font-weight: $font-weight-base;
-    margin: 0.2em 0;
+    margin: 8px 0;
 }
 
 p{

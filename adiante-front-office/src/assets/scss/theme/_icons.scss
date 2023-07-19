@@ -27,6 +27,7 @@
     -webkit-font-smoothing: antialiased;
   }
   
+
   .icon-user:before {
     content: "\e000";
   }
@@ -79,24 +80,8 @@
     content: "\e00c";
   }
   
-  .icon-menu-retos:before {
-    content: "\e00d";
-  }
-  
-  .icon-menu-home:before {
+  .icon-typewhatsapp:before {
     content: "\e00e";
-  }
-  
-  .icon-menu-contact:before {
-    content: "\e00f";
-  }
-  
-  .icon-menu-calendar:before {
-    content: "\e010";
-  }
-  
-  .icon-mail:before {
-    content: "\e011";
   }
   
   .icon-location:before {
@@ -177,5 +162,33 @@
   
   .icon-add:before {
     content: "\e025";
+  }
+  
+  .icon-alert:before {
+    content: "\e026";
+  }
+  
+  .icon-call:before {
+    content: "\e027";
+  }
+  
+  .icon-menu-yoga:before {
+    content: "\e029";
+  }
+  
+  .icon-menu-retos-2:before {
+    content: "\e02a";
+  }
+  
+  .icon-menu-home:before {
+    content: "\e02b";
+  }
+  
+  .icon-menu-contact-2:before {
+    content: "\e02c";
+  }
+  
+  .icon-menu-calendar-2:before {
+    content: "\e02d";
   }
   

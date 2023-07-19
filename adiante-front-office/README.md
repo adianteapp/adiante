@@ -20,3 +20,4 @@ npm run build
 ```
 npm run lint
 ```
+export NODE_OPTIONS="--openssl-legacy-provider"

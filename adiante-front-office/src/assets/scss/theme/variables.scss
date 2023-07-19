@@ -19,9 +19,9 @@ $primary-dark-5:    #1d0d3f !default;
 $neutral-00:   #fff !default;
 $neutral-10:   #f6f6f6 !default;
 $neutral-20:   #ededed !default;
-$neutral-30:   #e7e6e6 !default;
+$neutral-30:   #ECEDEF !default;
 $neutral-40:   #a3a3a3 !default;
-$neutral-50:   #787879 !default;
+$neutral-50:   #8C8E97 !default;
 $neutral-60:   #636263 !default;
 $neutral-70:   #404040 !default;
 $neutral-80:   #323232 !default;
@@ -48,9 +48,10 @@ $error-dark:     #BC1A6D !default;
 
 // Shadows
 
-$shadow-soft: 0px 2px 9px rgba(0, 0, 0, 0.1);
+$shadow-soft: 0px 2px 9px 0px rgba(0, 0, 0, 0.10);
 $shadow-medium: 0px 4px 8px rgba(0, 0, 0, 0.1);
 $shadow-strong:0px 8px 16px rgba(0, 0, 0, 0.2);
+ 
 
 
 
