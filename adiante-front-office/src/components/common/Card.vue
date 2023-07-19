@@ -1,6 +1,6 @@
 <template>
-    <div class="card">
-
+    <div class="card ">
+      <div class="container-card">
         <div class="img">
           <img v-if="getMainImage()" :src="getMainImage()" alt="">
           <img v-else src="../../assets/img/demo/reto1.jpg" alt="">
@@ -8,18 +8,19 @@
 
         <div class="content">
           <div class="info"> 
-            <span class="title">{{task.title}}</span>  
-            <span></span>
-        </div>
-          <div class="desc">
-            {{task.description}}
+            <span class="title">{{task.title}}</span>   
           </div>
 
+          <div v-if="task.description" class="desc">
+            {{task.description}}
+          </div>
+          
         </div>
 
         <div class="icon">
           <i class="icon-navigate_next"></i>
         </div>
+      </div>
       </div>
 </template> 
    

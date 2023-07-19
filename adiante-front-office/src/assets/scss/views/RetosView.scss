@@ -1,5 +1,8 @@
 .introView{
+    
     padding: 0em 1em;
+    display: flex;
+    flex-direction: row;
   
     a{
         text-decoration: none !important;
@@ -13,6 +16,34 @@
         align-items: flex-start;
         width: 100%;
     }
+
+    .header-activity{
+        position: fixed; 
+        background-color: white;
+        z-index: 99;
+        width: 95%;
+        padding: .4em 1em;
+
+    }
+    .container-activity{
+        position: relative;
+        overflow: auto;
+        padding: 8px;
+        padding-top: 20px;
+        bottom: 140px;
+        top: 0;
+        margin-bottom: 145px;
+    }
+
+    .button-activity{
+        position: fixed; 
+        background-color: white;
+        z-index: 99;
+        width: 91%;
+        bottom: 85px;
+
+    }
+
     h1{
         font-size: $font-size-base !important;
         text-align: left !important;

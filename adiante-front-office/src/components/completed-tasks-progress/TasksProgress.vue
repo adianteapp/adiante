@@ -1,8 +1,8 @@
 <template>
   <div class="content">
 
-    <div v-if="total == 0">
-      <div class="alert default">
+   
+      <div  v-if="total == 0" class="alert default">
 
         <div class="icon">
           <i class="icon-star"></i>
@@ -13,11 +13,11 @@
         </div>
         
        </div>
-    </div>
+     
 
-    <div v-else class="info">
+    <div v-else class="info-task">
       <h2>{{ selectedDayLabel }}</h2> 
-      <span>{{ $t('taskprogress_label_today_progress', { completed: completed, total: total }) }}</span>
+      <span class="number">{{ $t('taskprogress_label_today_progress', { completed: completed, total: total }) }}</span>
       <a v-if="showLinkToAgenda" href="/agenda" class="btn btn-secondary small">{{ $t('widgettask_header_link') }}</a>
     </div>
 

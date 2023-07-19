@@ -1,8 +1,22 @@
 <template>
   <headerMenu/>
-  <div class="container-fluid panel-container">
-      <h2>Alume Saúde Mental</h2>
-      <h3>Alume Saúde Mental Rúa Illa Coelleira, 3, 27002, Lugo</h3>
+  <div class="container-fluid contact-container">
+
+      <h1>Hola, soy Paquita</h1>
+
+      <img class="img-profesional" src="https://templates.joomla-monster.com/joomla30/jm-news-portal/components/com_djclassifieds/assets/images/default_profile.png" alt="" />
+      
+    
+    <br />   
+      <p>Soy tu terapeuta y puedes contactar conmigo a través cuando lo necesites.</p>
+      <br />
+      <a href="https://wa.me/628546755/?text=Hola" target="_blank" class="btn big btn-whatsapp">Enviame un Whatsapp</a>
+      <br />
+      <p>¿Es una emergencia?</p>
+
+      <a href="tel:+34628546755" class="btn big btn-alert">Llámame ahora</a>
+
+
   </div>
   
   <footerMenu/>
