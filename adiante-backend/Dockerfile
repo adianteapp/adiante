@@ -18,3 +18,5 @@ RUN npm run build
 
 # Define the command that will run when the container starts
 CMD ["npm", "start"]
+
+# To build the image, run: docker build -t adnt/adiante-patient-backend .

@@ -33,7 +33,7 @@ class AppConfig {
 
   private configureCorsOptions(): void {
     this.corsOptions = {
-      origin: 'http://localhost:8081',
+      origin: process.env.API_VALID_CORS_URL,
     };
   }
 

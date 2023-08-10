@@ -71,12 +71,11 @@ if( `${process.env.API_LOG_FILE_TRANSPORT_ENABLED}` == '1'){
 
 
 const Logger = winston.createLogger({
-  level: level(),
+  level: 'debug',
   levels,
   format,
-  transports,exceptionHandlers: [
-    errorTransport,
-  ],
+  transports,
+  exceptionHandlers: [errorTransport]
 })
 
 export default Logger

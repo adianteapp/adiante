@@ -10,7 +10,6 @@
   },
   "resolutions": {
     "webpack": "^5.0.0",
-    "fs": "graceful-fs",
     "path": "path-browserify",
     "os": "os-browserify"
   },
