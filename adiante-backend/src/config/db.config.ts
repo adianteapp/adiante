@@ -9,7 +9,9 @@ const pool = createPool({
    user: `${process.env.DB_USER}`,
    password: `${process.env.DB_PASS}`,
    database: `${process.env.DB_NAME}`,
-   connectionLimit: 100
+   connectionLimit: parseInt(`${process.env.DB_POOL_CONNECTION_LIMIT}`),
+   timeout: parseInt(`${process.env.DB_POOL_QUERY_TIME_OUT}`)
 });
 
 export default pool;
+

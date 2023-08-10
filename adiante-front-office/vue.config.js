@@ -1,13 +1,14 @@
 module.exports = {
   devServer: {
-    port: 8081
+    port: 8081,
+    allowedHosts: [
+      `${process.env.VUE_APP_ALLOWED_DOMAIN}`
+    ]
   },
 
   transpileDependencies: [
     'vue'
   ],
-
-
 
   pluginOptions: {
     i18n: {
