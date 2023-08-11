@@ -1,6 +1,9 @@
 <template>
   <div class="login">
     <div class="content">
+      <div class="login-form">
+
+     
       <img alt="logo" class="logo" src="../assets/img/svg/logo.svg"/> 
       <div v-if="loginError != undefined" class="alert error">{{loginError}}</div>
       <form @submit.prevent="handleLogin">
@@ -16,13 +19,16 @@
           <button type="submit" class="btn btn-primary w-100">{{ $t('loginform_button_access') }} <i class="icon-navigate_next"></i></button>
         </div>
       </form>
-
+    </div>
       <div class="lost-pwd">
         <button type="submit" class="btn btn-outline-primary w-100 mt-4">{{ $t('loginform_label_forgotpwd') }}</button>
       </div>
+
       
       <div class="about">
-        <a href="">{{ $t('loginform_label_aboutus') }}</a>
+
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Licencia de Creative Commons" style="border-width:0" src="../../public/img/licencia.png" /></a><br /> <small> Esta aplicación est&aacute; bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">licencia de Creative Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional</a></small>.
+        
       </div>
 
     </div>

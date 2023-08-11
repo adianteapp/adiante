@@ -6,9 +6,10 @@
  }
 
  #app{
-    max-width: 500px;
+   // max-width: 500px;
     margin: 0 auto;
     overflow-x: hidden;
+    height: 100vh;
  }
 
  *, ::after, ::before {
@@ -57,12 +58,7 @@ section{
     padding-left: 15px;
 }
 
-.login{
-    .content{
-        width: 300px;
-    }
-   
-}
+
 
 .w-100{
     width: 100% !important;

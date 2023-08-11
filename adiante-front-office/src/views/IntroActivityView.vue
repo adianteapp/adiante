@@ -15,10 +15,12 @@
     </div>
  
     <div class="container-activity"> 
-      <h2>{{ retrievedTask.task.title }}</h2>
+     
 
       <img v-if="getMainImage()" :src="getMainImage()" alt="">
       <img v-else src="../assets/img/demo/reto1.jpg" alt="">
+
+      <h2>{{ retrievedTask.task.title }}</h2>
       <div v-if="retrievedTask.task.additionalInfo != null" v-html="retrievedTask.task.additionalInfo"></div>
       <div v-else>{{ retrievedTask.task.description }}</div>
 
@@ -32,10 +34,9 @@
 
 
        <div class="button-activity"> 
-
         <button v-if="startChallenge" type="button" @click.prevent="handleStartChallenge" class="btn btn-primary  w-100">
         {{ $t('intro_activities.startChallengeButton') }}
-      </button>
+       </button>
 
        </div>
     </div>

@@ -20,11 +20,7 @@
         border: 0;
         box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
         border-radius: 4px;
-        i::before{
-            content: "\e016";
-            color:  $error-dark;
-            font-style: normal;
-        }
+         
     }
 
     &.info {
@@ -32,11 +28,7 @@
         border: 0;
         box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
         border-radius: 4px;
-        i::before{
-            content: "\e016";
-            color:  $info-dark  !important;
-            font-style: normal;
-        }
+         
     }
 
     &.error {
@@ -44,11 +36,7 @@
         border: 0;
         box-shadow: 0px 12px 12px rgba(0, 83, 125, 0.1);
         border-radius: 4px;
-        i::before{
-            content: "\e016";
-            color:  $error-dark;
-            font-style: normal;
-        }
+        
     }
     &.success {
         background-color: $success-light !important;

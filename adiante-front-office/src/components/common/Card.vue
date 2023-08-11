@@ -7,6 +7,7 @@
         </div>
 
         <div class="content">
+          
           <div class="info"> 
             <span class="title">{{task.title}}</span>   
           </div>
@@ -14,12 +15,13 @@
           <div v-if="task.description" class="desc">
             {{task.description}}
           </div>
+
+          <div class="label small completed"> <span></span>Hecho x veces</div>
+          
           
         </div>
 
-        <div class="icon">
-          <i class="icon-navigate_next"></i>
-        </div>
+        
       </div>
       </div>
 </template> 
