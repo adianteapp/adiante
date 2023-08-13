@@ -40,8 +40,8 @@ export default {
   
       if( task != null && task.taskAttributeList != null && task.taskAttributeList.length > 0){
           
-          const imageUri = task.taskAttributeList.find(attribute => attribute.attributeCode === "ImageUri")?.attributeValue;
-          imagePath = imageUri != null ? imageUri : undefined;
+        const imageUri = task.taskAttributeList.find(attribute => attribute.attributeCode === "ImageUri");
+        imagePath = imageUri != null ? imageUri.attributeValue : undefined;
       }
       return imagePath;
     };
