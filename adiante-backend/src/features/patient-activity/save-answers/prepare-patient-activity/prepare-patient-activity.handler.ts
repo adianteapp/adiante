@@ -29,7 +29,7 @@ export class PreparePatientActivityHandler implements IPreparePatientActivityHan
 
         for (const answer of filledQuestionnaire.answersList) {
     
-        const freeAnswerValue = answer.answerFreeValue ? answer.answerFreeValue : null;
+        const freeAnswerValue = answer.freeAnswerValue ? answer.freeAnswerValue : null;
         questionnaireExecutionAnswerList.push( { idQuestion: answer.idQuestion, freeAnswerValue: freeAnswerValue, idAnswer:answer.idAnswer} as QuestionnaireExecutionAnswer);
         }
 
