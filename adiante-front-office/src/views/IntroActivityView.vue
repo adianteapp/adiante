@@ -4,7 +4,7 @@
 
   <div class="container-fluid introView">
  
-    <div  class="header-activity" v-if="retrievedTask">
+    <div  class="header-activity" v-if="enableMainContent">
       <div class="backlink">
         <a :href="getReturnPath()">
           <i class="icon-navigate_before"></i>
@@ -15,15 +15,17 @@
     </div>
  
     <div class="container-activity"> 
-     
+      <Suspense>
+          <div v-if="enableMainContent">
+            <h2>{{  retrievedTask.task.title  }}</h2>
 
-      <img v-if="getMainImage()" :src="getMainImage()" alt="">
-      <img v-else src="../assets/img/demo/reto1.jpg" alt="">
-
-      <h2>{{ retrievedTask.task.title }}</h2>
-      <div v-if="retrievedTask.task.additionalInfo != null" v-html="retrievedTask.task.additionalInfo"></div>
-      <div v-else>{{ retrievedTask.task.description }}</div>
-
+            <img v-if="getMainImage()" :src="getMainImage()" alt="">
+            <img v-else src="../assets/img/demo/reto1.jpg" alt="">
+            
+            <div v-if="retrievedTask.task.additionalInfo != null" v-html="retrievedTask.task.additionalInfo"></div>
+            <div v-else>{{ retrievedTask.task.description }}</div>
+          </div>
+      </Suspense>
       <Suspense>
         <taskManager v-if="enableTaskManager" :showOnModal="true" :taskData="retrievedTask"
           @evtCloseTaskManagerModal="handleEvtCloseTaskManagerModal" />
@@ -48,9 +50,10 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import taskService from '../services/task.service';
-import TaskManager from '../components/tasks/TaskManager.vue';
+import TaskManager from '../components/tasks/TaskManager.vue'; // change import statement to match file name casing
 import HeaderMenu from '../components/common/HeaderMenu.vue';
 import FooterMenu from '../components/common/FooterMenu.vue';
+
 export default {
   name: 'IntroActivity',
   props: [],
@@ -59,13 +62,14 @@ export default {
     footerMenu: FooterMenu,
     taskManager: TaskManager
   },
-  setup() {
+   setup() {
     const retrievedTask = ref(undefined);
     const route = useRoute();
     const type = route.query.type;
     const taskId = route.query.taskId;
     const returnPath = "/activities?type=" + type;
     const enableTaskManager = ref(false);
+    const enableMainContent = ref(false);
 
     const startChallenge = ref(false);
 
@@ -76,8 +80,10 @@ export default {
         console.log("Error retrieving task on IntroActivityView");
       } else {
         retrievedTask.value = response.data;
+        enableMainContent.value = true;
         startChallenge.value = retrievedTask.value.questionnaire != null;
-      }
+        console.log(response.data);
+       }
     }
     const getReturnPath = () => {
       return returnPath;
@@ -89,8 +95,8 @@ export default {
       if (retrievedTask.value != null && retrievedTask.value.task != null &&
         retrievedTask.value.task.taskAttributeList != null && retrievedTask.value.task.taskAttributeList.length > 0) {
 
-        const imageUri = retrievedTask.value.task.taskAttributeList.find(attribute => attribute.attributeCode === "ImageUri")?.attributeValue;
-        imagePath = imageUri != null ? imageUri : undefined;
+        const imageUri = retrievedTask.value.task.taskAttributeList.find(attribute => attribute.attributeCode === "ImageUri");
+        imagePath = imageUri != null ? imageUri.attributeValue : undefined;
       }
       return imagePath;
     };
@@ -105,7 +111,7 @@ export default {
 
     initComponent();
     return {
-      retrievedTask, returnPath, type, startChallenge, enableTaskManager,
+      retrievedTask, returnPath, type, startChallenge, enableMainContent, enableTaskManager,
       handleStartChallenge, getMainImage, getReturnPath, handleEvtCloseTaskManagerModal
     }
   }

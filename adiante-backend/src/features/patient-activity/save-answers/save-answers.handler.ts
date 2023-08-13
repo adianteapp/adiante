@@ -333,7 +333,7 @@ private async  validateQuestionAnswerRelationship(patientAnswer: RequestAnswer, 
 }
 
 async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<boolean> {
- const validationResult = patientAnswer.answerFreeValue !== null;
+ const validationResult = patientAnswer.freeAnswerValue !== null;
  return validationResult;
 }
  //#endregion validations over questionnaire

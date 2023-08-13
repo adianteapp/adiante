@@ -22,8 +22,9 @@
        <tasksProgress  :enableLinkToAgenda="true"/>
     </section>
 
-      <div class="card">
-        <routerLink class="container-card"  to="/activities?type=tt-challenge">
+    <routerLink class="container-card"  to="/activities?type=tt-challenge">
+      
+      <div class="card"> 
             <div class="img">
               <img src="../assets/img/svg/retos-icon.svg" class="icon-card" alt="">
             </div>
@@ -33,16 +34,17 @@
                 <span class="title">{{$t('challenges.title')}}</span>   
               </div>
             </div>
-        </routerLink> 
+        
 
         <div class="icon">
           <i class="icon-navigate_next"></i>
         </div>
-
       </div>
 
+    </routerLink>
+    <routerLink class="container-card"  to="/activities?type=tt-guided-activity">
       <div class="card">
-        <routerLink class="container-card"  to="/activities?type=tt-guided-activity">
+        
             <div class="img">
               <img src="../assets/img/svg/relax-icon.svg" class="icon-card" alt="">
             </div>
@@ -52,11 +54,11 @@
                   <span class="title">{{ $t('guided_activities.title')}}</span>   
                 </div>
             </div>
-        </routerLink> 
         <div class="icon">
           <i class="icon-navigate_next"></i>
         </div>
      </div>
+    </routerLink> 
 
 
   </div>

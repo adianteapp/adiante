@@ -39,7 +39,7 @@ export default {
   ,
   setup() {
     const store = useStore();
-    const patientName = computed( () => store.state.auth.user.name);
+    const patientName = computed( () => store.state.auth.user && store.state.auth.user.name ? store.state.auth.user.name : '');
     return   {patientName}
    },
   methods:{

@@ -6,7 +6,7 @@ export interface SaveAnswersRequest {
 
 export interface RequestAnswer {
     idQuestion: string;
-    answerFreeValue: string;
+    freeAnswerValue: string;
     idAnswer: string;
 }
 
