@@ -11,6 +11,9 @@ COPY . .
 COPY package*.json ./
 
 # Install the application dependencies
+RUN npm  install
+
+# Install the application dependencies
 RUN npm  install -g typescript
 
 # Compile the TypeScript code to JavaScript
