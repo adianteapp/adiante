@@ -22,14 +22,13 @@ services:
      - -config.file=/etc/config/loki.yaml
   
   adiante-patient-backend:
-    image: adiante-patient-backend:${TAG:-latest}
+    image: mandradeva/adiante:patient-backend-v0.0.5-alpha
     environment:
       - DB_HOST=82.223.97.161
       - DB_USER=adiante
       - DB_PASSWORD=adiante123
       - DB_NAME = adiantebd
-      - LOKI_HOST=loki
-      - LOKI_PORT=3100
+      - API_LOG_GRAFANA_LOKI_URL=http://loki:3100
       - API_LOG_CONSOLE_TRANSPORT_ENABLED = 0
       - API_LOG_FILE_TRANSPORT_ENABLED = 0
       - API_LOG_FILE_LOKI_TRANSPORT_ENABLED = 1
