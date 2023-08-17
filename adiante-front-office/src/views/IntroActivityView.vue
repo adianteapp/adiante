@@ -59,7 +59,7 @@ export default {
   props: [],
   components: {
     headerMenu: HeaderMenu,
-    footerMenu: FooterMenu,
+    FooterMenu: FooterMenu,
     taskManager: TaskManager
   },
    setup() {

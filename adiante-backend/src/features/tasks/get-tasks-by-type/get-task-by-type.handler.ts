@@ -37,7 +37,7 @@ export class GetTasksByTypeHandler implements IGetTasksByTypeHandler{
 
         }else{
 
-            let taskList:Task[]= await this.getsTasksByTypeFromDB(getTasksByTypeRequest.taskType);
+            let taskList:Task[]= await this.getsTasksByTypeFromDB(getTasksByTypeRequest.taskType,getTasksByTypeRequest.patientId);
 
             getTasksByTypeReponse.status = GetTasksByTypeStatus.Succesfull;
             getTasksByTypeReponse.tasksList = taskList;     
@@ -100,7 +100,7 @@ private async isPatientIdValid(patientId:string):Promise<boolean>{
 
 //#region database methods
 
-async  getsTasksByTypeFromDB(selectedTaskType:string,langId?:string): Promise<Task[]> {
+async  getsTasksByTypeFromDB(selectedTaskType:string,patientId:string,langId?:string): Promise<Task[]> {
 
     let retrievedTaskList : Task[] = [];
 
@@ -110,7 +110,8 @@ async  getsTasksByTypeFromDB(selectedTaskType:string,langId?:string): Promise<Ta
     const sqlQuery =`SELECT
                             t.id AS 'taskId', tin.title_i18n AS 'title', tin.description_i18n AS 'description',tin.additional_info_i18n AS 'additionalInfo',
                             tt.code_name AS 'taskTypeCode',tav.id_task as 'attributeTaskId',
-                            ta.code_name as 'attributeCode',tav.value  as 'attributeValue'
+                            ta.code_name AS 'attributeCode',tav.value  as 'attributeValue',
+                            CASE WHEN EXISTS (SELECT 1 FROM patient_activity_entry pae WHERE pae.id_task = t.id AND pae.id_patient= '${patientId}') THEN TRUE ELSE FALSE END AS 'executed'
                     FROM  task t 
                     INNER JOIN task_type tt ON t.id_task_type = tt.id
                     INNER JOIN task_i18n tin ON t.id = tin.id_task
@@ -146,6 +147,7 @@ async  getsTasksByTypeFromDB(selectedTaskType:string,langId?:string): Promise<Ta
           description : row.description,
           taskTypeCode : row.taskTypeCode,
           additionalInfo : row.additionalInfo,
+          executed:row.executed,
           taskAttributeList : []
         } as Task;
 

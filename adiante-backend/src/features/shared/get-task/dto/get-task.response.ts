@@ -16,6 +16,7 @@ export interface Task {
     additionalInfo: string | null;
     relatedQuestionnaireId: string | null;
     taskAttributeList: TaskAttribute[] | null;
+    executed:boolean | null;
   }
 
 export interface TaskAttribute{

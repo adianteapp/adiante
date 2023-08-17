@@ -1,7 +1,10 @@
 {
   "message": "hello i18n !!",
   "common":{
-     "loading_text":"Cargando..."
+     "loading_text":"Cargando...",
+     "card":{
+      "executed_text":"Hecho"
+     }
   },
   "loginform_label_user": "Usuario",
   "loginform_label_pwd": "Contraseña",

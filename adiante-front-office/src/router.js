@@ -9,11 +9,13 @@ const Dashboard = () => import("./views/DashboardView.vue")
 const Agenda = () => import ("./views/AgendaView.vue"); 
 const Activities = () => import ("./views/ActivitiesView.vue");  
 const IntroActivity = () => import ("./views/IntroActivityView.vue");  
+const tabTitle = 'Adiante App';
 const routes = [
   {
     path: "/",
     name: "home",
     component: Login,
+    meta: {checkAuth: true}
   },
   {
     path: "/home",
@@ -21,7 +23,7 @@ const routes = [
   },
   {
     path: "/login",
-    component: Login,
+    component: Login
   },
   {
     path: "/contact",
@@ -63,6 +65,9 @@ const router = createRouter({
 
 // This method is in charge to check if the user is logged validating the token
 router.beforeEach(async (to, from, next) => {
+
+  document.title = tabTitle;
+
   const publicPages = ['/login','/about','/'];
   const authRequired = !publicPages.includes(to.path);
   // Genereate a comment explaining this code below 
