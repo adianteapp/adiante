@@ -50,7 +50,7 @@
 <script>
 import { useRoute } from 'vue-router';
 export default {
-  name: 'FooterMemu',
+  name: 'FooterMenu',
   setup() {
      
     const route = useRoute();

@@ -60,11 +60,12 @@ export default defineComponent({
 const loadedTask = ref(props.loadedTask).value;
   
 const showScheduledTask = ref( loadedTask.task.scheduledTaskId != undefined ? true : false);
+const isCompletedScheduledTask = ref(loadedTask.task.executionDateTimeLocal != null ? true : false);
 const showQuestionnaire = ref(loadedTask.task.scheduledTaskId == undefined ? true : false);
 
 
   let buttonsManager = {
-     buttonStartEnabled : showScheduledTask.value ?true :false,
+     buttonStartEnabled : showScheduledTask.value && !isCompletedScheduledTask.value ?true :false,
      buttonCloseEnabled : showScheduledTask.value ?true :false,
      buttonBackEnabled : false,
      buttonNextEnabled :   !showScheduledTask.value && loadedTask.questionnaire.questions.length > 1 ? true: false ,

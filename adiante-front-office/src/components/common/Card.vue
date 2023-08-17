@@ -16,7 +16,7 @@
             {{task.description}}
           </div>
 
-          <div class="label small completed"> <span></span>Hecho x veces</div>
+          <div v-if="task.executed" class="label small completed"> <span></span>{{ $t('common.card.executed_text')}}</div>
           
           
         </div>
