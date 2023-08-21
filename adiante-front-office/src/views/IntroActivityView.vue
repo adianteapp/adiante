@@ -30,6 +30,13 @@
         <taskManager v-if="enableTaskManager" :showOnModal="true" :taskData="retrievedTask"
           @evtCloseTaskManagerModal="handleEvtCloseTaskManagerModal" />
       </Suspense>
+      <Suspense>
+        <taskAttributeLoaderModal v-if="enableAttributeLoaderModal" :showOnModal="true" :taskData="retrievedTask"
+          @evtCloseTaskAttributeLoaderModal="handleEvtCloseTaskAttributeLoaderModal" />
+      </Suspense>
+
+
+
 
 
        </div>
@@ -39,6 +46,11 @@
         <button v-if="startChallenge" type="button" @click.prevent="handleStartChallenge" class="btn btn-primary  w-100">
         {{ $t('intro_activities.startChallengeButton') }}
        </button>
+
+       <button v-if="showMoreInfoButton" type="button" @click.prevent="handleShowMoreInfo" class="btn btn-primary  w-100">
+        {{ $t('intro_activities.showMoreInfoButton') }}
+       </button>
+
 
        </div>
     </div>
@@ -50,9 +62,11 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import taskService from '../services/task.service';
-import TaskManager from '../components/tasks/TaskManager.vue'; // change import statement to match file name casing
+import TaskManager from '../components/tasks/TaskManager.vue';
+import TaskAttributeLoaderModal from '../components/task-attributes/TaskAttributeLoaderModal.vue';
 import HeaderMenu from '../components/common/HeaderMenu.vue';
 import FooterMenu from '../components/common/FooterMenu.vue';
+import canBeShownTaskAttributeLoader from '../services/util/attribute-list-validator';
 
 export default {
   name: 'IntroActivity',
@@ -60,7 +74,8 @@ export default {
   components: {
     headerMenu: HeaderMenu,
     FooterMenu: FooterMenu,
-    taskManager: TaskManager
+    taskManager: TaskManager,
+    taskAttributeLoaderModal: TaskAttributeLoaderModal
   },
    setup() {
     const retrievedTask = ref(undefined);
@@ -68,9 +83,14 @@ export default {
     const type = route.query.type;
     const taskId = route.query.taskId;
     const returnPath = "/activities?type=" + type;
-    const enableTaskManager = ref(false);
-    const enableMainContent = ref(false);
 
+    const enableMainContent = ref(false);
+   
+    //modals
+    const enableTaskManager = ref(false);
+    const enableAttributeLoaderModal = ref(false);
+    //buttons init
+    const showMoreInfoButton = ref(false);
     const startChallenge = ref(false);
 
 
@@ -82,9 +102,10 @@ export default {
         retrievedTask.value = response.data;
         enableMainContent.value = true;
         startChallenge.value = retrievedTask.value.questionnaire != null;
-        console.log(response.data);
+        showMoreInfoButton.value = !( startChallenge.value) &&  retrievedTask.value.task &&  canBeShownTaskAttributeLoader(retrievedTask.value.task.taskAttributeList)
        }
     }
+
     const getReturnPath = () => {
       return returnPath;
     }
@@ -105,14 +126,22 @@ export default {
       enableTaskManager.value = true;
     }
 
+    const handleShowMoreInfo = () => {
+      enableAttributeLoaderModal.value = true;
+    }
+
     const handleEvtCloseTaskManagerModal = () => {
       enableTaskManager.value = false;
     }
 
+    const handleEvtCloseTaskAttributeLoaderModal = () => {
+      enableAttributeLoaderModal.value = false;
+    }
+
     initComponent();
     return {
-      retrievedTask, returnPath, type, startChallenge, enableMainContent, enableTaskManager,
-      handleStartChallenge, getMainImage, getReturnPath, handleEvtCloseTaskManagerModal
+      retrievedTask, returnPath, type, startChallenge, showMoreInfoButton, enableMainContent, enableTaskManager,enableAttributeLoaderModal,
+      handleStartChallenge, getMainImage, getReturnPath,handleShowMoreInfo, handleEvtCloseTaskManagerModal,handleEvtCloseTaskAttributeLoaderModal
     }
   }
 }

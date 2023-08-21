@@ -103,7 +103,8 @@
   },
   "intro_activities":{
    "backLink":"Volver al listado",
-   "startChallengeButton":"Comenzar reto"
+   "startChallengeButton":"Comenzar reto",
+   "showMoreInfoButton":"Más información"
   }
 }
 
