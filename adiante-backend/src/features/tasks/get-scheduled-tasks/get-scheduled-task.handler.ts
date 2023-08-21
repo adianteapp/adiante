@@ -163,7 +163,10 @@ async  getscheduledTasksFromDB(patientId: string , startDate: string ,endDate:st
                     WHERE pst.id_patient = '${patientId}'
                     AND pst.start_datetime >= '${startDate}'
                     AND pst.end_datetime <  '${endDate}'
-                    AND tin.id_language= '${languageId}'`;
+                    AND tin.id_language= '${languageId}'
+                    ORDER BY 
+					    CASE WHEN executionDateTimeLocal IS NULL THEN 0 ELSE 1 END,
+					    pst.start_datetime ASC;`;
   
     const rows = await dao.executeQuery(sqlQuery);
     
