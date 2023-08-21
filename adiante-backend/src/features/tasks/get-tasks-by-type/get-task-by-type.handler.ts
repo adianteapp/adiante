@@ -117,7 +117,8 @@ async  getsTasksByTypeFromDB(selectedTaskType:string,patientId:string,langId?:st
                     INNER JOIN task_i18n tin ON t.id = tin.id_task
                     LEFT OUTER JOIN task_attribute_value tav on tav.id_task = t.id
                     LEFT OUTER JOIN task_attribute ta on ta.id = tav.id_task_attribute
-                    WHERE tt.code_name =  '${selectedTaskType}' AND tin.id_language= '${languageId}'`;
+                    WHERE tt.code_name =  '${selectedTaskType}' AND tin.id_language= '${languageId}'
+                    ORDER BY executed ASC,t.createdAt ASC`;
 
     const rows = await dao.executeQuery(sqlQuery);
     
