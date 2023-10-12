@@ -43,15 +43,15 @@
 
 
        <div class="button-activity"> 
-        <button v-if="startChallenge" type="button" @click.prevent="handleStartChallenge" class="btn btn-primary  w-100">
-        {{ $t('intro_activities.startChallengeButton') }}
-       </button>
+        
 
-       <button v-if="showMoreInfoButton" type="button" @click.prevent="handleShowMoreInfo" class="btn btn-primary  w-100">
+       <button v-if="showMoreInfoButton" type="button" @click.prevent="handleShowMoreInfo" class="btn btn-secondary  w-100">
         {{ $t('intro_activities.showMoreInfoButton') }}
        </button>
 
-
+       <button v-if="startChallenge" type="button" @click.prevent="handleStartChallenge" class="btn btn-primary  w-100">
+        {{ $t('intro_activities.startChallengeButton') }}
+       </button>
        </div>
     </div>
  
@@ -102,7 +102,7 @@ export default {
         retrievedTask.value = response.data;
         enableMainContent.value = true;
         startChallenge.value = retrievedTask.value.questionnaire != null;
-        showMoreInfoButton.value = !( startChallenge.value) &&  retrievedTask.value.task &&  canBeShownTaskAttributeLoader(retrievedTask.value.task.taskAttributeList)
+        showMoreInfoButton.value =  retrievedTask.value.task &&  canBeShownTaskAttributeLoader(retrievedTask.value.task.taskAttributeList)
        }
     }
 

@@ -151,7 +151,7 @@ async  getsTasksByTypeFromDB(selectedTaskType:string,patientId:string,langId?:st
           executed:row.executed,
           taskAttributeList : []
         } as Task;
-
+        taskList.push(currentTask);
       }
   
       if (row.attributeCode != undefined && row.attributeTaskId.toString() == currentTask.taskId) {
@@ -163,7 +163,7 @@ async  getsTasksByTypeFromDB(selectedTaskType:string,patientId:string,langId?:st
         
         currentTask.taskAttributeList.push(currentAttribute);
       }
-      taskList.push(currentTask);
+      
     });
   
     return taskList;

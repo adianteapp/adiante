@@ -11,8 +11,8 @@
         <div class="alert-text">
           {{ notTasksLabel }}
         </div>
-        
-       </div>
+        <a v-if="showLinkToAgenda" href="/agenda" class="btn btn-secondary small">{{ $t('widgettask_header_link_no_tasks_text') }}</a>
+      </div>
      
 
     <div v-else class="info-task">
@@ -57,6 +57,7 @@ export default {
 
     const showLinkToAgenda = ref(props.enableLinkToAgenda);
     let tasks = ref(props.tasks).value;
+
     let selectedDate = ref(props.selectedDate).value;
     const today = new Date().toISOString().slice(0, 10);
 
