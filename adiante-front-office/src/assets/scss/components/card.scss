@@ -17,9 +17,10 @@
     .container-card{
 
         display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 16px;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 16px;
+       
     }
     
     cursor: pointer;
@@ -27,7 +28,11 @@
         background-color: $neutral-10;
     }
    
- 
+    .title{
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+    }
    
     .img{ 
         width: 80px;

@@ -25,6 +25,7 @@
     <routerLink class="container-card"  to="/activities?type=tt-challenge">
       
       <div class="card"> 
+        <div class="title">
             <div class="img">
               <img src="../assets/img/svg/retos-icon.svg" class="icon-card" alt="">
             </div>
@@ -34,7 +35,7 @@
                 <span class="title">{{$t('challenges.title')}}</span>   
               </div>
             </div>
-        
+          </div>
 
         <div class="icon">
           <i class="icon-navigate_next"></i>
@@ -44,7 +45,7 @@
     </routerLink>
     <routerLink class="container-card"  to="/activities?type=tt-guided-activity">
       <div class="card">
-        
+        <div class="title">
             <div class="img">
               <img src="../assets/img/svg/relax-icon.svg" class="icon-card" alt="">
             </div>
@@ -54,6 +55,7 @@
                   <span class="title">{{ $t('guided_activities.title')}}</span>   
                 </div>
             </div>
+          </div>
         <div class="icon">
           <i class="icon-navigate_next"></i>
         </div>

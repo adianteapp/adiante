@@ -18,7 +18,7 @@
       <div class="task-info time"><i class="icon-time"></i> {{ taskStartTime }} - {{ taskEndTime }}</div>
     </div>
 
-    <div v-if="showFullInformation">
+    <div class="extrainfo" v-if="showFullInformation">
       <div class="details">
         <p>{{ currentScheduledTask.description }}</p>
       </div>

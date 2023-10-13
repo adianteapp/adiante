@@ -1,18 +1,21 @@
 <template>
   <div class="content">
 
-   
-      <div  v-if="total == 0" class="alert default">
+   <div  v-if="total == 0" class="no-task" >
+      <div class="alert simple">
 
         <div class="icon">
-          <i class="icon-star"></i>
+          <i class="icon-alert"></i>
         </div>
 
         <div class="alert-text">
           {{ notTasksLabel }}
         </div>
-        <a v-if="showLinkToAgenda" href="/agenda" class="btn btn-secondary small">{{ $t('widgettask_header_link_no_tasks_text') }}</a>
       </div>
+
+      <a v-if="showLinkToAgenda" href="/agenda" class="btn btn-secondary small">{{ $t('widgettask_header_link_no_tasks_text') }}</a>
+
+    </div> 
      
 
     <div v-else class="info-task">

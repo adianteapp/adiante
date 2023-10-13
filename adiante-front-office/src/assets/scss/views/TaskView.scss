@@ -358,8 +358,10 @@
     align-items: center;
     vertical-align: middle;
     gap: 15px;
+    
    
   }
+  
   .details{ 
   padding: 5px 0px;
   width: 100%;
@@ -410,3 +412,7 @@
     display: none;
   }
  }
+
+ .extrainfo{
+  width: 100% !important;
+}

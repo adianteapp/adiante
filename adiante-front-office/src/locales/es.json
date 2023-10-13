@@ -17,7 +17,7 @@
   "header_label_logout": "Cerrar sesión",
   "widgetstate_header_register": "registros hoy",
   "widgettask_header_link": "Ver todas",
-  "widgettask_header_link_no_tasks_text": "Ver mi semana",
+  "widgettask_header_link_no_tasks_text": "Ver toda la semana",
   "weekAgenda":{
    "task_week_day0": "Lun",
    "task_week_day1": "Mar",
@@ -105,7 +105,7 @@
   "intro_activities":{
    "backLink":"Volver al listado",
    "startChallengeButton":"Comenzar reto",
-   "showMoreInfoButton":"Más información"
+   "showMoreInfoButton":"Ver contenido multimedia"
   }
 }
 

@@ -70,4 +70,13 @@
             color:  $neutral-80;
         }
     }
+    &.simple { 
+        border: 0;
+        padding: 4px; 
+        border-radius: 4px;
+        i::before{
+            content: "\e016";
+            color:  $neutral-80;
+        }
+    }
 }
