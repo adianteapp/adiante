@@ -27,168 +27,190 @@
     -webkit-font-smoothing: antialiased;
   }
   
+.icon-user:before {
+  content: "\e000";
+}
 
-  .icon-user:before {
-    content: "\e000";
-  }
-  
-  .icon-upload:before {
-    content: "\e001";
-  }
-  
-  .icon-today:before {
-    content: "\e002";
-  }
-  
-  .icon-time:before {
-    content: "\e003";
-  }
-  
-  .icon-star:before {
-    content: "\e004";
-  }
-  
-  .icon-share:before {
-    content: "\e005";
-  }
-  
-  .icon-settings:before {
-    content: "\e006";
-  }
-  
-  .icon-search:before {
-    content: "\e007";
-  }
-  
-  .icon-navigate_next:before {
-    content: "\e008";
-  }
-  
-  .icon-navigate_before:before {
-    content: "\e009";
-  }
-  
-  .icon-more:before {
-    content: "\e00a";
-  }
-  
-  .icon-more_vert:before {
-    content: "\e00b";
-  }
-  
-  .icon-menu:before {
-    content: "\e00c";
-  }
-  
-  .icon-typewhatsapp:before {
-    content: "\e00e";
-  }
-  
-  .icon-location:before {
-    content: "\e012";
-  }
-  
-  .icon-link:before {
-    content: "\e013";
-  }
-  
-  .icon-folder:before {
-    content: "\e014";
-  }
-  
-  .icon-exit:before {
-    content: "\e015";
-  }
-  
-  .icon-error:before {
-    content: "\e016";
-  }
-  
-  .icon-edit:before {
-    content: "\e017";
-  }
-  
-  .icon-download:before {
-    content: "\e018";
-  }
-  
-  .icon-delete:before {
-    content: "\e019";
-  }
-  
-  .icon-date:before {
-    content: "\e01a";
-  }
-  
-  .icon-close:before {
-    content: "\e01b";
-  }
-  
-  .icon-check:before {
-    content: "\e01c";
-  }
-  
-  .icon-cancel:before {
-    content: "\e01d";
-  }
-  
-  .icon-attach_file:before {
-    content: "\e01e";
-  }
-  
-  .icon-arrow-up:before {
-    content: "\e01f";
-  }
-  
-  .icon-arrow-right:before {
-    content: "\e020";
-  }
-  
-  .icon-arrow-left:before {
-    content: "\e021";
-  }
-  
-  .icon-arrow-down:before {
-    content: "\e022";
-  }
-  
-  .icon-arrow_forward:before {
-    content: "\e023";
-  }
-  
-  .icon-arrow_back:before {
-    content: "\e024";
-  }
-  
-  .icon-add:before {
-    content: "\e025";
-  }
-  
-  .icon-alert:before {
-    content: "\e026";
-  }
-  
-  .icon-call:before {
-    content: "\e027";
-  }
-  
-  .icon-menu-yoga:before {
-    content: "\e029";
-  }
-  
-  .icon-menu-retos-2:before {
-    content: "\e02a";
-  }
-  
-  .icon-menu-home:before {
-    content: "\e02b";
-  }
-  
-  .icon-menu-contact-2:before {
-    content: "\e02c";
-  }
-  
-  .icon-menu-calendar-2:before {
-    content: "\e02d";
-  }
-  
+.icon-upload:before {
+  content: "\e001";
+}
+
+.icon-today:before {
+  content: "\e002";
+}
+
+.icon-time:before {
+  content: "\e003";
+}
+
+.icon-star:before {
+  content: "\e004";
+}
+
+.icon-share:before {
+  content: "\e005";
+}
+
+.icon-settings:before {
+  content: "\e006";
+}
+
+.icon-search:before {
+  content: "\e007";
+}
+
+.icon-navigate_next:before {
+  content: "\e008";
+}
+
+.icon-navigate_before:before {
+  content: "\e009";
+}
+
+.icon-more:before {
+  content: "\e00a";
+}
+
+.icon-more_vert:before {
+  content: "\e00b";
+}
+
+.icon-menu:before {
+  content: "\e00c";
+}
+
+.icon-play:before {
+  content: "\e00d";
+}
+
+.icon-typewhatsapp:before {
+  content: "\e00e";
+}
+
+.icon-calll:before {
+  content: "\e00f";
+}
+
+.icon-quiz:before {
+  content: "\e010";
+}
+
+.icon-question:before {
+  content: "\e011";
+}
+
+.icon-location:before {
+  content: "\e012";
+}
+
+.icon-link:before {
+  content: "\e013";
+}
+
+.icon-folder:before {
+  content: "\e014";
+}
+
+.icon-exit:before {
+  content: "\e015";
+}
+
+.icon-error:before {
+  content: "\e016";
+}
+
+.icon-edit:before {
+  content: "\e017";
+}
+
+.icon-download:before {
+  content: "\e018";
+}
+
+.icon-delete:before {
+  content: "\e019";
+}
+
+.icon-date:before {
+  content: "\e01a";
+}
+
+.icon-close:before {
+  content: "\e01b";
+}
+
+.icon-check:before {
+  content: "\e01c";
+}
+
+.icon-cancel:before {
+  content: "\e01d";
+}
+
+.icon-attach_file:before {
+  content: "\e01e";
+}
+
+.icon-arrow-up:before {
+  content: "\e01f";
+}
+
+.icon-arrow-right:before {
+  content: "\e020";
+}
+
+.icon-arrow-left:before {
+  content: "\e021";
+}
+
+.icon-arrow-down:before {
+  content: "\e022";
+}
+
+.icon-arrow_forward:before {
+  content: "\e023";
+}
+
+.icon-arrow_back:before {
+  content: "\e024";
+}
+
+.icon-add:before {
+  content: "\e025";
+}
+
+.icon-alert:before {
+  content: "\e026";
+}
+
+.icon-call:before {
+  content: "\e027";
+}
+
+.icon-play-2:before {
+  content: "\e028";
+}
+
+.icon-menu-yoga:before {
+  content: "\e029";
+}
+
+.icon-menu-retos-2:before {
+  content: "\e02a";
+}
+
+.icon-menu-home:before {
+  content: "\e02b";
+}
+
+.icon-menu-contact-2:before {
+  content: "\e02c";
+}
+
+.icon-menu-calendar-2:before {
+  content: "\e02d";
+}
+
+.icon-calll-2:before {
+  content: "\e02e";
+}

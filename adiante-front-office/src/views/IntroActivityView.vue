@@ -45,7 +45,7 @@
        <div class="button-activity"> 
         
 
-       <button v-if="showMoreInfoButton" type="button" @click.prevent="handleShowMoreInfo" class="btn btn-outline-primary mb-2 w-100"> <i class="icon-arrow-right"></i>
+       <button v-if="showMoreInfoButton" type="button" @click.prevent="handleShowMoreInfo" class="btn btn-outline-primary mb-2 w-100"> <i class="icon-play-2"></i>
         {{ $t('intro_activities.showMoreInfoButton') }}
        </button>
 
