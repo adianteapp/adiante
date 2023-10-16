@@ -2,19 +2,19 @@
   <headerMenu/>
   <div class="container-fluid contact-container">
 
-      <h1>Hola, soy Paquita</h1>
+      <h1 style="text-align:center">Hola, somos el equipo PAPEP</h1>
 
-      <img class="img-profesional" src="https://templates.joomla-monster.com/joomla30/jm-news-portal/components/com_djclassifieds/assets/images/default_profile.png" alt="" />
+       
+      <br />
+      <p>Puedes contactar con nosotros cuando lo necesites.</p>
       
-    
-    <br />   
-      <p>Soy tu terapeuta y puedes contactar conmigo a través cuando lo necesites.</p>
+      <a href="https://wa.me/604016521/?text=Hola" target="_blank" class="btn big btn-whatsapp">Envíanos un Whatsapp</a>
       <br />
-      <a href="https://wa.me/628546755/?text=Hola" target="_blank" class="btn big btn-whatsapp">Enviame un Whatsapp</a>
-      <br />
-      <p>¿Es una emergencia?</p>
 
-      <a href="tel:+34628546755" class="btn big btn-alert">Llámame ahora</a>
+      <br />
+      <p><strong>¿Es una emergencia?</strong></p> 
+
+      <a href="tel:+3604016521" class="btn big btn-alert">Llámanos ahora</a>
 
 
   </div>

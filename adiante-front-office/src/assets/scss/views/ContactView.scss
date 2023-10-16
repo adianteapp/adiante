@@ -31,10 +31,10 @@ p{
         border: 1px solid $error-medium !important;
         color: $neutral-00 !important;
         &:hover{
-            background-color: $error-light !important;
+            background-color: $error-medium !important;
         }
         &:focus{
-            box-shadow: 0 0 0 0.2rem $error-light !important;
+            box-shadow: 0 0 0 0.2rem $error-medium !important;
         }
         
     }
