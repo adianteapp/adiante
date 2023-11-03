@@ -29,11 +29,12 @@ async  savePatientActivity(patientActivity) {
                     }
  * @returns 
  */
-   async  saveQuestionnaire(taskId,scheduledId,idQuestionnaire,answersList) {
+   async  saveQuestionnaire(taskId,scheduledId,idQuestionnaire,answersList, paeId) {
       const patientActivity = {
     executedTask:{
         idTask: taskId,
         idScheduledTask: scheduledId,
+        idParentExecutedTask: paeId,
         filledQuestionnaire:{
           idQuestionnaire: idQuestionnaire,
           answersList: answersList
@@ -43,11 +44,12 @@ async  savePatientActivity(patientActivity) {
    return this.savePatientActivity (patientActivity);
  }
 
-  async saveConfirmationExecution(taskId, scheduledId) {
+  async saveConfirmationExecution(taskId, scheduledId,paeId) {
     const patientActivity = {
       executedTask: {
         idTask: taskId,
-        idScheduledTask: scheduledId
+        idScheduledTask: scheduledId,
+        idParentExecutedTask: paeId
       }
     }
     return this.savePatientActivity(patientActivity);

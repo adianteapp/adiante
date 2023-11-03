@@ -1,4 +1,4 @@
-import { injectable } from "inversify";
+import { id, injectable } from "inversify";
 import { FilledQuestionnaire } from "../dto/save-answers.request";
 import { PreparePatientActivityRequest } from "./dto/prepare-patient-activity.request";
 import { PatientActivityEntry, PreparePatientActivityResponse, QuestionnaireExecution, QuestionnaireExecutionAnswer } from "./dto/prepare-patient-activity.response";
@@ -11,7 +11,8 @@ export class PreparePatientActivityHandler implements IPreparePatientActivityHan
         let patientActivityEntry:  PatientActivityEntry =
         {
             idPatient : preparePatientActivityRequest.patientActivityData.patientId,
-            idTask : preparePatientActivityRequest.patientActivityData.executedTask.idTask
+            idTask : preparePatientActivityRequest.patientActivityData.executedTask.idTask,
+            idParentPatientActivityEntry : preparePatientActivityRequest.patientActivityData.executedTask.idParentExecutedTask
         } as PatientActivityEntry
 
         if(preparePatientActivityRequest.patientActivityData.executedTask.filledQuestionnaire != undefined){

@@ -18,6 +18,7 @@ export interface FilledQuestionnaire {
 export interface ExecutedTask {
     idScheduledTask: string;
     idTask: string;
+    idParentExecutedTask: string;
     filledQuestionnaire: FilledQuestionnaire;
 }
 
