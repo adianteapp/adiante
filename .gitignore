@@ -1,0 +1,5 @@
+
+*.json
+adiante-backend/node_modules/
+adiante-backend/dist/
+/adiante-front-office/package-lock.json

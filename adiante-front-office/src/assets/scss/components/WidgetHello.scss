@@ -1,0 +1,14 @@
+
+
+.widget-hello{
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    align-self: stretch; 
+   
+    .h1, h1{
+        font-size: 28px;
+        line-height: 33px;
+    }
+
+}

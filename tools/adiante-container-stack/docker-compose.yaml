@@ -1,0 +1,47 @@
+version: '3.4'
+services:
+  grafana:
+    image: grafana/grafana
+    environment: 
+      - GF_SECURITY_ADMIN_PASSWORD=password1
+    ports:
+      - ${GRAFANA_PORT:-3000}:3000
+    volumes:
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml 
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    volumes:
+     - ./loki/loki.yaml:/etc/config/loki.yaml
+    entrypoint:
+     - /usr/bin/loki
+     - -config.file=/etc/config/loki.yaml
+  
+  adiante-patient-backend:
+    image: mandradeva/adiante:patient-backend-v0.0.5-alpha
+    environment:
+      - DB_HOST=82.223.97.161
+      - DB_USER=adiante
+      - DB_PASSWORD=adiante123
+      - DB_NAME = adiantebd
+      - API_LOG_GRAFANA_LOKI_URL=http://loki:3100
+      - API_LOG_CONSOLE_TRANSPORT_ENABLED = 0
+      - API_LOG_FILE_TRANSPORT_ENABLED = 0
+      - API_LOG_FILE_LOKI_TRANSPORT_ENABLED = 1
+      - API_LOG_PATH=/var/log/adiante2
+      - API_PORT=8082
+    ports:
+      - "8082:8082"
+    volumes:
+     - C:/Logs/adiante/docker:/var/log/adiante2
+
+  adiante-patient:
+    image: adiante-patient:${TAG:-latest}
+    environment:
+      - VUE_APP_BACKEND_BASE_URL=https://adiante.alume.org/adiante/patient
+    ports:
+      - "8081:8081"
