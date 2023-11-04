@@ -59,7 +59,7 @@ export class SaveAnswersHandler implements ISaveAnswersHandler{
         const preparePatientActivityResponse: PreparePatientActivityResponse = await this.preparePatientActivityHandler.execute({patientActivityData:saveAnswersRequest,taskType:originalTask.task.taskTypeCode} as PreparePatientActivityRequest);
      
         //save the info
-        let saveResult:boolean = false;
+        let saveResult:string ;
      
         if (originalTask.task.taskTypeCode === TaskType.questionnaire || originalTask.task.taskTypeCode === TaskType.challenge) {
             if(saveAnswersRequest.executedTask.idScheduledTask){
@@ -71,10 +71,14 @@ export class SaveAnswersHandler implements ISaveAnswersHandler{
         } else {
          saveResult = await this.insertPatientTaskExecutionEntry(preparePatientActivityResponse.patientActivityEntry, saveAnswersRequest.executedTask.idScheduledTask);
         }
-     
-        const saveStatus = saveResult ? SaveAnswersStatus.Success : SaveAnswersStatus.InternalError;
-     
-        saveAnswersResponse.status = saveStatus ;
+         
+        if(saveResult != "-1"){
+            saveAnswersResponse.status  = SaveAnswersStatus.Success;
+            saveAnswersResponse.patientActivityEntryId = saveResult;
+        }else{
+         saveAnswersResponse.status  = SaveAnswersStatus.InternalError;
+        }
+
 
         return saveAnswersResponse;
     }
@@ -341,7 +345,7 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
 
 //#region database methods
 
- async  insertPatientTaskQuestionnaireEntry(patientActivityData: PatientActivityEntry): Promise<boolean> {
+ async  insertPatientTaskQuestionnaireEntry(patientActivityData: PatientActivityEntry): Promise<string> {
    let connection: any;
    try {
            connection = await dao.getConnection();
@@ -355,8 +359,16 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
            const result1 = await connection.execute(sqlWithValues);
            const insertIdPatientActivityData = result1.insertId;
  
- 
- 
+
+          if(patientActivityData.idParentPatientActivityEntry){
+            const sqlRelatedPatientActivityEntry = "INSERT INTO related_patient_activity_entries (parent_patient_activity_entry, patient_activity_entry)  VALUES(@parent_patient_activity_entry, @patient_activity_entry)";
+            const sqlRelatedPatientActivityEntryWithValues = sqlRelatedPatientActivityEntry.replace("@parent_patient_activity_entry", patientActivityData.idParentPatientActivityEntry)
+                                                                                           .replace("@patient_activity_entry", insertIdPatientActivityData);
+            await connection.execute(sqlRelatedPatientActivityEntryWithValues);
+          }
+
+          
+
            const sqlQuestionnaireExecution = "INSERT INTO questionnaire_execution (id_questionnaire, id_patient_activy_entry) VALUES(@id_questionnaire, @id_patient_activy_entry)";
            const sqlQuestionnaireExecutionWithValues = sqlQuestionnaireExecution
              .replace("@id_questionnaire", patientActivityData.questionnaireExecution.idQuestionnaire)
@@ -389,13 +401,13 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
 
            await connection.commit();
  
-           return true;
+           return insertIdPatientActivityData.toString();
    } catch (err) {
      Logger.error("Error saving answers" + err);
      if (connection) {
        await connection.rollback();
      }
-     return false;
+     return "-1";
    } finally {
 
      await connection.end();
@@ -403,7 +415,7 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
  }
 
 
- async  insertPatientTaskScheduledQuestionnaireEntry(patientActivityData: PatientActivityEntry,scheduledTaskId:string): Promise<boolean> {
+ async  insertPatientTaskScheduledQuestionnaireEntry(patientActivityData: PatientActivityEntry,scheduledTaskId:string): Promise<string> {
    let connection: any;
    try {
            connection = await dao.getConnection();
@@ -416,6 +428,13 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
              .replace("@p3", patientActivityData.idTask);
            const result1 = await connection.execute(sqlWithValues);
            const insertIdPatientActivityData = result1.insertId;
+
+           if(patientActivityData.idParentPatientActivityEntry){
+            const sqlRelatedPatientActivityEntry = "INSERT INTO related_patient_activity_entries (parent_patient_activity_entry, patient_activity_entry)  VALUES(@parent_patient_activity_entry, @patient_activity_entry)";
+            const sqlRelatedPatientActivityEntryWithValues = sqlRelatedPatientActivityEntry.replace("@parent_patient_activity_entry", patientActivityData.idParentPatientActivityEntry)
+                                                                                           .replace("@patient_activity_entry", insertIdPatientActivityData);
+            await connection.execute(sqlRelatedPatientActivityEntryWithValues);
+          }
  
            const sqlUpdatePatientScheduledTask = "UPDATE patient_scheduled_task  SET id_patient_activity_entry = @activityEntryId  where id = @scheduledId;";
            const sqlWithValues2 = sqlUpdatePatientScheduledTask
@@ -455,13 +474,13 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
 
            await connection.commit();
  
-           return true;
+           return insertIdPatientActivityData.toString();
    } catch (err) {
      Logger.error("Error saving answers" + err);
      if (connection) {
        await connection.rollback();
      }
-     return false;
+     return "-1";
    } finally {
 
      await connection.end();
@@ -470,7 +489,7 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
 
 
 
- async  insertPatientTaskExecutionEntry(patientActivityData: PatientActivityEntry,scheduledId:string): Promise<boolean> {
+ async  insertPatientTaskExecutionEntry(patientActivityData: PatientActivityEntry,scheduledId:string): Promise<string> {
    let connection: any;
    try {
            connection = await dao.getConnection();
@@ -485,6 +504,14 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
            const insertIdPatientActivityEntry = result.insertId;
 
 
+           if(patientActivityData.idParentPatientActivityEntry){
+            const sqlRelatedPatientActivityEntry = "INSERT INTO related_patient_activity_entries (parent_patient_activity_entry, patient_activity_entry)  VALUES(@parent_patient_activity_entry, @patient_activity_entry)";
+            const sqlRelatedPatientActivityEntryWithValues = sqlRelatedPatientActivityEntry.replace("@parent_patient_activity_entry", patientActivityData.idParentPatientActivityEntry)
+                                                                                           .replace("@patient_activity_entry", insertIdPatientActivityEntry);
+            await connection.execute(sqlRelatedPatientActivityEntryWithValues);
+          }
+
+
            const sqlUpdatePatientScheduledTask = "UPDATE patient_scheduled_task  SET id_patient_activity_entry = @activityEntryId  where id = @scheduledId;";
            const sqlWithValues2 = sqlUpdatePatientScheduledTask
              .replace("@activityEntryId", insertIdPatientActivityEntry)
@@ -493,13 +520,13 @@ async  validateMandatoryFreeAnswerValue(patientAnswer: RequestAnswer): Promise<b
            
            await connection.commit();
  
-           return true;
+           return insertIdPatientActivityEntry.toString();
    } catch (err) {
      Logger.error("Error saving confirmation of the execution:" + err);
      if (connection) {
        await connection.rollback();
      }
-     return false;
+     return "-1";
    } finally {
      // Close database connection;
      await connection.end();

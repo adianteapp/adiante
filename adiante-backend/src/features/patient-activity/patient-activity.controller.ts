@@ -35,7 +35,7 @@ export class PatientActivityController implements IPatientActivityController {
 
       switch (saveAnswersResponse.status) {
          case SaveAnswersStatus.Success:
-            res.status(200).send();
+            res.status(200).send({paeId:saveAnswersResponse.patientActivityEntryId});
             break;
          case SaveAnswersStatus.TaskValueMandatory:
             res.status(402).send({ message: "Task value mandatory", errorCode: SaveAnswersStatus.TaskValueMandatory });

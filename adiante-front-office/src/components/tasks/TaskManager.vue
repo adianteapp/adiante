@@ -47,6 +47,7 @@ const selectedTaskId = ref(props.taskId).value;
 const selectedQuestionnaireType = ref(props.questionnaireType).value;
 const providedScheduledTask = ref(props.taskData).value;
 const feedbackModalTaskType = ref(undefined);
+const paeId = ref(undefined);
 let showOnModal = ref(props.showOnModal).value;
 
 
@@ -140,7 +141,7 @@ const handleConfirmExecution = (msg) => {
     };  
 
 async function saveConfirmationExecution(msg){
-    const saveResult = await patientService.saveConfirmationExecution(msg.scheduledTask.task.taskId,msg.scheduledTask.task.scheduledTaskId);
+    const saveResult = await patientService.saveConfirmationExecution(msg.scheduledTask.task.taskId,msg.scheduledTask.task.scheduledTaskId,paeId.value);
     if(saveResult.isAxiosError)
     {
     alert("Ha ocurrido un error salvando el estado del paciente");
@@ -148,6 +149,7 @@ async function saveConfirmationExecution(msg){
         showTaskOnModalRef.value = false;
         feedbackModalTaskType.value = isMoodQuestionnaire ? undefined:  modalLoadedTask.value.task.taskTypeCode;
         showGeneralFeedbackModal.value = true;
+        paeId.value = saveResult.data.paeId;
     }
 }
 
@@ -172,11 +174,12 @@ async function savePatientActivity(patientActivity) {
     if(savedTask.questionnaire && savedTask.questionnaire.questionnaireId){
         auxQuestionnaireId = savedTask.questionnaire.questionnaireId;
     }
-    const saveResult = await patientService.saveQuestionnaire(savedTask.task.taskId,savedTask.task.scheduledTaskId,auxQuestionnaireId,patientActivity.answersList);
+    const saveResult = await patientService.saveQuestionnaire(savedTask.task.taskId,savedTask.task.scheduledTaskId,auxQuestionnaireId,patientActivity.answersList,paeId.value);
     if(saveResult.isAxiosError)
     {
           alert("Ha ocurrido un error salvando el estado del paciente");
     }else{
+          paeId.value = saveResult.data.paeId;
           handleSavePatientActivy(patientActivity);
     }
 }
@@ -191,6 +194,8 @@ async function handleSavePatientActivy(patientActivity){
       showTaskOnModalRef.value = false;
       showGeneralFeedbackModal.value = true;
       feedbackModalTaskType.value = isMoodQuestionnaire ? undefined:  modalLoadedTask.value.task.taskTypeCode;
+      //Reset paeId
+      paeId.value = undefined;
    }
 }
 
@@ -203,6 +208,8 @@ async function loadRelatedTaskModal(relatedTaskId){
         showTaskOnModalRef.value = true;
     }else{
         console.log("Error retrieving the relatedtask for taskId:"+relatedTaskId);
+        //Reset paeId
+        paeId.value = undefined;
         //show feedback anyway;
         showGeneralFeedbackModal.value = true;
         feedbackModalTaskType.value = isMoodQuestionnaire ? undefined:  modalLoadedTask.value.task.taskTypeCode;

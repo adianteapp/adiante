@@ -9,6 +9,7 @@ export interface   PatientActivityEntry {
   idPatient: string;
   idTask: string;
   patientActivityEntryValue?: PatientActivityEntryValue;
+  idParentPatientActivityEntry?: string;
   questionnaireExecution?: QuestionnaireExecution;
 }
 
