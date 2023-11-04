@@ -21,17 +21,16 @@ mkdir target
 cd target
 
 echo.
-echo.  2 Checking out git  develop branch:
+echo.  2 Checking out git  master branch:
 echo.
-git clone --branch develop --depth 1 https://github.com/lucialence/adiante
+git clone --branch master --depth 1 https://github.com/lucialence/adiante
 cd adiante
 
 echo.
-echo.  3 Tagging develop branch with version %version%
+echo.  3 Tagging master branch with version %version%
 echo.
 git tag %version%
 git push origin --tags
-cd adiante
 
 echo.
 echo.  4 Create and send adiante-patient-backend image
