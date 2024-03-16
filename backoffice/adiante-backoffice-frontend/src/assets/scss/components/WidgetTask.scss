@@ -1,0 +1,128 @@
+
+.widget-task{
+    width: 100%;  
+    float: left; 
+    margin-bottom: 6px;
+   
+
+    a{
+      text-decoration: none;
+    }
+
+    h2{
+      color: $neutral-80;
+    }
+
+   
+    .content{
+        border: 1px solid $neutral-30;
+        border-radius: $border-radius-widget;
+        padding: 1.5em 1em;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px; 
+        box-shadow: $shadow-soft;
+         
+
+        .info-task{
+            width: 60%; 
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px; 
+
+            h2{
+                font-size: $font-size-xl;
+                font-weight: $font-weight-bold;
+                margin: 0;
+            }
+            .number{
+                color: $neutral-50;
+                padding: 12px 0;
+                font-size: $font-size-sm;
+            }
+            a{
+                color:  $neutral-80;
+            }
+        }
+        .completed{
+            width: 40%;
+            max-width: 120px;
+
+            .flex-wrapper {
+                display: flex;
+                flex-flow: row nowrap;
+              }
+              
+              .single-chart {
+                width: 100%;
+                justify-content: space-around ;
+              }
+              
+              .circular-chart {
+                display: block;
+                margin: 10px auto;
+                @media (min-width: 600px) {
+                  max-width: 50%;
+                }
+                max-height: 250px;
+              }
+              
+              .circle-bg {
+                fill: none;
+                stroke: #eee;
+                stroke-width: 4;
+              }
+              
+              .circle {
+                fill: none;
+                stroke-width: 3.8;
+                stroke-linecap: round;
+                animation: progress 1s ease-out forwards;
+              }
+              
+              @keyframes progress {
+                0% {
+                  stroke-dasharray: 0 100;
+                }
+              }
+                
+              .circular-chart.green .circle {
+                stroke: $success-medium;
+              }
+              
+              .percentage {
+                text-anchor: middle;
+                fill: $success-medium; 
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 8px; 
+              }
+        }
+        .no-task{
+          display: flex;
+          
+          flex-direction: column;
+          width: 100%;
+          .alert{
+          width: 100%;
+          }
+        }
+    }
+
+    &.small{
+      .content{
+        box-shadow: none !important;
+
+      }
+
+      .number{ 
+        padding: 6px 0 !important;  
+    }
+    }
+    
+}
+

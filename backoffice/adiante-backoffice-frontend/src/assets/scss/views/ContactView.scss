@@ -1,0 +1,42 @@
+// View used as laoding window
+
+.contact-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    .img-profesional{
+        border-radius: 510px;
+        width: 120px;
+        height: 120px;
+    }
+p{
+    text-align: center;
+}
+    .btn-whatsapp{
+        background-color: $success-medium !important;
+        border: 1px solid $success-medium !important;
+        color: $neutral-00 !important;
+        &:hover{
+            background-color: $success-light !important;
+        }
+        &:focus{
+            box-shadow: 0 0 0 0.2rem $success-light !important;
+        }
+
+    }
+
+    .btn-alert{
+        background-color: $error-medium !important; 
+        border: 1px solid $error-medium !important;
+        color: $neutral-00 !important;
+        &:hover{
+            background-color: $error-medium !important;
+        }
+        &:focus{
+            box-shadow: 0 0 0 0.2rem $error-medium !important;
+        }
+        
+    }
+
+}

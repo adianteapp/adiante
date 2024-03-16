@@ -1,0 +1,111 @@
+.introView{
+    
+    padding: 0em 1em;
+    display: flex;
+    flex-direction: row;
+  
+    a{
+        text-decoration: none !important;
+        h1{
+            color: $neutral-80 !important;
+        }
+    }
+
+    .header{
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .header-activity{
+        position: fixed; 
+        background-color: white;
+        z-index: 99;
+        width: 95%;
+        padding: .4em 1em; 
+
+    }
+    .container-activity{
+        position: relative;
+        overflow: auto;
+        padding: 8px;
+        padding-top: 32px;
+        bottom: 140px;
+        top: 0;
+        margin-bottom: 145px;
+        width: 100%;
+    }
+
+    .button-activity{
+        position: fixed; 
+        background-color: white;
+        z-index: 99;
+        width: 91%;
+        bottom: 85px; 
+        padding-top: 8px;
+
+    }
+
+    h1{
+        font-size: $font-size-base !important;
+        text-align: left !important;
+        padding-top: 1em;
+        
+    }
+
+    img{
+        height: 160px;
+        width: 100%;
+        object-fit: cover !important;
+        margin-bottom: 10px;
+        border-radius: 12px ;
+    }
+
+    .reto{
+        border: 1px solid $neutral-30;
+        border-radius: $border-radius-widget;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        gap: 14px;
+        cursor: pointer;
+        &:hover{
+            background-color: $neutral-10;
+        }
+        
+        .info{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding-bottom: 4px;
+            .title{
+                font-weight: $font-weight-bold;
+                font-size: $font-size-lg;
+                color: $neutral-80 !important;
+            }
+             
+        }
+        .desc{
+            font-size: $font-size-sm;
+            color: $neutral-50;
+           
+        }
+        .img{ 
+            img{
+                border-radius: 12px ;
+                width: 80px;
+                height: 80px;
+                object-fit: cover !important;
+            }
+            
+            
+        }
+        
+            .state{
+                font-size: $font-size-sm;
+               
+                 
+            }
+        
+    }
+}
