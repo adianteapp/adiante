@@ -1,0 +1,83 @@
+//Primary Color
+
+$primary-light-1:   #8a5ee8 !default;
+$primary-light-2:   #a07fe6 !default;
+$primary-light-3:   #b298e9 !default;
+$primary-light-4:   #cbbbee !default;
+$primary-light-5:   #F3EEFFC2 !default;
+
+$primary:           #7B44EE !default;
+
+$primary-dark-1:    #622FD0 !default;
+$primary-dark-2:    #592abe !default;
+$primary-dark-3:    #481da5 !default;
+$primary-dark-4:    #30146a !default;
+$primary-dark-5:    #1d0d3f !default;
+
+//Neutral Color
+
+$neutral-00:   #fff !default;
+$neutral-10:   #f6f6f6 !default;
+$neutral-20:   #ededed !default;
+$neutral-30:   #ECEDEF !default;
+$neutral-40:   #a3a3a3 !default;
+$neutral-50:   #8C8E97 !default;
+$neutral-60:   #636263 !default;
+$neutral-70:   #404040 !default;
+$neutral-80:   #323232 !default;
+$neutral-90:   #0A0D13 !default; 
+
+//Feedback Color
+
+$success-light:    #1DE9AC26 !default;
+$success-medium:   #50D2AB !default;
+$success-dark:     #1FA87F !default;
+
+$warning-light:    #f8f3d8 !default;
+$warning-medium:   #e2ca64 !default;
+$warning-dark:     #c9a81c !default;
+
+$info-light:    $primary-light-5 !default;
+$info-medium:   $primary-light-2 !default;
+$info-dark:     $primary-light-3 !default;
+
+$error-light:    #FED5EA !default;
+$error-medium:   #EF5DA8 !default;
+$error-dark:     #BC1A6D !default;
+
+
+// Shadows
+
+$shadow-soft: 0px 2px 9px 0px rgba(0, 0, 0, 0.10);
+$shadow-medium: 0px 4px 8px rgba(0, 0, 0, 0.1);
+$shadow-strong:0px 8px 16px rgba(0, 0, 0, 0.2);
+ 
+
+
+
+// Font size
+$font-size-xl: 1.4rem;
+$font-size-lg: 1.1rem;
+$font-size-base: 16px;
+$font-size-sm: 14px;
+$font-size-xs: 12px;
+
+$font-size-h1: 28px;
+$font-size-h2: 22px;
+$font-size-h3: 20px;
+$font-size-h4: 18px;
+
+$font-weight-light: 300;
+$font-weight-base: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+
+// Border radius
+
+$border-radius-input: 2px;
+$border-radius-button: 4px;
+$border-radius-widget: 12px;
+
+
+
+

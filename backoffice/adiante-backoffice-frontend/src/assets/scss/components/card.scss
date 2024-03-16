@@ -1,0 +1,92 @@
+.card{
+    border: 1px solid $neutral-30;
+    border-radius: $border-radius-widget;
+    padding: 12px;
+     
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:16px;
+    margin-bottom: 12px;
+    box-shadow: $shadow-soft;
+
+    a{
+        text-decoration: none;
+    }
+
+    .container-card{
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 16px;
+       
+    }
+    
+    cursor: pointer;
+    &:hover{
+        background-color: $neutral-10;
+    }
+   
+    .title{
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+    }
+   
+    .img{ 
+        width: 80px;
+        text-align: center;
+        img{
+            border-radius: 12px ;
+            width: 80px;
+            height: 80px;
+            object-fit: cover !important;
+        }
+        .icon-card{ 
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    .content{ 
+        display: flex;
+        flex-direction: column;
+        vertical-align: middle;
+        justify-content: space-evenly; 
+        .info{
+            
+            padding-bottom: 4px;  
+
+            .title{
+                font-weight: $font-weight-bold;
+                font-size: $font-size-base;
+                color: $neutral-80 !important;
+                text-decoration: none !important;
+            }
+             
+        }
+        .desc{
+            font-size: $font-size-sm;
+            color: $neutral-50;
+            padding-bottom: 8px;
+           
+        }
+    }
+    .icon{
+        display: flex;
+        align-self: center;
+        span{
+            font-size: $font-size-lg !important;
+           
+        }
+        
+    }
+    
+        .state{
+            font-size: $font-size-sm;
+           
+             
+        }
+    
+}

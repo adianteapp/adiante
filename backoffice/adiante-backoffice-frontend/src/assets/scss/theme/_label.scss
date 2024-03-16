@@ -1,0 +1,118 @@
+// Task states
+
+.label{
+    font-size: $font-size-sm; 
+    display: flex;
+    align-items: center;   
+
+    span{
+      width: auto !important;
+      display: flex; 
+      align-items: center;  
+    }
+   
+      
+    &.incomplete{
+      span::before{ 
+        content: '';
+        background: url('../../../public/img/svg/icon/pending.svg');
+        background-size: cover;
+        width: 20px;
+        height: 20px; 
+        display: block;  
+        margin-right: 8px;
+       
+        
+      }
+    }
+  
+    &.completed{
+      span::before{  
+        content: '';
+        background: url('../../../public/img/svg/icon/ok.svg');
+        background-size: cover;
+        width: 20px;
+        height: 20px; 
+        display: block;  
+        margin-right: 8px; 
+       
+        
+      }
+     
+    }
+
+  
+  
+    &.delayed{
+      span::before{   
+  
+        content: '';
+        background: url('../../../public/img/svg/icon/error.svg');
+        background-size: cover;
+        width: 20px;
+        height: 20px; 
+        display: block;  
+        margin-right: 8px; 
+        animation: beat 1s infinite;
+      }
+    }
+  
+    &.small{ 
+      font-size: small;
+      span::before{  
+        width: 15px;
+      height: 15px;
+
+        
+      }
+    }
+  }
+  
+  @keyframes beat {
+    from {
+      transform: scale(1);
+      transform-origin: center center;
+      animation-timing-function: ease-out;
+    }
+    10% {
+      transform: scale(1.1);
+      animation-timing-function: ease-in;
+    }
+    20% {
+      transform: scale(1);
+      animation-timing-function: ease-out;
+    }
+    30% {
+      transform: scale(1.05);
+      animation-timing-function: ease-in;
+    }
+    40% {
+      transform: scale(1);
+      animation-timing-function: ease-out;
+    }
+  }
+
+  @keyframes loadingG {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(70px, 0) rotate(360deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+  }
+  
+  @keyframes loadingH {
+    0% {
+      width: 15px;
+    }
+    50% {
+      width: 35px;
+      padding: 4px;
+    }
+    100% {
+      width: 15px;
+    }
+  }

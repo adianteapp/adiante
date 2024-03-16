@@ -1,0 +1,55 @@
+// View used as login form
+.form-login{ 
+}
+
+ 
+.login{ 
+    background: url('../../assets/img/svg/home-bg.svg'), $primary;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;  
+    
+    .content{   
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            justify-content: space-around;
+            .login-form{
+                display: flex;
+            flex-direction: column;
+            }
+            @media (min-width: 600px) {
+                width: 350px;
+              }
+            
+        
+       
+        .logo{ 
+            max-height: 70px !important;   
+            margin-bottom: 2em;
+            margin: 2em;
+        }
+        .alert{
+            margin-bottom: 1em;
+        }
+        .spinner-border{
+            color: $neutral-50;
+        }
+        .form-login{ 
+
+        }
+        .lost-pwd{ 
+            
+        }
+        .about{
+            text-align: center;
+            padding-top: 40px;
+            small{
+                font-size: 12px !important;
+                line-height: 12px !important;
+            }
+            
+        }
+    }
+}
